@@ -1,0 +1,12 @@
+.git/
+.github/
+.gitignore
+.DS_Store
+README.md
+charts/
+scripts/
+docs/
+.cr-release-packages/
+.cr-index/
+.cr-signatures/
+test/
