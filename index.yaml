@@ -3,6 +3,16 @@ entries:
   plex:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-09-17T19:04:15.572018971Z"
+    description: A Helm chart for Kubernetes
+    digest: ff96c4ac29bec025f393625b5da5ff210ed43589c1343839a831b9af25c10849
+    name: plex
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/plex-0.6.0/plex-0.6.0.tgz
+    version: 0.6.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-09-17T19:03:19.68254325Z"
     description: A Helm chart for Kubernetes
     digest: ca22c87d5a7f318e47d495daf9292063af0df5a9953f4a1ea5319f088c84d459
@@ -14,6 +24,16 @@ entries:
   teslamate:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-09-17T19:04:15.727613895Z"
+    description: A Helm chart for Kubernetes
+    digest: 6ceda8b90ed9629598f2fa813405800059202a022be13a1ab6dd0d4a35774b4e
+    name: teslamate
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.6.0/teslamate-0.6.0.tgz
+    version: 0.6.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-09-17T19:03:19.810877727Z"
     description: A Helm chart for Kubernetes
     digest: 8222481400700b178955864089de4caa3ed254ff7e344c07b4f7042eafa1e11c
@@ -22,4 +42,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.5.0/teslamate-0.5.0.tgz
     version: 0.5.0
-generated: "2024-09-17T19:03:19.810882466Z"
+generated: "2024-09-17T19:04:15.727738176Z"
