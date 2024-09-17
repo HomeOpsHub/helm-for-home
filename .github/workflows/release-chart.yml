@@ -24,7 +24,7 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Run chart-releaser
+      - name: Run chart-releaser-stable
         uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: charts/stable
@@ -32,7 +32,7 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.access_token }}"
 
-      - name: Run chart-releaser
+      - name: Run chart-releaser-experimental
         uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: charts/experimental
@@ -40,7 +40,7 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.access_token }}"
 
-      - name: Run chart-releaser
+      - name: Run chart-releaser-beta
         uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: charts/beta
