@@ -45,14 +45,14 @@ jobs:
             git checkout -b gh-pages origin/gh-pages || git checkout --orphan gh-pages
           fi
           git checkout gh-pages
-          if [ ! -f index.yaml ]; then
-            echo "Creating empty index.yaml"
-            touch index.yaml
+          if [ ! -f index.yaml ] || [ ! -s index.yaml ]; then
+            echo "Creating initial index.yaml with minimal YAML structure."
+            echo -e "apiVersion: v1\nentries: {}" > index.yaml
             git add index.yaml
-            git commit -m "Initialize index.yaml"
+            git commit -m "Initialize index.yaml with minimal structure"
             git push origin gh-pages
           else
-            echo "index.yaml already exists."
+            echo "index.yaml already exists and is not empty."
           fi
           git checkout "${GITHUB_REF#refs/heads/}"
 
