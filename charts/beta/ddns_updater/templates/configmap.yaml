@@ -1,0 +1,26 @@
+{{- if .Values.config.records }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ddns_updater.fullname" . }}
+data:
+  config.json: |
+    {
+      "settings": [
+        {{- range $index, $record := .Values.config.records }}
+        {
+          "provider": "{{ $record.provider }}",
+          "zone_identifier": "{{ $record.zone_identifier }}",
+          "domain": "{{ $record.domain }}",
+          "host": "{{ $record.host }}",
+          "ttl": {{ $record.ttl }},
+          "token": "{{ $record.key }}",
+          "ip_version": "{{ $record.ip_version }}",
+          "ipv6_suffix": "",
+          "email": "{{ $record.email }}",
+          "proxied": {{ $record.proxied }}
+        }{{ if not (eq (add $index 1) (len $.Values.config.records)) }},{{ end }}
+        {{- end }}
+      ]
+    }
+{{- end }}
