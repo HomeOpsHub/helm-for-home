@@ -37,11 +37,12 @@ jobs:
           REPOSITORY_NAME: "${{ github.event.repository.name }}"
         run: |
           set -e
-          git fetch origin
-          if git show-ref --verify --quiet refs/heads/gh-pages; then
-            echo "gh-pages branch exists locally."
+          git fetch origin gh-pages || true
+          if git ls-remote --exit-code origin gh-pages; then
+            echo "gh-pages branch exists on remote."
+            # No need to create the branch; it will be cloned later
           else
-            echo "gh-pages branch does not exist locally. Creating..."
+            echo "gh-pages branch does not exist on remote. Creating..."
             git checkout --orphan gh-pages
             git rm -rf .
             echo -e "apiVersion: v1\nentries: {}" > index.yaml
@@ -82,10 +83,7 @@ jobs:
         run: |
           set -e
           # Clone gh-pages branch into a temporary directory
-          git clone --single-branch --branch gh-pages "https://$GITHUB_TOKEN@github.com/$GITHUB_USERNAME/$REPOSITORY_NAME.git" gh-pages
-
-          # Copy the generated index.yaml to the gh-pages directory
-          cp index.yaml gh-pages/
+          git clone --single-branch --branch gh-pages "https://${GITHUB_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
 
           # Change to the gh-pages directory
           cd gh-pages
@@ -93,6 +91,12 @@ jobs:
           # Configure Git
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+          # Pull the latest changes from the remote gh-pages branch
+          git pull origin gh-pages
+
+          # Copy the generated index.yaml to the gh-pages directory
+          cp ../index.yaml .
 
           # Add and commit changes
           git add index.yaml
