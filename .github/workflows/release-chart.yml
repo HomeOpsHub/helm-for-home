@@ -32,7 +32,7 @@ jobs:
 
       - name: Run chart-releaser for each subcategory
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
           GITHUB_USERNAME: "${{ github.repository_owner }}"
           REPOSITORY_NAME: "${{ github.event.repository.name }}"
           CHART_REPO_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
