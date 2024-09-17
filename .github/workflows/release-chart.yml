@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   release:
@@ -16,92 +19,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Helm
-        uses: azure/setup-helm@v3
-        with:
-          version: v3.12.0
-
-      - name: Install chart-releaser
-        run: |
-          curl -sSL https://github.com/helm/chart-releaser/releases/download/v1.5.0/chart-releaser_1.5.0_linux_amd64.tar.gz | tar xz -C /usr/local/bin cr
-
       - name: Configure Git
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Ensure gh-pages branch and index.yaml exist
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts
+          skip_existing: true
         env:
-          ACCESS_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
-          GITHUB_USERNAME: "${{ github.repository_owner }}"
-          REPOSITORY_NAME: "${{ github.event.repository.name }}"
-        run: |
-          set -e
-          git fetch origin gh-pages || true
-          if git ls-remote --exit-code origin gh-pages; then
-            echo "gh-pages branch exists on remote."
-            # No need to create the branch; it will be cloned later
-          else
-            echo "gh-pages branch does not exist on remote. Creating..."
-            git checkout --orphan gh-pages
-            git rm -rf .
-            echo -e "apiVersion: v1\nentries: {}" > index.yaml
-            git add index.yaml
-            git commit -m "Initialize gh-pages branch with index.yaml"
-            git push "https://${ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
-            git checkout "${GITHUB_REF#refs/heads/}"
-          fi
-
-      - name: Run chart-releaser for each chart in subcategories
-        env:
-          CR_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
-          GITHUB_USERNAME: "${{ github.repository_owner }}"
-          REPOSITORY_NAME: "${{ github.event.repository.name }}"
-          CHART_REPO_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
-        run: |
-          set -e
-          mkdir -p .cr-release-packages
-          mkdir -p .cr-index
-          for category in charts/*; do
-            if [ -d "$category" ]; then
-              for chart in "$category"/*; do
-                if [ -d "$chart" ]; then
-                  echo "Packaging chart: $chart"
-                  cr package "$chart"
-                fi
-              done
-            fi
-          done
-          cr upload -o $GITHUB_USERNAME -r $REPOSITORY_NAME --skip-existing --token $CR_TOKEN
-          cr index -o $GITHUB_USERNAME -r $REPOSITORY_NAME -c $CHART_REPO_URL --package-path .cr-release-packages --index-path index.yaml
-
-      - name: Commit index.yaml to gh-pages branch
-        env:
-          ACCESS_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
-          GITHUB_USERNAME: "${{ github.repository_owner }}"
-          REPOSITORY_NAME: "${{ github.event.repository.name }}"
-        run: |
-          set -e
-          # Clone gh-pages branch into a temporary directory
-          git clone --single-branch --branch gh-pages "https://${ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
-
-          # Change to the gh-pages directory
-          cd gh-pages
-
-          # Configure Git
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-
-          # Pull the latest changes from the remote gh-pages branch
-          git pull origin gh-pages
-
-          # Copy the generated index.yaml to the gh-pages directory
-          cp ../index.yaml .
-
-          # Add and commit changes
-          git add index.yaml
-          git commit -m "Update index.yaml"
-
-          # Push changes to gh-pages branch
-          git push "https://${ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
-
+          CR_TOKEN: "${{ secrets.access_token }}"
