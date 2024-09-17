@@ -1,0 +1,5 @@
+apiVersion: v2
+name: caddy
+description: A Helm chart for Caddy
+version: 0.1.0
+appVersion: "2.5.1" # This should be the version of the Caddy Docker image

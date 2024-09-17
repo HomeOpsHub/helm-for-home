@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ddns_updater.fullname" . }}
+  labels:
+    app: {{ include "ddns_updater.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "ddns_updater.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "ddns_updater.name" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /updater/data/config.json
+              subPath: config.json
+            - name: data-volume
+              mountPath: /updater/data
+          env:
+            - name: CONFIG_FILE
+              value: /updater/data/config.json
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "ddns_updater.fullname" . }}
+        - name: data-volume
+          hostPath:
+            path: "{{ .Values.data.hostPath }}"
+            type: DirectoryOrCreate

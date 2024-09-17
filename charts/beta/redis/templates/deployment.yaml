@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "redis.fullname" . }}
+  labels:
+    app: {{ include "redis.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "redis.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "redis.name" . }}
+    spec:
+      restartPolicy: {{ .Values.restartPolicy }}
+      containers:
+        - name: {{ .Chart.Name }}  # Changed to be a list item
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "{{ .Values.env.ALLOW_EMPTY_PASSWORD }}"
+            - name: REDIS_DISABLE_COMMANDS
+              value: "{{ .Values.env.REDIS_DISABLE_COMMANDS }}"
+          volumeMounts:
+            - name: {{ include "redis.fullname" . }}-data
+              mountPath: {{ .Values.persistence.mountPath }}
+      volumes:
+        - name: {{ include "redis.fullname" . }}-data
+          persistentVolumeClaim:
+            claimName: {{ include "redis.fullname" . }}-data
