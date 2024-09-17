@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   gotify:
   - apiVersion: v2
+    appVersion: 2.1.5
+    created: "2024-09-17T22:59:32.646871257Z"
+    description: A Helm chart for Gotify, a server for receiving and sending messages.
+    digest: 01581afe8eb43836301cef0ee659a69b188eedb7d9921670a5fb7c3549fd9a86
+    name: gotify
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/gotify-0.2.0/gotify-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-09-17T19:12:52.790061539Z"
     description: A Helm chart for Kubernetes
@@ -85,4 +95,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-17T19:12:52.934129802Z"
+generated: "2024-09-17T22:59:32.646898878Z"
