@@ -32,7 +32,7 @@ jobs:
 
       - name: Ensure gh-pages branch and index.yaml exist
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          ACCESS_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
           GITHUB_USERNAME: "${{ github.repository_owner }}"
           REPOSITORY_NAME: "${{ github.event.repository.name }}"
         run: |
@@ -48,13 +48,13 @@ jobs:
             echo -e "apiVersion: v1\nentries: {}" > index.yaml
             git add index.yaml
             git commit -m "Initialize gh-pages branch with index.yaml"
-            git push origin gh-pages
+            git push "https://${ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
             git checkout "${GITHUB_REF#refs/heads/}"
           fi
 
       - name: Run chart-releaser for each chart in subcategories
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
           GITHUB_USERNAME: "${{ github.repository_owner }}"
           REPOSITORY_NAME: "${{ github.event.repository.name }}"
           CHART_REPO_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
@@ -77,13 +77,13 @@ jobs:
 
       - name: Commit index.yaml to gh-pages branch
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          ACCESS_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
           GITHUB_USERNAME: "${{ github.repository_owner }}"
           REPOSITORY_NAME: "${{ github.event.repository.name }}"
         run: |
           set -e
           # Clone gh-pages branch into a temporary directory
-          git clone --single-branch --branch gh-pages "https://${GITHUB_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
+          git clone --single-branch --branch gh-pages "https://${ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
 
           # Change to the gh-pages directory
           cd gh-pages
@@ -103,4 +103,4 @@ jobs:
           git commit -m "Update index.yaml"
 
           # Push changes to gh-pages branch
-          git push origin gh-pages
+          git push "https://${ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/${REPOSITORY_NAME}.git" gh-pages
