@@ -30,9 +30,9 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Run chart-releaser for each subcategory
+      - name: Run chart-releaser for each chart in subcategories
         env:
-          CR_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           GITHUB_USERNAME: "${{ github.repository_owner }}"
           REPOSITORY_NAME: "${{ github.event.repository.name }}"
           CHART_REPO_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
@@ -42,12 +42,17 @@ jobs:
           mkdir -p .cr-index
           for category in charts/*; do
             if [ -d "$category" ]; then
-              echo "Processing category: $category"
-              cr package "$category"
+              for chart in "$category"/*; do
+                if [ -d "$chart" ]; then
+                  echo "Packaging chart: $chart"
+                  cr package "$chart"
+                fi
+              done
             fi
           done
           cr upload -o $GITHUB_USERNAME -r $REPOSITORY_NAME
           cr index -o $GITHUB_USERNAME -r $REPOSITORY_NAME -c $CHART_REPO_URL --index-path index.yaml --package-path .cr-release-packages
+
 
       - name: Commit index.yaml
         run: |
