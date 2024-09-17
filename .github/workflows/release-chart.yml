@@ -28,10 +28,27 @@ jobs:
         uses: azure/setup-helm@v4
         env:
           GITHUB_TOKEN: "${{ secrets.access_token }}"
-          
+
+      - name: Run chart-releaser-stable
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts/stable/
+          skip_existing: true
+        env:
+          CR_TOKEN: "${{ secrets.access_token }}"
+
       - name: Run chart-releaser-beta
         uses: helm/chart-releaser-action@v1.6.0
         with:
+          charts_dir: charts/beta/
+          skip_existing: true
+        env:
+          CR_TOKEN: "${{ secrets.access_token }}"
+
+      - name: Run chart-releaser-experimental
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts/experimental/
           skip_existing: true
         env:
           CR_TOKEN: "${{ secrets.access_token }}"
