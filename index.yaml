@@ -1,2 +1,68 @@
 apiVersion: v1
-entries: {}
+entries:
+  authelia:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-09-17T15:52:31.64801647Z"
+    description: A Helm chart for Authelia
+    digest: 5747f7f441f30f77c1d070553b896aae5247567ce218f1ba67858082121d7caa
+    name: authelia
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/authelia-0.0.1/authelia-0.0.1.tgz
+    version: 0.0.1
+  caddy:
+  - apiVersion: v2
+    appVersion: 2.5.1
+    created: "2024-09-17T15:52:31.87422966Z"
+    description: A Helm chart for Caddy
+    digest: 75ea2d3153be3ea846b54d0d78f1221766048d46a3c72f909fae80fb38d20e73
+    name: caddy
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/caddy-0.0.1/caddy-0.0.1.tgz
+    version: 0.0.1
+  ddns-updater:
+  - apiVersion: v2
+    appVersion: 2.7.1
+    created: "2024-09-17T15:52:32.04534963Z"
+    description: A Helm chart for the DDNS Updater
+    digest: 60f1a4a56a537be247e09039b69785b0f09654c74e9aecc6f366a94d21cc7d30
+    name: ddns-updater
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/ddns-updater-0.0.1/ddns-updater-0.0.1.tgz
+    version: 0.0.1
+  portainer:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-17T15:52:32.223923093Z"
+    description: A Helm chart for Kubernetes
+    digest: 7b3c8eefc2f0fbc4efbc372e5533169c9671502a7475c1f5e7f7c41638a1e2c5
+    name: portainer
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/portainer-0.0.1/portainer-0.0.1.tgz
+    version: 0.0.1
+  redis:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-09-17T15:52:32.415134357Z"
+    description: A Helm chart for Redis
+    digest: 2ee0d3a167c1ae2b46a3485230a514ede9e8afea171ab1ebfb6c32d7c0b00a12
+    name: redis
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/redis-0.0.1/redis-0.0.1.tgz
+    version: 0.0.1
+  traefik:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-17T15:52:32.60786489Z"
+    description: A Helm chart for Kubernetes
+    digest: e914a31fece5b496efa78c3633ebeb6afef4b1a9a63fa7baffb1f1085e0c47a4
+    name: traefik
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/traefik-0.0.1/traefik-0.0.1.tgz
+    version: 0.0.1
+generated: "2024-09-17T15:52:32.607871182Z"
