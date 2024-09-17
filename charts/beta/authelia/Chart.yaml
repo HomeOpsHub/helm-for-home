@@ -1,6 +1,0 @@
-apiVersion: v2
-name: authelia
-description: A Helm chart for Authelia
-type: application
-version: 0.0.4
-appVersion: "latest"
