@@ -32,6 +32,16 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/plex-0.5.0/plex-0.5.0.tgz
     version: 0.5.0
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-17T19:08:08.40210429Z"
+    description: A Helm chart for Kubernetes
+    digest: dda1e914ffb1892f46375bbb1ec4240aabf648269ed00679d35eaa961c555065
+    name: plex
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/plex-0.1.0/plex-0.1.0.tgz
+    version: 0.1.0
   teslamate:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -64,4 +74,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-17T19:05:53.751145408Z"
+generated: "2024-09-17T19:08:08.402121612Z"
