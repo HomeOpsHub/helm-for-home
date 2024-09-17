@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  netdata:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-17T19:05:53.591866259Z"
+    description: A Helm chart for Kubernetes
+    digest: 5a6ccec5fdd71c6133559d99572c31718d3ffac1eb48d815c0ed868c8a39c83b
+    name: netdata
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/netdata-0.1.0/netdata-0.1.0.tgz
+    version: 0.1.0
   plex:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -42,4 +53,15 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.5.0/teslamate-0.5.0.tgz
     version: 0.5.0
-generated: "2024-09-17T19:04:15.727738176Z"
+  whoogle:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-17T19:05:53.751134578Z"
+    description: A Helm chart for Kubernetes
+    digest: e72a30efe5649631fa7dcc7935c194b5acfcb49721afd3c413f7281a1ef53e83
+    name: whoogle
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-09-17T19:05:53.751145408Z"
