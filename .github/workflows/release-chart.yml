@@ -27,7 +27,23 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
-          charts_dir: charts
+          charts_dir: charts/stable
+          skip_existing: true
+        env:
+          CR_TOKEN: "${{ secrets.access_token }}"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts/experimental
+          skip_existing: true
+        env:
+          CR_TOKEN: "${{ secrets.access_token }}"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts/beta
           skip_existing: true
         env:
           CR_TOKEN: "${{ secrets.access_token }}"
