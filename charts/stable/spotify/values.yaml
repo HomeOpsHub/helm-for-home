@@ -24,6 +24,8 @@ customConfig:
     server: server
     client: web
 
+fullnameOverride: ""
+
 ingress:
   enabled: true
   annotations:

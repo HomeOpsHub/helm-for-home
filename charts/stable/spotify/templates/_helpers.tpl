@@ -10,7 +10,7 @@ Create a full name by appending the release name.
 */}}
 {{- define "spotify.fullname" -}}
 {{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s" .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else }}
 {{- $name := default .Chart.Name .Values.nameOverride }}
 {{- if contains $name .Release.Name }}
