@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spotify.fullname" . }}
+  labels:
+    {{- include "spotify.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "spotify.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "spotify.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: spotify-server
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: API_ENDPOINT
+              value: {{ printf "http://%s.%s" .Values.customConfig.subdomains.server .Values.customConfig.domain }}
+        - name: spotify-client
+          image: "{{ .Values.webImage.repository }}:{{ .Values.webImage.tag }}"
+          imagePullPolicy: {{ .Values.webImage.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.webService.port }}
+          env:
+            - name: API_ENDPOINT
+              value: {{ printf "http://%s.%s" .Values.customConfig.subdomains.server .Values.customConfig.domain }}

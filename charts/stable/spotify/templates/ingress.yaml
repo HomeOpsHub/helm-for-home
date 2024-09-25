@@ -1,0 +1,34 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "spotify.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    {{- range $host := .Values.ingress.hosts }}
+    - match: Host(`{{ $host.host }}`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: {{ include "spotify.fullname" . }}
+          port:
+            {{- if eq $host.host (printf "%s.%s" .Values.customConfig.subdomains.server .Values.customConfig.domain) }}
+            {{ .Values.service.port }}
+            {{- else if eq $host.host (printf "%s.%s" .Values.customConfig.subdomains.client .Values.customConfig.domain) }}
+            {{ .Values.webService.port }}
+            {{- end }}
+    {{- end }}
+  tls:
+    {{- if .Values.ingress.tls.enabled }}
+    secretName: {{ .Values.ingress.tls.secretName }}
+    {{- else }}
+    # TLS is disabled
+    {{- end }}
+{{- end }}
