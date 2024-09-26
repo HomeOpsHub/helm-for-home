@@ -30,6 +30,8 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.access_token }}"
       - name: Lint Helm charts beta
         run: helm lint charts/beta/*
+      - name: Lint Helm charts stable
+        run: helm lint charts/stable/*
       - name: Run chart-releaser-stable
         uses: helm/chart-releaser-action@v1.6.0
         with:
