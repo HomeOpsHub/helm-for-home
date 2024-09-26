@@ -1,4 +1,4 @@
-{{- if .Values.ingress.enabled -}}
+{{- if .Values.ingress.enabled }}
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -9,32 +9,23 @@ metadata:
     {{ $key }}: {{ $value | quote }}
     {{- end }}
 spec:
-  rules:
-    - host: {{ printf "%s.%s" .Values.config.subdomains.server .Values.config.domain }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "spotify.fullname" . }}-service
-                port:
-                  number: {{ .Values.service.port }}
-    - host: {{ printf "%s.%s" .Values.config.subdomains.client .Values.config.domain }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "spotify.fullname" . }}-service
-                port:
-                  number: {{ .Values.webService.port }}
+  entryPoints:
+    - websecure  # Define the entry point, typically 'websecure' for HTTPS
+  routes:
+    - match: Host(`{{ printf "%s.%s" .Values.config.subdomains.server .Values.config.domain }}`)
+      kind: Rule
+      services:
+        - name: {{ include "spotify.fullname" . }}-service
+          port: {{ .Values.service.port }}
+    - match: Host(`{{ printf "%s.%s" .Values.config.subdomains.client .Values.config.domain }}`)
+      kind: Rule
+      services:
+        - name: {{ include "spotify.fullname" . }}-service
+          port: {{ .Values.webService.port }}
   tls:
     {{- if .Values.ingress.tls.enabled }}
-    - hosts:
-        - {{ printf "%s.%s" .Values.config.subdomains.server .Values.config.domain }}
-        - {{ printf "%s.%s" .Values.config.subdomains.client .Values.config.domain }}
-      secretName: {{ .Values.ingress.tls.secretName }}
+    certResolver: {{ .Values.ingress.tls.certResolver | default "le" }}  # Use 'le' (Let's Encrypt) by default
+    # If you prefer to use a secret for TLS, uncomment the following lines and comment out the certResolver line above
+    # secretName: {{ .Values.ingress.tls.secretName }}
     {{- end }}
 {{- end }}
