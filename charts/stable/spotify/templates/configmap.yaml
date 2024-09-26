@@ -10,3 +10,4 @@ data:
   SPOTIFY_PUBLIC: {{ .Values.config.spotifyPublic | quote }}
   SPOTIFY_SECRET: {{ .Values.config.spotifySecret | quote }}
   CLIENT_ENDPOINT: {{ .Values.config.clientEndpoint | quote }}
+  MONGO_ENDPOINT: {{ .Values.config.mongoEndpoint | quote }}
