@@ -9,3 +9,4 @@ data:
   API_ENDPOINT: {{ .Values.config.apiEndpoint | quote }}
   SPOTIFY_PUBLIC: {{ .Values.config.spotifyPublic | quote }}
   SPOTIFY_SECRET: {{ .Values.config.spotifySecret | quote }}
+  CLIENT_ENDPOINT: {{ .Values.config.clientEndpoint | quote }}
