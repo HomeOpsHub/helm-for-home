@@ -1,10 +1,9 @@
-{{- if .Values.ingress.enabled -}}
 1. **Spotify Application Access**
 
    Your Spotify application has been deployed successfully!
 
-   - **Server URL**: http://{{ .Values.customConfig.subdomains.server }}.{{ .Values.customConfig.domain }}
-   - **Client URL**: http://{{ .Values.customConfig.subdomains.client }}.{{ .Values.customConfig.domain }}
+   - **Server URL**: http://{{ .Values.config.subdomains.server }}.{{ .Values.config.domain }}
+   - **Client URL**: http://{{ .Values.config.subdomains.client }}.{{ .Values.config.domain }}
 
 {{- if .Values.ingress.tls.enabled }}
    - **TLS is enabled** for the application. Ensure your TLS secret (`{{ .Values.ingress.tls.secretName }}`) is correctly configured.
@@ -21,23 +20,3 @@
 3. **Traefik Ingress**
 
    The application is using Traefik `IngressRoute`. Ensure that Traefik is installed and properly configured in your cluster.
-
-{{- else }}
-1. **Ingress Not Enabled**
-
-   Ingress is not enabled for this release. If you wish to expose the application via Ingress, set `ingress.enabled` to `true` in your `values.yaml`.
-{{- end }}
-
-4. **Next Steps**
-
-   - You can monitor the deployment status with:
-     ```
-     kubectl get all -l app.kubernetes.io/name={{ .Chart.Name }}
-     ```
-
-   - Check for any issues using:
-     ```
-     kubectl logs deployment/{{ include "spotify.fullname" . }}
-     ```
-
-Thank you for using this Helm chart!
