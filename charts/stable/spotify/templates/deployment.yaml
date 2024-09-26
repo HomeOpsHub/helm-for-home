@@ -36,3 +36,14 @@ spec:
                 configMapKeyRef:
                   name: {{ include "spotify.fullname" . }}-config
                   key: SPOTIFY_SECRET
+        - name: spotify-client
+          image: "{{ .Values.webService.image.repository }}:{{ .Values.webService.image.tag }}"
+          imagePullPolicy: {{ .Values.webService.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.webService.port }}
+          env:
+            - name: CLIENT_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "spotify.fullname" . }}-config
+                  key: CLIENT_ENDPOINT
