@@ -14,15 +14,17 @@ spec:
   entryPoints:
     - {{ .Values.config.entrypoint | default "websecure" }}
   routes:
+    # Route for Spotify Server
     - match: Host(`{{ .Values.config.subdomains.server }}.{{ .Values.config.domain }}`)
       kind: Rule
       services:
         - name: {{ include "spotify.fullname" $ }}-server
           port: {{ $.Values.service.port }}
+    # Route for Spotify Client
     - match: Host(`{{ .Values.config.subdomains.client }}.{{ .Values.config.domain }}`)
       kind: Rule
       services:
-        - name: {{ include "spotify.fullname" $ }}-client
+        - name: {{ include "spotify.fullname" $ }}-web
           port: {{ $.Values.webService.port }}
   tls:
     {{- if .Values.ingress.tls.enabled }}
