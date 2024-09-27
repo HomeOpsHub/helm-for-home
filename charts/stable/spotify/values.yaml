@@ -37,14 +37,6 @@ config:
     server: spotify-server
     client: spotify-client
 
-# Removed the 'domains' section as it's redundant
-# domains:
-#   server: spotify-server.xyz.app
-#   client: spotify-client.xyz.app
-
-sample:
-  entrypoint: websecure
-
 ingress:
   enabled: true
   annotations:
