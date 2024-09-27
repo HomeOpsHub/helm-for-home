@@ -25,4 +25,3 @@ spec:
           env:
             - name: API_ENDPOINT
               value: {{ .Values.clientEnv.API_ENDPOINT }}
-          restartPolicy: Always
