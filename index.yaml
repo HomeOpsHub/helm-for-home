@@ -66,6 +66,16 @@ entries:
   spotify:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2024-09-27T04:39:13.401777189Z"
+    description: A Helm chart for deploying Spotify server and client
+    digest: 97103281894a25931c40b90ac036d7328ca7e364899522904f373c1ccdf96fe0
+    name: spotify
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/spotify-0.13.0/spotify-0.13.0.tgz
+    version: 0.13.0
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2024-09-27T04:32:07.607648799Z"
     description: A Helm chart for deploying Spotify server and client
     digest: ae44b65d8f2684bc46dcb2d19508b52f48e78b00b91aa434b99b28e6a740600c
@@ -216,4 +226,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-27T04:32:07.60769198Z"
+generated: "2024-09-27T04:39:13.401878469Z"
