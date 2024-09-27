@@ -40,5 +40,8 @@ config:
 ingress:
   enabled: true
   tls:
-    enabled: true
+    enabled: false
     certResolver: "le"  # CertResolver for Let's Encrypt
+    secretName: "spotify-tls"  # Secret name for TLS certificate
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
