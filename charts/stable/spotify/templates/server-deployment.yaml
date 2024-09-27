@@ -30,4 +30,6 @@ spec:
               value: {{ .Values.serverEnv.SPOTIFY_PUBLIC }}
             - name: SPOTIFY_SECRET
               value: {{ .Values.serverEnv.SPOTIFY_SECRET }}
+            - name: MONGO_ENDPOINT
+              value: {{ .Values.serverEnv.MONGO_ENDPOINT }}
           restartPolicy: Always

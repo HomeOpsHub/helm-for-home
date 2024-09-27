@@ -1,21 +1,29 @@
+{{- if .Values.ingress.enabled -}}
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: {{ include "spotify.fullname" . }}-ingress
+  name: {{ include "spotify.fullname" $ }}-ingress
   labels:
-    {{ include "spotify.labels" . | nindent 4 }}
+    {{ include "spotify.labels" $ | nindent 4 }}
+  annotations:
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
 spec:
   entryPoints:
-    - web
-    - websecure
+    - {{ .Values.config.entrypoint }}
   routes:
-    - match: Host(`{{ .Values.config.subdomains.server }}.{{ .Values.config.domain }}`)
+    {{- range .Values.ingress.hosts }}
+    - match: Host(`{{ .host }}`) && PathPrefix(`{{ index .paths 0 }}`)
       kind: Rule
       services:
-        - name: {{ include "spotify.fullname" . }}-server
-          port: {{ .Values.service.port }}
-    - match: Host(`{{ .Values.config.subdomains.client }}.{{ .Values.config.domain }}`)
-      kind: Rule
-      services:
-        - name: {{ include "spotify.fullname" . }}-web
-          port: {{ .Values.webService.port }}
+        - name: {{ include "spotify.fullname" $ }}-{{ .service }}
+          port: {{ if eq .service "server" }}{{ $.Values.service.port }}{{ else }}{{ $.Values.webService.port }}{{ end }}
+    {{- end }}
+  tls:
+    {{- if .Values.ingress.tls.enabled }}
+    secretName: {{ .Values.ingress.tls.secretName }}
+    {{- else }}
+    # TLS is disabled
+    {{- end }}
+{{- end }}
