@@ -1,18 +1,18 @@
 {{/*
-Define the name of the chart.
+Expand the name of the chart or use the fullnameOverride if defined.
 */}}
 {{- define "spotify.name" -}}
-spotify
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 
 {{/*
-Create a full name by appending the release name. Safely check for fullnameOverride before using it.
+Create a full name by appending the release name to the chart name.
 */}}
 {{- define "spotify.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- printf "%s" .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else }}
-{{- $name := default "spotify" .Values.nameOverride }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
 {{- if contains .Release.Name $name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else }}
@@ -22,20 +22,20 @@ Create a full name by appending the release name. Safely check for fullnameOverr
 {{- end }}
 
 {{/*
-Define common labels to be used in resources.
+Define common labels to be used in all Kubernetes objects.
 */}}
 {{- define "spotify.labels" -}}
-app.kubernetes.io/name: spotify
+app.kubernetes.io/name: {{ include "spotify.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/version: "1.0"
+app.kubernetes.io/version: {{ .Chart.AppVersion }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-helm.sh/chart: spotify-0.1.0
+helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 {{- end }}
 
 {{/*
-Selector labels for Kubernetes objects like Deployments, Services, etc.
+Define selector labels to be used in Deployments, Services, etc.
 */}}
 {{- define "spotify.selectorLabels" -}}
-app.kubernetes.io/name: spotify
+app.kubernetes.io/name: {{ include "spotify.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

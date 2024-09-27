@@ -1,31 +1,21 @@
-{{- if .Values.ingress.enabled }}
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: {{ include "spotify.fullname" . }}-ingress
-  namespace: {{ .Release.Namespace }}
-  annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
+  labels:
+    {{ include "spotify.labels" . | nindent 4 }}
 spec:
   entryPoints:
-    - websecure  # Define the entry point, typically 'websecure' for HTTPS
+    - web
+    - websecure
   routes:
-    - match: Host(`{{ printf "%s.%s" .Values.config.subdomains.server .Values.config.domain }}`)
+    - match: Host(`{{ .Values.config.subdomains.server }}.{{ .Values.config.domain }}`)
       kind: Rule
       services:
-        - name: {{ include "spotify.fullname" . }}-service
+        - name: {{ include "spotify.fullname" . }}-server
           port: {{ .Values.service.port }}
-    - match: Host(`{{ printf "%s.%s" .Values.config.subdomains.client .Values.config.domain }}`)
+    - match: Host(`{{ .Values.config.subdomains.client }}.{{ .Values.config.domain }}`)
       kind: Rule
       services:
-        - name: {{ include "spotify.fullname" . }}-service
+        - name: {{ include "spotify.fullname" . }}-web
           port: {{ .Values.webService.port }}
-  tls:
-    {{- if .Values.ingress.tls.enabled }}
-    certResolver: {{ .Values.ingress.tls.certResolver | default "le" }}  # Use 'le' (Let's Encrypt) by default
-    # If you prefer to use a secret for TLS, uncomment the following lines and comment out the certResolver line above
-    # secretName: {{ .Values.ingress.tls.secretName }}
-    {{- end }}
-{{- end }}
