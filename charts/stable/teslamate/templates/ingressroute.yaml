@@ -1,0 +1,36 @@
+{{- if .Values.ingressRoute.enabled }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "teslamate.fullname" . }}-ingressroute
+  labels:
+    {{- include "teslamate.labels" . | nindent 4 }}
+  {{- with .Values.ingressRoute.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  entryPoints:
+    - web
+    {{- if .Values.ingressRoute.tls.enabled }}
+    - websecure
+    {{- end }}
+  routes:
+    - match: Host(`{{ .Values.ingressRoute.host }}`)
+      kind: Rule
+      services:
+        - name: {{ include "teslamate.fullname" . }}
+          port: {{ .Values.service.port }}
+      {{- if .Values.ingressRoute.middlewares }}
+      middlewares:
+        {{- range .Values.ingressRoute.middlewares }}
+        - name: {{ . }}
+        {{- end }}
+      {{- end }}
+  {{- if .Values.ingressRoute.tls.enabled }}
+  tls:
+    secretName: {{ .Values.ingressRoute.tls.secretName }}
+    # Uncomment the following line if using TLS passthrough
+    # passthrough: {{ .Values.ingressRoute.tls.passthrough | default false }}
+  {{- end }}
+{{- end }}
