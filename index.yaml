@@ -265,6 +265,16 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.5.0/teslamate-0.5.0.tgz
     version: 0.5.0
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-28T00:48:39.250919275Z"
+    description: A Helm chart for Kubernetes
+    digest: 40fa9b958d1d8a6e1f1df2ee2d077375b10b74c9a9fc18d6bac457cc0db305ac
+    name: teslamate
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.1.0/teslamate-0.1.0.tgz
+    version: 0.1.0
   whoogle:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -276,4 +286,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-27T20:45:55.278356439Z"
+generated: "2024-09-28T00:48:39.25098048Z"
