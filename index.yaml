@@ -266,6 +266,16 @@ entries:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.5.0/teslamate-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v2
+    appVersion: "1.0"
+    created: "2024-09-28T01:07:21.870284265Z"
+    description: A Helm chart for deploying TeslaMate with Longhorn
+    digest: 6951e0c342b94f7cdf17b72c92de8881a474d5852c09a6855a46097f4a380421
+    name: teslamate
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.2.0/teslamate-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-09-28T00:48:39.250919275Z"
     description: A Helm chart for Kubernetes
@@ -286,4 +296,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-28T00:48:39.25098048Z"
+generated: "2024-09-28T01:07:21.870352683Z"
