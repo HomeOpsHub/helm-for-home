@@ -26,9 +26,11 @@ serverEnv:
   SPOTIFY_PUBLIC: "__your_spotify_client_id__"
   SPOTIFY_SECRET: "__your_spotify_secret__"
   MONGO_ENDPOINT: "mongodb://mongo:27017/spotify"
+  LOG_LEVEL: info
 
 clientEnv:
   API_ENDPOINT: "http://localhost:8080"
+  LOG_LEVEL: info
 
 config:
   domain: xyz.app

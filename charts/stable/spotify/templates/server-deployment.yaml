@@ -33,3 +33,5 @@ spec:
               value: {{ .Values.serverEnv.SPOTIFY_SECRET }}
             - name: MONGO_ENDPOINT
               value: {{ .Values.serverEnv.MONGO_ENDPOINT }}
+            - name: LOG_LEVEL
+              value: {{ .Values.serverEnv.LOG_LEVEL }}
