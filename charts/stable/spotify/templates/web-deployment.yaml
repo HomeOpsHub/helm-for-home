@@ -27,3 +27,5 @@ spec:
               value: {{ .Values.clientEnv.API_ENDPOINT }}
             - name: LOG_LEVEL
               value: {{ .Values.clientEnv.LOG_LEVEL }}
+            - name: CORS
+              value: {{ .Values.clientEnv.CORS }}
