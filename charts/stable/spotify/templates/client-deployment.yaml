@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "spotify.fullname" $ }}-web
+  name: {{ include "spotify.fullname" $ }}-client
   labels:
     {{ include "spotify.labels" $ | nindent 4 }}
 spec:
@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: "{{ include "spotify.name" $ }}-web"
+        app.kubernetes.io/name: "{{ include "spotify.name" $ }}-client"
         app.kubernetes.io/instance: "{{ .Release.Name }}"
     spec:
       containers:
