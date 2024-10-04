@@ -8,8 +8,6 @@ spec:
   type: {{ .Values.service.type | quote }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
-      protocol: TCP
-      name: http
+      targetPort: {{ .Values.service.port }}
   selector:
     app.kubernetes.io/name: "{{ include "spotify.name" . }}-server"
