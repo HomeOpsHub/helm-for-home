@@ -23,10 +23,8 @@ spec:
           ports:
             - name: http
               containerPort: 80
-              protocol: TCP
             - name: https
               containerPort: 443
-              protocol: TCP
           env:
             - name: APP_URL
               value: "{{ .Values.env.APP_URL }}"
