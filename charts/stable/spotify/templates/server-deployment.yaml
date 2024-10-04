@@ -35,4 +35,6 @@ spec:
               value: "{{ .Values.serverEnv.MONGO_ENDPOINT }}"
             - name: LOG_LEVEL
               value: "{{ .Values.serverEnv.LOG_LEVEL }}"
+            - name: CORS
+              value: "{{ .Values.serverEnv.CORS }}"
 
