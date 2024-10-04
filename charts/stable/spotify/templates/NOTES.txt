@@ -1,22 +1,5 @@
 1. **Spotify Application Access**
 
-   Your Spotify application has been deployed successfully!
-
-   - **Server URL**: http://{{ .Values.config.subdomains.server }}.{{ .Values.config.domain }}
-   - **Client URL**: http://{{ .Values.config.subdomains.client }}.{{ .Values.config.domain }}
-
-{{- if .Values.ingress.tls.enabled }}
-   - **TLS is enabled** for the application. Ensure your TLS secret (`{{ .Values.ingress.tls.secretName }}`) is correctly configured.
-
-{{- else }}
-   - **TLS is disabled**. The application will be served over HTTP.
-{{- end }}
-
-2. **Service Details**
-
-   - The Spotify server is exposed on port `{{ .Values.service.port }}`.
-   - The Spotify client is exposed on port `{{ .Values.webService.port }}`.
-
 3. **Traefik Ingress**
 
    The application is using Traefik `IngressRoute`. Ensure that Traefik is installed and properly configured in your cluster.
