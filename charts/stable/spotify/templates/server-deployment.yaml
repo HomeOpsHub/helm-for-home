@@ -19,21 +19,20 @@ spec:
       containers:
         - name: spotify-server
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
           ports:
             - containerPort: {{ .Values.service.port }}
           env:
             - name: API_ENDPOINT
-              value: {{ .Values.serverEnv.API_ENDPOINT }}
+              value: "{{ .Values.serverEnv.API_ENDPOINT }}"
             - name: CLIENT_ENDPOINT
-              value: {{ .Values.serverEnv.CLIENT_ENDPOINT }}
+              value: "{{ .Values.serverEnv.CLIENT_ENDPOINT }}"
             - name: SPOTIFY_PUBLIC
-              value: {{ .Values.serverEnv.SPOTIFY_PUBLIC }}
+              value: "{{ .Values.serverEnv.SPOTIFY_PUBLIC }}"
             - name: SPOTIFY_SECRET
-              value: {{ .Values.serverEnv.SPOTIFY_SECRET }}
+              value: "{{ .Values.serverEnv.SPOTIFY_SECRET }}"
             - name: MONGO_ENDPOINT
-              value: {{ .Values.serverEnv.MONGO_ENDPOINT }}
+              value: "{{ .Values.serverEnv.MONGO_ENDPOINT }}"
             - name: LOG_LEVEL
-              value: {{ .Values.serverEnv.LOG_LEVEL }}
-            - name: CORS
-              value: {{ .Values.serverEnv.CORS }}
+              value: "{{ .Values.serverEnv.LOG_LEVEL }}"
+

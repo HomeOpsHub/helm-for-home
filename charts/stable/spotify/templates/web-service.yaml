@@ -1,13 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "spotify.fullname" . }}-web
+  name: {{ include "spotify.fullname" . }}-client
   labels:
     {{ include "spotify.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.webService.type }}
+  type: {{ .Values.webService.type | quote }}
   ports:
-    - port: {{ .Values.webService.port }}
+    - name: http
+      port: {{ .Values.webService.port }}
       targetPort: {{ .Values.webService.port }}
+      protocol: TCP
   selector:
-    app.kubernetes.io/name: {{ include "spotify.name" . }}-web
+    app.kubernetes.io/name: "{{ include "spotify.name" . }}-web"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
