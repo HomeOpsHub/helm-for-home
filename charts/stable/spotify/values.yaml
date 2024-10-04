@@ -3,13 +3,8 @@ fullnameOverride: "spotify"
 nameOverride: "spotify"
 
 image:
-  repository: yooooomi/your_spotify_server
-  tag: "latest"
-  pullPolicy: IfNotPresent
-
-webImage:
-  repository: yooooomi/your_spotify_client
-  tag: "latest"
+  repository: lscr.io/linuxserver/your_spotify
+  tag: "1.6.0"
   pullPolicy: IfNotPresent
 
 service:
@@ -17,19 +12,10 @@ service:
   port: 8080
   targetPort: 8080
 
-webService:
-  type: ClusterIP
-  port: 3000
-
-serverEnv:
-  API_ENDPOINT: "http://localhost:8080"
-  CLIENT_ENDPOINT: "http://localhost:3000"
+env:
+  APP_URL: "http://localhost:8080"
   SPOTIFY_PUBLIC: "__your_spotify_client_id__"
   SPOTIFY_SECRET: "__your_spotify_secret__"
   MONGO_ENDPOINT: "mongodb://mongo:27017/spotify"
   LOG_LEVEL: info
   CORS: "http://localhost:3000"
-
-clientEnv:
-  API_ENDPOINT: "http://localhost:8080"
-  LOG_LEVEL: info

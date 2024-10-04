@@ -8,25 +8,28 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: "{{ include "spotify.name" $ }}-server"
+      app.kubernetes.io/name: "{{ include "spotify.name" $ }}"
       app.kubernetes.io/instance: "{{ .Release.Name }}"
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: "{{ include "spotify.name" $ }}-server"
+        app.kubernetes.io/name: "{{ include "spotify.name" $ }}"
         app.kubernetes.io/instance: "{{ .Release.Name }}"
     spec:
       containers:
-        - name: spotify-server
+        - name: spotify
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: "{{ .Values.image.pullPolicy }}"
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: https
+              containerPort: 443
+              protocol: TCP
           env:
-            - name: API_ENDPOINT
-              value: "{{ .Values.serverEnv.API_ENDPOINT }}"
-            - name: CLIENT_ENDPOINT
-              value: "{{ .Values.serverEnv.CLIENT_ENDPOINT }}"
+            - name: APP_URL
+              value: "{{ .Values.env.APP_URL }}"
             - name: SPOTIFY_PUBLIC
               value: "{{ .Values.serverEnv.SPOTIFY_PUBLIC }}"
             - name: SPOTIFY_SECRET
