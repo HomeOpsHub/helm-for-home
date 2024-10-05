@@ -367,6 +367,20 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2024-10-05T01:10:47.917293111Z"
+    description: A Helm chart for deploying TeslaMate with Longhorn
+    digest: eb717427d26b9b3e33efea951f99031d2f1f515026e4930a99b1a3f26ecd10ef
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Tesla_Motors.svg/793px-Tesla_Motors.svg.png
+    keywords:
+    - teslamate
+    - tesla
+    name: teslamate
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.3.0/teslamate-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2024-09-28T01:07:21.870284265Z"
     description: A Helm chart for deploying TeslaMate with Longhorn
     digest: 6951e0c342b94f7cdf17b72c92de8881a474d5852c09a6855a46097f4a380421
@@ -396,4 +410,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-04T03:59:06.417692903Z"
+generated: "2024-10-05T01:10:47.9173893Z"
