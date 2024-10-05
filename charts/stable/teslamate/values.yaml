@@ -2,54 +2,61 @@ replicaCount: 1
 
 image:
   repository: teslamate/teslamate
-  tag: v1.25.0
+  tag: latest
   pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
   port: 4000
 
-ingressRoute:
-  enabled: true
-  host: teslamate.example.com
-  tls:
-    enabled: true
-    secretName: teslamate-tls
-  annotations: {}
-  middlewares: []
+env:
+  DATABASE_HOST: "database"
+  MQTT_HOST: "mosquitto"
 
-resources:
-  limits:
-    memory: "1Gi"
-    cpu: "500m"
-  requests:
-    memory: "512Mi"
-    cpu: "250m"
+secrets:
+  ENCRYPTION_KEY: "your-strong-encryption-key" # Replace with a secure key
+  DATABASE_USER: "teslamate"
+  DATABASE_PASS: "your-secure-database-password" # Replace with a secure password
+  DATABASE_NAME: "teslamate"
 
 persistence:
   enabled: true
-  storageClass: longhorn
-  accessMode: ReadWriteOnce
-  size: 10Gi
-  dataPath: /data
+  import:
+    mountPath: /opt/app/import
+    existingClaim: ""
+    storageClass: "standard"
+    accessMode: ReadWriteOnce
+    size: 1Gi
 
-# Non-sensitive environment variables managed via ConfigMap
-config:
-  environment:
-    DATABASE_NAME: teslamate
-    DATABASE_HOST: postgres
-    # Add other non-sensitive env variables here
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
 
-# Sensitive environment variables managed via Secrets
-envSecrets:
-  db:
-    username: teslamate
-    password: secretpassword
+ingressRoute:
+  enabled: false
+  metadata:
+    name: ""
+    namespace: ""
+  annotations: {}
+  spec:
+    entrypoints:
+      - websecure
+    routes:
+      - match: Host(`teslamate.example.com`)
+        kind: Rule
+        services:
+          - name: teslamate
+            port: 4000
+        middlewares: []
+    tls:
+      enabled: false
+      secretName: ""
 
-network:
-  ports:
-    - containerPort: 4000
-      name: http
-      protocol: TCP
 
-labels: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

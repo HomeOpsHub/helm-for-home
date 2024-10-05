@@ -21,24 +21,48 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            {{- range .Values.network.ports }}
-            - containerPort: {{ .containerPort }}
-              name: {{ .name }}
-              protocol: {{ .protocol }}
-            {{- end }}
-          envFrom:
-            - configMapRef:
-                name: {{ include "teslamate.fullname" . }}-config
-            - secretRef:
-                name: teslamate-db-secret
+            - containerPort: 4000
+          env:
+            # Reference non-sensitive environment variables
+            - name: DATABASE_HOST
+              value: {{ .Values.env.DATABASE_HOST | quote }}
+            - name: MQTT_HOST
+              value: {{ .Values.env.MQTT_HOST | quote }}
+            # Reference sensitive environment variables from Secret
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "teslamate.fullname" . }}-secret
+                  key: ENCRYPTION_KEY
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "teslamate.fullname" . }}-secret
+                  key: DATABASE_USER
+            - name: DATABASE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "teslamate.fullname" . }}-secret
+                  key: DATABASE_PASS
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "teslamate.fullname" . }}-secret
+                  key: DATABASE_NAME
           volumeMounts:
-            - name: teslamate-data
-              mountPath: {{ .Values.persistence.dataPath }}
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            - name: import-volume
+              mountPath: {{ .Values.persistence.import.mountPath }}
       volumes:
-        - name: teslamate-data
+        - name: import-volume
           persistentVolumeClaim:
-            claimName: {{ include "teslamate.fullname" . }}-pvc
-      restartPolicy: Always
-      # Define additional specifications like networks if needed
+            claimName: {{ include "teslamate.fullname" . }}-import-pvc
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}

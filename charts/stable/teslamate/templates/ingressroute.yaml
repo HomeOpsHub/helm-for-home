@@ -2,35 +2,43 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: {{ include "teslamate.fullname" . }}-ingressroute
-  labels:
-    {{- include "teslamate.labels" . | nindent 4 }}
-  {{- with .Values.ingressRoute.annotations }}
+  name: {{ if .Values.ingressRoute.metadata.name }}
+          {{ .Values.ingressRoute.metadata.name }}
+        {{ else }}
+          {{ include "teslamate.fullname" . }}
+        {{ end }}
+  namespace:  {{ if .Values.ingressRoute.metadata.namespace }}
+                {{ .Values.ingressRoute.metadata.namespace }}
+              {{ else }}
+                {{ .Release.Namespace }}
+              {{ end }}
+  {{- if .Values.ingressRoute.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+    {{- toYaml .Values.ingressRoute.annotations | nindent 4 }}
   {{- end }}
 spec:
   entryPoints:
-    - web
-    {{- if .Values.ingressRoute.tls.enabled }}
-    - websecure
+    {{- range .Values.ingressRoute.spec.entrypoints }}
+    - {{ . }}
     {{- end }}
   routes:
-    - match: Host(`{{ .Values.ingressRoute.host }}`)
-      kind: Rule
+    {{- range .Values.ingressRoute.spec.routes }}
+    - match: {{ .match }}
+      kind: {{ .kind }}
       services:
-        - name: {{ include "teslamate.fullname" . }}
-          port: {{ .Values.service.port }}
-      {{- if .Values.ingressRoute.middlewares }}
+        {{- range .services }}
+        - name: {{ .name }}
+          port: {{ .port }}
+        {{- end }}
+      {{- if .middlewares }}
       middlewares:
-        {{- range .Values.ingressRoute.middlewares }}
+        {{- range .middlewares }}
         - name: {{ . }}
         {{- end }}
       {{- end }}
-  {{- if .Values.ingressRoute.tls.enabled }}
+    {{- end }}
+  {{- if .Values.ingressRoute.spec.tls.enabled }}
   tls:
-    secretName: {{ .Values.ingressRoute.tls.secretName }}
-    # Uncomment the following line if using TLS passthrough
-    # passthrough: {{ .Values.ingressRoute.tls.passthrough | default false }}
+    secretName: {{ .Values.ingressRoute.spec.tls.secretName }}
   {{- end }}
 {{- end }}

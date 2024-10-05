@@ -1,13 +1,15 @@
+{{- if .Values.persistence.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "teslamate.fullname" . }}-pvc
+  name: {{ include "teslamate.fullname" . }}-import-pvc
   labels:
     {{- include "teslamate.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - {{ .Values.persistence.accessMode }}
-  storageClassName: {{ .Values.persistence.storageClass }}
+    - {{ .Values.persistence.import.accessMode }}
+  storageClassName: {{ .Values.persistence.import.storageClass }}
   resources:
     requests:
-      storage: {{ .Values.persistence.size }}
+      storage: {{ .Values.persistence.import.size }}
+{{- end }}

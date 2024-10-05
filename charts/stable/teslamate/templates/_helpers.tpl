@@ -1,20 +1,11 @@
-{{/*
-Expand the name of the chart.
-*/}}
 {{- define "teslamate.name" -}}
-{{- .Chart.Name -}}
-{{- end -}}
+teslamate
+{{- end }}
 
-{{/*
-Create a default fully qualified app name.
-*/}}
 {{- define "teslamate.fullname" -}}
-{{- printf "%s-%s" .Release.Name .Chart.Name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
+{{ include "teslamate.name" . }}-{{ .Release.Name }}
+{{- end }}
 
-{{/*
-Common labels
-*/}}
 {{- define "teslamate.labels" -}}
 helm.sh/chart: {{ include "teslamate.chart" . }}
 app.kubernetes.io/name: {{ include "teslamate.name" . }}
