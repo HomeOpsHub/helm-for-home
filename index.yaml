@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  custom-error-pages:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-10-06T05:44:52.253121707Z"
+    description: A Helm chart for Kubernetes
+    digest: e30fcd3e76fadb626ffffa270ee79feebde6d44dd5e5741712ad81ce708f92ac
+    name: custom-error-pages
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/custom-error-pages-0.1.0/custom-error-pages-0.1.0.tgz
+    version: 0.1.0
   gotify:
   - apiVersion: v2
     appVersion: 2.1.5
@@ -472,4 +483,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-06T05:37:38.364931503Z"
+generated: "2024-10-06T05:44:52.253215553Z"
