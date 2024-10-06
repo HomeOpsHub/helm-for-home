@@ -24,6 +24,17 @@ entries:
   it-tools:
   - apiVersion: v2
     appVersion: latest
+    created: "2024-10-06T05:37:38.36484377Z"
+    description: Helm chart for deploying IT-Tools
+    digest: 4ebe36c9417d782a2bf2daad1ffa1c68305f3ca6726d195a1d11c0a681b9f620
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
+    name: it-tools
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/it-tools-0.3.0/it-tools-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2024-10-06T05:31:58.984077235Z"
     description: Helm chart for deploying IT-Tools
     digest: dcd99babb959ac439726ab407cac111ca2a9ed03ca68a119e5a4cafe42df4296
@@ -461,4 +472,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-06T05:31:58.984170849Z"
+generated: "2024-10-06T05:37:38.364931503Z"
