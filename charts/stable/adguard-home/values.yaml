@@ -5,10 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: adguard/adguardhome
+  tag: "latest"
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,7 +40,24 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 3000
+  dnsPort: 53
+  dhcpPort: 67
+  dhcpSecPort: 68
+  tlsPort: 853
+  httpAltPort: 80
+  httpsAltPort: 443
+
+persistence:
+  enabled: true
+  dataPath: "/opt/adguardhome/work"
+  configPath: "/opt/adguardhome/conf"
+  dataPvcName: "adguard-data-pvc"
+  configPvcName: "adguard-config-pvc"
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
 
 ingress:
   enabled: false

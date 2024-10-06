@@ -8,8 +8,25 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
+      targetPort: 3000
       name: http
+    - port: {{ .Values.service.dnsPort }}
+      targetPort: 53
+      name: dns
+    - port: {{ .Values.service.dhcpPort }}
+      targetPort: 67
+      name: dhcp
+    - port: {{ .Values.service.dhcpSecPort }}
+      targetPort: 68
+      name: dhcp-sec
+    - port: {{ .Values.service.tlsPort }}
+      targetPort: 853
+      name: tls
+    - port: {{ .Values.service.httpAltPort }}
+      targetPort: 80
+      name: http-alt
+    - port: {{ .Values.service.httpsAltPort }}
+      targetPort: 443
+      name: https-alt
   selector:
     {{- include "adguard-home.selectorLabels" . | nindent 4 }}
