@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Values.ingressRoute.metadata.namespace | default .Release.Namespace }}
   {{- if .Values.ingressRoute.annotations }}
   annotations:
-    {{- toYaml .Values.ingressRoute.annotations | nindent 4 }}
+    {{- toYaml .Values.ingressRoute.metadata.annotations | nindent 4 }}
   {{- end }}
 spec:
   entryPoints:
