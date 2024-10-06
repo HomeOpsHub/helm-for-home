@@ -21,6 +21,18 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/gotify-0.1.0/gotify-0.1.0.tgz
     version: 0.1.0
+  it-tools:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-10-06T04:19:49.496496783Z"
+    description: Helm chart for deploying IT-Tools
+    digest: f25c138992c98eb727906f6ff682e5199f9d4f7dad3941e81eef6865325063c0
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
+    name: it-tools
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/it-tools-0.1.0/it-tools-0.1.0.tgz
+    version: 0.1.0
   netdata:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -438,4 +450,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-05T03:42:47.313739132Z"
+generated: "2024-10-06T04:19:49.496547006Z"
