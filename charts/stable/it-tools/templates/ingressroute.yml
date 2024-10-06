@@ -4,7 +4,7 @@ kind: IngressRoute
 metadata:
   name: {{ .Values.ingressRoute.metadata.name | default .Release.Name }}
   namespace: {{ .Values.ingressRoute.metadata.namespace | default .Release.Namespace }}
-  {{- if .Values.ingressRoute.annotations }}
+  {{- if .Values.ingressRoute.metadata.annotations }}
   annotations:
     {{- toYaml .Values.ingressRoute.metadata.annotations | nindent 4 }}
   {{- end }}
