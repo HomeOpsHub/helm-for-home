@@ -1,5 +1,5 @@
 apiVersion: v2
 name: adguard-home
 description: A Helm chart for AdGuard Home
-version: 0.2.0
+version: 0.3.0
 appVersion: "latest"
