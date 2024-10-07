@@ -55,6 +55,14 @@ service:
     tlsPort: 853
     httpAltPort: 80
     httpsAltPort: 443
+  nodePort:
+    port: 30080
+    dnsPort: 30053
+    dhcpPort: 30067
+    dhcpSecPort: 30068
+    tlsPort: 30853
+    httpAltPort: 30081
+    httpsAltPort: 30443
 
 persistence:
   enabled: true
