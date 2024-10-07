@@ -10,6 +10,7 @@ spec:
     {{- range .Values.service.externalIPs }}
     - {{ . | quote }}
     {{- end }}
+  externalTrafficPolicy: Local
   ports:
     - port: 53
       targetPort: {{ .Values.service.dnsPort | default 53 }}
