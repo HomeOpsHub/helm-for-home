@@ -5,49 +5,37 @@ metadata:
   labels:
     {{- include "adguard-home.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP  # Keep it as ClusterIP
+  externalIPs:
+    {{- range .Values.service.externalIPs }}
+    - {{ . | quote }}
+    {{- end }}
   ports:
+    - port: 53
+      targetPort: {{ .Values.service.dnsPort | default 53 }}
+      protocol: UDP
+      name: dns-udp
+    - port: 53
+      targetPort: {{ .Values.service.dnsPort | default 53 }}
+      protocol: TCP
+      name: dns-tcp
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.target.port | default .Values.service.port }}
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ .Values.service.nodePort.port | default .Values.service.nodePort }}
-      {{- end }}
       name: http
-    - port: {{ .Values.service.dnsPort }}
-      targetPort: {{ .Values.service.target.dnsPort | default .Values.service.dnsPort }}
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ .Values.service.nodePort.dnsPort | default .Values.service.nodePort }}
-      {{- end }}
-      name: dns
     - port: {{ .Values.service.dhcpPort }}
       targetPort: {{ .Values.service.target.dhcpPort | default .Values.service.dhcpPort }}
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ .Values.service.nodePort.dhcpPort | default .Values.service.nodePort }}
-      {{- end }}
       name: dhcp
     - port: {{ .Values.service.dhcpSecPort }}
       targetPort: {{ .Values.service.target.dhcpSecPort | default .Values.service.dhcpSecPort }}
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ .Values.service.nodePort.dhcpSecPort | default .Values.service.nodePort }}
-      {{- end }}
       name: dhcp-sec
     - port: {{ .Values.service.tlsPort }}
       targetPort: {{ .Values.service.target.tlsPort | default .Values.service.tlsPort }}
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ .Values.service.nodePort.tlsPort | default .Values.service.nodePort }}
-      {{- end }}
       name: tls
     - port: {{ .Values.service.httpAltPort }}
       targetPort: {{ .Values.service.target.httpAltPort | default .Values.service.httpAltPort }}
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ .Values.service.nodePort.httpAltPort | default .Values.service.nodePort }}
-      {{- end }}
       name: http-alt
     - port: {{ .Values.service.httpsAltPort }}
       targetPort: {{ .Values.service.target.httpsAltPort | default .Values.service.httpsAltPort }}
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ .Values.service.nodePort.httpsAltPort | default .Values.service.nodePort }}
-      {{- end }}
       name: https-alt
   selector:
     {{- include "adguard-home.selectorLabels" . | nindent 4 }}

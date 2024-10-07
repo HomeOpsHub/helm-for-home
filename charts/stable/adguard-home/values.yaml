@@ -39,7 +39,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 3000
   dnsPort: 53
   dhcpPort: 67
@@ -56,13 +56,14 @@ service:
     httpAltPort: 80
     httpsAltPort: 443
   nodePort:
-    port: 30080
-    dnsPort: 30053
-    dhcpPort: 30067
-    dhcpSecPort: 30068
-    tlsPort: 30853
-    httpAltPort: 30081
-    httpsAltPort: 30443
+    port: 5082
+    dnsPort: 53
+    dhcpPort: 67
+    dhcpSecPort: 68
+    tlsPort: 853
+    httpAltPort: 5083
+    httpsAltPort: 5084
+  externalIPs: []
 
 persistence:
   enabled: true
