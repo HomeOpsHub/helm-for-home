@@ -3,6 +3,15 @@ entries:
   adguard-home:
   - apiVersion: v2
     appVersion: latest
+    created: "2024-10-07T00:48:38.629847441Z"
+    description: A Helm chart for AdGuard Home
+    digest: 54b56f939e020934ca475f57e5610e59d2aa442e2008ab31e53bdbf0c0c0fbe3
+    name: adguard-home
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/adguard-home-0.5.0/adguard-home-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2024-10-07T00:31:07.399851863Z"
     description: A Helm chart for AdGuard Home
     digest: 79c510769690ff3ff4cc3144ee4f805447b915c81c9b052a016c7524f17e342c
@@ -532,4 +541,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-07T00:31:07.399955897Z"
+generated: "2024-10-07T00:48:38.629958348Z"
