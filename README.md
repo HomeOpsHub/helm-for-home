@@ -40,6 +40,6 @@ Before you start using the Helm charts from this repository, ensure you have the
 
    To add this repository to your Helm setup, run:
 
-   ```bash
-   helm repo add helm-for-home https://your-repo-url
+   ```bash   
+   helm repo add myhelm https://homeopshub.github.io/helm-for-home/
    helm repo update
