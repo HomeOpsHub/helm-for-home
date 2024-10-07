@@ -8,25 +8,25 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 3000
+      targetPort: {{ .Values.service.target.port | default .Values.service.port }}
       name: http
     - port: {{ .Values.service.dnsPort }}
-      targetPort: 53
+      targetPort: {{ .Values.service.target.dnsPort | default .Values.service.dnsPort }}
       name: dns
     - port: {{ .Values.service.dhcpPort }}
-      targetPort: 67
+      targetPort: {{ .Values.service.target.dhcpPort | default .Values.service.dhcpPort }}
       name: dhcp
     - port: {{ .Values.service.dhcpSecPort }}
-      targetPort: 68
+      targetPort: {{ .Values.service.target.dhcpSecPort | default .Values.service.dhcpSecPort }}
       name: dhcp-sec
     - port: {{ .Values.service.tlsPort }}
-      targetPort: 853
+      targetPort: {{ .Values.service.target.tlsPort | default .Values.service.tlsPort }}
       name: tls
     - port: {{ .Values.service.httpAltPort }}
-      targetPort: 80
+      targetPort: {{ .Values.service.target.httpAltPort | default .Values.service.httpAltPort }}
       name: http-alt
     - port: {{ .Values.service.httpsAltPort }}
-      targetPort: 443
+      targetPort: {{ .Values.service.target.httpsAltPort | default .Values.service.httpsAltPort }}
       name: https-alt
   selector:
     {{- include "adguard-home.selectorLabels" . | nindent 4 }}

@@ -47,6 +47,14 @@ service:
   tlsPort: 853
   httpAltPort: 80
   httpsAltPort: 443
+  target:
+    port: 3000
+    dnsPort: 53
+    dhcpPort: 67
+    dhcpSecPort: 68
+    tlsPort: 853
+    httpAltPort: 80
+    httpsAltPort: 443
 
 persistence:
   enabled: true
