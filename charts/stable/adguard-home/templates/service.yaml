@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "adguard-home.labels" . | nindent 4 }}
 spec:
-  type: ClusterIP  # Keep it as ClusterIP
+  type: LoadBalancer  # Keep it as ClusterIP
   externalIPs:
     {{- range .Values.service.externalIPs }}
     - {{ . | quote }}
