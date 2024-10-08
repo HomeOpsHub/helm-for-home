@@ -5,9 +5,11 @@ metadata:
   name: {{ include "uptime-kuma.fullname" . }}
 spec:
   accessModes:
-    - {{ .Values.persistence.accessModes | first }}
+    {{- toYaml .Values.persistence.accessModes | nindent 2 }}
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
+  {{- if .Values.persistence.storageClass }}
   storageClassName: {{ .Values.persistence.storageClass }}
+  {{- end }}
 {{- end }}
