@@ -86,6 +86,16 @@ entries:
   custom-error-pages:
   - apiVersion: v2
     appVersion: latest
+    created: "2024-10-08T00:26:33.418252632Z"
+    description: A Helm chart for deploying tarampampam/error-pages
+    digest: 217584f14710d8a5610f2d1081b05d639d63e48bffa37ac35a1a1b0449949fe3
+    name: custom-error-pages
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/custom-error-pages-0.3.0/custom-error-pages-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2024-10-07T23:53:20.472461132Z"
     description: A Helm chart for deploying tarampampam/error-pages
     digest: cc288dcf640ac29114102dac68d1ff83dd33d64f703a76b0eb2324abf30ed362
@@ -587,4 +597,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-07T23:53:20.472578052Z"
+generated: "2024-10-08T00:26:33.418350745Z"
