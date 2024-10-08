@@ -580,6 +580,28 @@ entries:
       category: Monitoring
     apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-10-08T02:22:34.747004103Z"
+    description: A Helm chart for deploying Uptime Kuma, a self-hosted monitoring
+      tool.
+    digest: aada8263b79c51ffa5b446b41bf886f44a0cc4de8c84ec14915de50908df519e
+    home: https://github.com/louislam/uptime-kuma
+    icon: https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/icon.png
+    keywords:
+    - monitoring
+    - uptime
+    - self-hosted
+    - Kubernetes
+    name: uptime-kuma
+    sources:
+    - https://github.com/louislam/uptime-kuma
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/uptime-kuma-0.4.0/uptime-kuma-0.4.0.tgz
+    version: 0.4.0
+  - annotations:
+      category: Monitoring
+    apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-10-08T02:05:45.509591338Z"
     description: A Helm chart for deploying Uptime Kuma, a self-hosted monitoring
       tool.
@@ -641,4 +663,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-08T02:05:45.509670876Z"
+generated: "2024-10-08T02:22:34.747094553Z"
