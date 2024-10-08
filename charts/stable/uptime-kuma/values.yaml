@@ -5,10 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: louislam/uptime-kuma
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,7 +40,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 3001
 
 ingress:
   enabled: false
@@ -58,6 +57,17 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+
+ingressRoute: {}
+
+persistence:
+  enabled: false
+  storageClass: ""  # Specify your storage class if using Longhorn
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  mountPath: /app/data
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
