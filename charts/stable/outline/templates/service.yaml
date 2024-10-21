@@ -6,8 +6,6 @@ metadata:
   name: {{ .name | quote }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    app: {{ $.Chart.Name }}
-    release: {{ $.Release.Name }}
     {{- if .labels }}
     {{- range $key, $value := .labels }}
     {{ $key }}: {{ $value | quote }}
