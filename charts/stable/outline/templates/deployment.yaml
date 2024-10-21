@@ -56,14 +56,6 @@ spec:
               containerPort: {{ .containerPort }}
               protocol: {{ .protocol | default "TCP" }}
             {{- end }}
-          {{- if .Values.livenessProbe }}
-          livenessProbe:
-            {{ toYaml .Values.livenessProbe | nindent 12 }}
-          {{- end }}
-          {{- if .Values.readinessProbe }}
-          readinessProbe:
-            {{ toYaml .Values.readinessProbe | nindent 12 }}
-          {{- end }}
           {{- if .Values.resources }}
           resources:
             {{ toYaml .Values.resources | nindent 12 }}
