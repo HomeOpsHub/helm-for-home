@@ -13,37 +13,37 @@ spec:
 {{ toYaml .Values.ingressRoute.entryPoints | indent 4 }}
   routes:
   {{- range .Values.ingressRoute.routes }}
-    - match: {{ .match | quote }}
-      kind: {{ .kind | default "Rule" | quote }}
+    - match: {{ .match  }}
+      kind: {{ .kind | default "Rule"  }}
       {{- if .middlewares }}
       middlewares:
       {{- range .middlewares }}
-        - name: {{ .name | quote }}
-          namespace: {{ .namespace | default $.Values.ingressRoute.namespace | quote }}
+        - name: {{ .name  }}
+          namespace: {{ .namespace | default $.Values.ingressRoute.namespace  }}
       {{- end }}
       {{- end }}
       services:
       {{- range .services }}
-        - name: {{ .name | quote }}
-          namespace: {{ .namespace | default $.Values.ingressRoute.namespace | quote }}
+        - name: {{ .name  }}
+          namespace: {{ .namespace | default $.Values.ingressRoute.namespace  }}
           port: {{ .port }}
       {{- end }}
   {{- end }}
   {{- if .Values.ingressRoute.tls.enabled }}
   tls:
     {{- if .Values.ingressRoute.tls.secretName }}
-    secretName: {{ .Values.ingressRoute.tls.secretName | quote }}
+    secretName: {{ .Values.ingressRoute.tls.secretName  }}
     {{- end }}
     {{- if .Values.ingressRoute.tls.certResolver }}
-    certResolver: {{ .Values.ingressRoute.tls.certResolver | quote }}
+    certResolver: {{ .Values.ingressRoute.tls.certResolver  }}
     {{- end }}
     {{- if .Values.ingressRoute.tls.domains }}
     domains:
     {{- range .Values.ingressRoute.tls.domains }}
-      - main: {{ .main | quote }}
+      - main: {{ .main  }}
         sans:
           {{- range .sans }}
-          - {{ . | quote }}
+          - {{ .  }}
           {{- end }}
     {{- end }}
     {{- end }}
