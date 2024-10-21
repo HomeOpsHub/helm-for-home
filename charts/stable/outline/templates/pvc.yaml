@@ -18,7 +18,9 @@ metadata:
   {{- end }}
 spec:
   accessModes:
-  {{- toYaml .accessModes | indent 4 }}
+  {{- range .accessModes }}
+  - {{ . | quote }}
+  {{- end }}
   {{- if .volumeMode }}
   volumeMode: {{ .volumeMode }}
   {{- end }}
