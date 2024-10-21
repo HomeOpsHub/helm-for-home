@@ -8,10 +8,10 @@ data:
 {{- range $key, $value := .Values.configmap.data }}
   {{- if kindIs "map" $value }}
     {{- range $subKey, $subValue := $value }}
-  {{ $key }}_{{ $subKey }}: {{ $subValue  }}
+  {{ $key }}_{{ $subKey }}: {{ $subValue | quote }}
     {{- end }}
   {{- else }}
-  {{ $key }}: {{ $value  }}
+  {{ $key }}: {{ $value | quote }}
   {{- end }}
 {{- end }}
 {{- end }}

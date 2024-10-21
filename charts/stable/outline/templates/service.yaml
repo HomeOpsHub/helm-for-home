@@ -3,35 +3,35 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .name  }}
+  name: {{ .name | quote }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- if .labels }}
     {{- range $key, $value := .labels }}
-    {{ $key }}: {{ $value  }}
+    {{ $key }}: {{ $value | quote }}
     {{- end }}
     {{- end }}
   annotations:
     {{- if .annotations }}
     {{- range $key, $value := .annotations }}
-    {{ $key }}: {{ $value  }}
+    {{ $key }}: {{ $value | quote }}
     {{- end }}
     {{- end }}
 spec:
-  type: {{ .type | default "ClusterIP"  }}
+  type: {{ .type | default "ClusterIP" | quote }}
   selector:
     {{- range $key, $value := .selector }}
-    {{ $key }}: {{ $value  }}
+    {{ $key }}: {{ $value | quote }}
     {{- end }}
   ports:
     {{- range .ports }}
     - port: {{ .port }}
       targetPort: {{ .targetPort }}
       {{- if .protocol }}
-      protocol: {{ .protocol | default "TCP"  }}
+      protocol: {{ .protocol | default "TCP" | quote }}
       {{- end }}
       {{- if .name }}
-      name: {{ .name  }}
+      name: {{ .name | quote }}
       {{- end }}
     {{- end }}
 {{- end }}
