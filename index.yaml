@@ -180,6 +180,17 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/netdata-0.1.0/netdata-0.1.0.tgz
     version: 0.1.0
+  outline:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-10-21T00:15:02.816746779Z"
+    description: A Helm chart for Kubernetes
+    digest: 2ee11b81c5c53e256b2c42aff9a0d898a326d7e0afcb5762c8c9ef909e4fb3b1
+    name: outline
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/outline-0.1.0/outline-0.1.0.tgz
+    version: 0.1.0
   plex:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -663,4 +674,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-08T02:22:34.747094553Z"
+generated: "2024-10-21T00:15:02.816872073Z"
