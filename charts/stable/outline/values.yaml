@@ -1,0 +1,317 @@
+# Default values for outline.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+serviceAccount: {}
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Configuration for the ConfigMap
+configmap:
+  # Set to true to enable the creation of the ConfigMap resource
+  enabled: true
+
+  # Data to include in the ConfigMap
+  data:
+    # Key-value pairs to be stored in the ConfigMap.
+    # Uncomment and customize the sample values below.
+
+    # AWS configuration
+    # AWS_REGION: ""                             # AWS region for services (e.g., "us-west-2")
+    # AWS_S3_ACL: ""                             # Access control list for S3 (e.g., "private")
+    # AWS_S3_FORCE_PATH_STYLE: ""                # Force path style for S3 URLs ("true" or "false")
+    # AWS_S3_UPLOAD_BUCKET_NAME: ""              # Name of the S3 bucket for uploads
+    # AWS_S3_UPLOAD_BUCKET_URL: ""               # URL of the S3 bucket (e.g., "https://s3.amazonaws.com/my-bucket")
+    # AWS_S3_UPLOAD_MAX_SIZE: ""                 # Maximum upload size in bytes (e.g., "26214400" for 25MB)
+
+    # CDN configuration
+    # CDN_URL: ""                                # URL of the Content Delivery Network (if applicable)
+
+    # Database configuration
+    # DATABASE_URL: ""                           # Database connection URL (e.g., "postgres://user:pass@host:5432/dbname")
+    # DATABASE_URL_TEST: ""                      # Test database URL (used in testing environments)
+
+    # Debugging and logging
+    # DEBUG: ""                                  # Debugging options (e.g., "cache,presenters,events")
+
+    # Localization
+    # DEFAULT_LANGUAGE: ""                       # Default language setting (e.g., "en_US")
+
+    # Application settings
+    # ENABLE_UPDATES: ""                         # Enable automatic updates ("true" or "false")
+    # FORCE_HTTPS: ""                            # Force HTTPS connections ("true" or "false")
+    # PORT: ""                                   # Port the application listens on (e.g., "80")
+
+    # Authentication and authorization
+    # GOOGLE_ALLOWED_DOMAINS: ""                 # Allowed Google domains for authentication (e.g., "example.com")
+    # GOOGLE_ANALYTICS_ID: ""                    # Google Analytics Tracking ID (e.g., "UA-XXXXXXXXX-X")
+    # SLACK_MESSAGE_ACTIONS: ""                  # Enable Slack message actions ("true" or "false")
+
+    # Security and error tracking
+    # PGSSLMODE: ""                              # PostgreSQL SSL mode (e.g., "disable", "require")
+    # SENTRY_DSN: ""                             # Sentry DSN for error tracking
+
+    # Caching
+    # REDIS_URL: ""                              # Redis connection URL (e.g., "redis://localhost:6379")
+
+    # Email (SMTP) configuration
+    # SMTP_FROM_EMAIL: ""                        # From email address for outgoing emails (e.g., "noreply@example.com")
+    # SMTP_HOST: ""                              # SMTP server host (e.g., "smtp.example.com")
+    # SMTP_PORT: ""                              # SMTP server port (e.g., "587")
+    # SMTP_REPLY_EMAIL: ""                       # Reply-to email address (e.g., "support@example.com")
+    # SMTP_USERNAME: ""                          # SMTP username for authentication
+    # SMTP_PASSWORD: ""                          # SMTP password for authentication (store securely)
+
+    # Branding
+    # TEAM_LOGO: ""                              # URL to the team's logo (e.g., "https://example.com/logo.png")
+
+    # Application URL
+    # URL: ""                                    # Base URL of the application (e.g., "https://app.example.com")
+
+ingress: {}
+
+# Global configuration for the IngressRoute
+ingressRoute:
+  # Set to true to enable the creation of the IngressRoute resource
+  enabled: true
+
+  # Namespace where the IngressRoute will be created
+  # Defaults to the Helm release namespace if not specified
+  namespace: default
+
+  # Annotations to add to the IngressRoute metadata
+  annotations: {}
+  # annotations:
+  #   kubernetes.io/ingress.class: traefik-external  # Specify the Traefik ingress class
+
+  # Entry points that Traefik will listen on
+  # Common entry points are 'web' (HTTP) and 'websecure' (HTTPS)
+  entryPoints: []
+  # entryPoints:
+  #   - websecure
+  #   - web
+
+  # List of routes to define how requests are handled
+  routes: []
+  # routes:
+  #   # First route configuration
+  #   - match: Host(`your-domain.example.com`)  # The matching rule for the route (replace with your domain)
+  #     kind: Rule  # Type of match; defaults to 'Rule' if not specified
+  #
+  #     # Middlewares to apply to the route (optional)
+  #     middlewares:
+  #       - name: your-middleware-1             # Name of the middleware
+  #         namespace: middleware-namespace-1   # Namespace where the middleware is located
+  #       - name: your-middleware-2
+  #         namespace: middleware-namespace-2
+  #
+  #     # Services that handle the requests
+  #     services:
+  #       - name: your-service-name             # Name of your Kubernetes service
+  #         namespace: your-service-namespace   # Namespace where your service is deployed
+  #         port: your-service-port             # Port your service is listening on (e.g., 80 or 8080)
+  #
+  #   # Additional routes can be added here
+  #   # - match: PathPrefix(`/api`)
+  #     # ... (additional route configuration)
+
+  # TLS configuration for secure connections (optional)
+  tls:
+    # Set to true to enable TLS for the IngressRoute
+    enabled: false
+
+    # Use a pre-existing TLS secret for SSL termination (optional)
+    secretName: ""
+    # secretName: your-tls-secret-name  # Replace with the name of your TLS secret
+
+    # Alternatively, use a certificate resolver like Let's Encrypt (optional)
+    certResolver: ""
+    # certResolver: your-cert-resolver-name   # Name of your certResolver configured in Traefik
+
+    # Define domains and SANs when using certResolver (optional)
+    domains: []
+    # domains:
+    #   - main: your-domain.example.com       # The main domain for the certificate
+    #     sans:
+    #       - subdomain1.your-domain.example.com  # Additional Subject Alternative Names
+    #       - subdomain2.your-domain.example.com
+
+# Configuration for Kubernetes Secret
+secret:
+  # Set to true to enable the creation of the Secret resource
+  enabled: true
+
+  # Type of the Kubernetes Secret
+  type: Opaque
+
+  # Data to include in the Secret
+  data:
+    # Key-value pairs to be stored in the Secret.
+    # Note: Do NOT store actual sensitive data directly in this file.
+    # Instead, consider using external secret management or pass them securely during deployment.
+
+    # AWS Credentials
+    # AWS_ACCESS_KEY_ID: ""          # AWS Access Key ID (Base64 encoded)
+    # AWS_SECRET_ACCESS_KEY: ""      # AWS Secret Access Key (Base64 encoded)
+
+    # Google OAuth Credentials
+    # GOOGLE_CLIENT_ID: ""           # Google OAuth Client ID (Base64 encoded)
+    # GOOGLE_CLIENT_SECRET: ""       # Google OAuth Client Secret (Base64 encoded)
+
+    # MinIO Credentials
+    # MINIO_ACCESS_KEY: ""           # MinIO Access Key (Base64 encoded)
+    # MINIO_SECRET_KEY: ""           # MinIO Secret Key (Base64 encoded)
+
+    # Application Secrets
+    # SECRET_KEY: ""                 # Application secret key for encryption (Base64 encoded)
+    # UTILS_SECRET: ""               # Utility secret, if applicable (Base64 encoded)
+
+    # Slack Credentials
+    # SLACK_APP_ID: ""               # Slack Application ID (Base64 encoded)
+    # SLACK_KEY: ""                  # Slack Key (Base64 encoded)
+    # SLACK_SECRET: ""               # Slack Secret (Base64 encoded)
+    # SLACK_VERIFICATION_TOKEN: ""   # Slack Verification Token (Base64 encoded)
+
+    # SMTP Credentials
+    # SMTP_PASSWORD: ""              # SMTP Password for email sending (Base64 encoded)
+
+    # Additional secrets can be added below
+    # ADDITIONAL_SECRET_KEY: ""      # Description of the secret (Base64 encoded)
+
+# Configuration for PersistentVolumeClaims
+persistentVolumeClaims:
+  # Set to true to enable the creation of PVCs
+  enabled: true
+
+  # List of PVC configurations
+  claims: []
+  # claims:
+  #   - name: data-storage                    # Unique identifier for the PVC (must be unique per claim)
+  #     create: true                          # Set to true to create this PVC
+  #     mountPath: /data                      # Mount path inside the container
+  #     accessModes:
+  #       - ReadWriteOnce                     # Access modes: ReadWriteOnce, ReadOnlyMany, ReadWriteMany
+  #     volumeMode: Filesystem                # Volume mode: Filesystem or Block
+  #     size: 10Gi                            # Storage request size
+  #     storageClassName: ""                  # Storage class name (leave empty to use default)
+  #     existingClaim: ""                     # Use an existing PVC by name
+  #     annotations: {}                       # Additional annotations for the PVC
+  #     labels: {}                            # Additional labels for the PVC
+  #     subPath: ""                           # Sub-path within the volume to mount (optional)
+  #     readOnly: false                       # Mount the volume as read-only (true or false)
+  #     ensurePermissions: true               # Manage permissions automatically (e.g., init containers)
+  #   - name: logs
+  #     create: true
+  #     mountPath: /var/logs
+  #     accessModes:
+  #       - ReadWriteOnce
+  #     volumeMode: Filesystem
+  #     size: 5Gi
+  #     storageClassName: "fast-storage"
+  #     existingClaim: ""
+  #     annotations: {}
+  #     labels: {}
+  #     subPath: ""
+  #     readOnly: false
+  #     ensurePermissions: true
+
+
+
+# Configuration for Kubernetes Services
+services:
+  # Set to true to enable the creation of services
+  enabled: true
+
+  # List of service configurations
+  definitions: []
+  # definitions:
+  #   - name: http-service                       # Unique name for the service
+  #     type: ClusterIP                          # Service type: ClusterIP, NodePort, LoadBalancer, etc.
+  #     ports:
+  #       - port: 80                             # Port that the service will expose
+  #         targetPort: 8080                     # Port on the container where the service will route to
+  #         protocol: TCP                        # Protocol: TCP or UDP
+  #         name: http                           # Name of the port (optional)
+  #     selector:
+  #       app: my-app                            # Labels to select pods
+  #     annotations: {}                          # Additional annotations for the service
+  #     labels: {}                               # Additional labels for the service
+  #   - name: metrics-service
+  #     type: ClusterIP
+  #     ports:
+  #       - port: 9090
+  #         targetPort: 9090
+  #         protocol: TCP
+  #         name: metrics
+  #     selector:
+  #       app: my-app
+  #     annotations: {}
+  #     labels: {}

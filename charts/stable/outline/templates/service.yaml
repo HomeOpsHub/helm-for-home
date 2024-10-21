@@ -1,0 +1,36 @@
+{{- if and .Values.services.enabled (gt (len .Values.services.definitions) 0) }}
+{{- range .Values.services.definitions }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name | quote }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ $.Chart.Name }}
+    release: {{ $.Release.Name }}
+    {{- with .labels }}
+    {{ toYaml . | indent 4 }}
+    {{- end }}
+  {{- with .annotations }}
+  annotations:
+    {{ toYaml . | indent 4 }}
+  {{- end }}
+spec:
+  type: {{ .type | default "ClusterIP" | quote }}
+  selector:
+    {{- range $key, $value := .selector }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  ports:
+    {{- range .ports }}
+    - port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      {{- if .protocol }}
+      protocol: {{ .protocol | default "TCP" | quote }}
+      {{- end }}
+      {{- if .name }}
+      name: {{ .name | quote }}
+      {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}

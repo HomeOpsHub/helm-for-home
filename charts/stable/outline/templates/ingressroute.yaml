@@ -1,0 +1,51 @@
+{{- if .Values.ingressRoute.enabled }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}-ingressroute
+  namespace: {{ .Values.ingressRoute.namespace | default .Release.Namespace }}
+  {{- if .Values.ingressRoute.annotations }}
+  annotations:
+{{ toYaml .Values.ingressRoute.annotations | indent 4 }}
+  {{- end }}
+spec:
+  entryPoints:
+{{ toYaml .Values.ingressRoute.entryPoints | indent 4 }}
+  routes:
+  {{- range .Values.ingressRoute.routes }}
+    - match: {{ .match | quote }}
+      kind: {{ .kind | default "Rule" | quote }}
+      {{- if .middlewares }}
+      middlewares:
+      {{- range .middlewares }}
+        - name: {{ .name | quote }}
+          namespace: {{ .namespace | default $.Values.ingressRoute.namespace | quote }}
+      {{- end }}
+      {{- end }}
+      services:
+      {{- range .services }}
+        - name: {{ .name | quote }}
+          namespace: {{ .namespace | default $.Values.ingressRoute.namespace | quote }}
+          port: {{ .port }}
+      {{- end }}
+  {{- end }}
+  {{- if .Values.ingressRoute.tls.enabled }}
+  tls:
+    {{- if .Values.ingressRoute.tls.secretName }}
+    secretName: {{ .Values.ingressRoute.tls.secretName | quote }}
+    {{- end }}
+    {{- if .Values.ingressRoute.tls.certResolver }}
+    certResolver: {{ .Values.ingressRoute.tls.certResolver | quote }}
+    {{- end }}
+    {{- if .Values.ingressRoute.tls.domains }}
+    domains:
+    {{- range .Values.ingressRoute.tls.domains }}
+      - main: {{ .main | quote }}
+        sans:
+          {{- range .sans }}
+          - {{ . | quote }}
+          {{- end }}
+    {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

@@ -1,0 +1,33 @@
+{{- if and .Values.persistentVolumeClaims.enabled (gt (len .Values.persistentVolumeClaims.claims) 0) }}
+{{- range .Values.persistentVolumeClaims.claims }}
+{{- if .create }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name | quote }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ .Chart.Name }}
+    release: {{ $.Release.Name }}
+    {{- with .labels }}
+    {{ toYaml . | indent 4 }}
+    {{- end }}
+  {{- with .annotations }}
+  annotations:
+    {{ toYaml . | indent 4 }}
+  {{- end }}
+spec:
+  accessModes:
+  {{- toYaml .accessModes | indent 4 }}
+  {{- if .volumeMode }}
+  volumeMode: {{ .volumeMode }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .size | quote }}
+  {{- if .storageClassName }}
+  storageClassName: {{ .storageClassName | quote }}
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
