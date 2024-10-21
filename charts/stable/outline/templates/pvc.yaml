@@ -7,7 +7,7 @@ metadata:
   name: {{ .name | quote }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    app: {{ .Chart.Name }}
+    app: {{ $.Chart.Name }}
     release: {{ $.Release.Name }}
     {{- with .labels }}
     {{ toYaml . | indent 4 }}
