@@ -5,10 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: outlinewiki/outline
+  tag: latest
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -29,6 +28,18 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+
+# Define container ports dynamically
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+  - name: https
+    containerPort: 443
+    protocol: TCP
+  - name: admin
+    containerPort: 3000
+    protocol: TCP
 
 service:
   type: ClusterIP
