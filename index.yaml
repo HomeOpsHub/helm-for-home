@@ -183,6 +183,16 @@ entries:
   outline:
   - apiVersion: v2
     appVersion: 0.80.2
+    created: "2024-10-21T17:43:50.101391032Z"
+    description: Helm chart to deploy Outline Wiki
+    digest: 5aae3b447c641dc9e736d7b9466c3e7087e34e7d89bed7b77c80b93c2eb43b55
+    name: outline
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/outline-0.13.0/outline-0.13.0.tgz
+    version: 0.13.0
+  - apiVersion: v2
+    appVersion: 0.80.2
     created: "2024-10-21T17:37:16.384303671Z"
     description: Helm chart to deploy Outline Wiki
     digest: 694b9d0e3c9c882f4a5bf422e2a178e623e61a90bfd88747019e8ea324bc10f2
@@ -784,4 +794,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-21T17:37:16.384516571Z"
+generated: "2024-10-21T17:43:50.101556721Z"
