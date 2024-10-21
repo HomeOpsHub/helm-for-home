@@ -8,8 +8,8 @@ metadata:
   labels:
     app: {{ $.Chart.Name }}
     release: {{ $.Release.Name }}
-    {{- with .labels }}
-    {{ toYaml . | indent 4 }}
+    {{- if .labels }}
+    {{ toYaml .labels | indent 4 }}
     {{- end }}
   {{- with .annotations }}
   annotations:
