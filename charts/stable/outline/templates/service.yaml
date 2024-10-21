@@ -9,12 +9,16 @@ metadata:
     app: {{ $.Chart.Name }}
     release: {{ $.Release.Name }}
     {{- if .labels }}
-    {{ toYaml .labels | indent 4 }}
+    {{- range $key, $value := .labels }}
+    {{ $key }}: {{ $value | quote }}
     {{- end }}
-  {{- with .annotations }}
+    {{- end }}
   annotations:
-    {{ toYaml . | indent 4 }}
-  {{- end }}
+    {{- if .annotations }}
+    {{- range $key, $value := .annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+    {{- end }}
 spec:
   type: {{ .type | default "ClusterIP" | quote }}
   selector:
