@@ -49,7 +49,6 @@ spec:
           {{- if .Values.command }}
           command: {{ toYaml .Values.command | nindent 12 }}
           {{- end }}
-          {{- if .Values.args }}
           {{- if .Values.securityContext }}
           securityContext:
             {{ toYaml .Values.securityContext | nindent 12 }}
