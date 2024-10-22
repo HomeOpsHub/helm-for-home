@@ -326,3 +326,6 @@ services:
   #       app: my-app
   #     annotations: {}
   #     labels: {}
+
+command: ["sh", "-c", "yarn sequelize:migrate --env production-ssl-disabled && yarn start"]
+

@@ -2,5 +2,5 @@ apiVersion: v2
 name: outline
 description: Helm chart to deploy Outline Wiki
 type: application
-version: 0.14.0
+version: 0.15.0
 appVersion: "0.80.2"
