@@ -1,0 +1,204 @@
+# Default values for outline.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: freshrss/freshrss
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+serviceAccount: {}
+
+securityContext: {}
+
+# Define container ports dynamically
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingress: {}
+
+# Global configuration for the IngressRoute
+ingressRoute:
+  # Set to true to enable the creation of the IngressRoute resource
+  enabled: true
+
+  # Namespace where the IngressRoute will be created
+  # Defaults to the Helm release namespace if not specified
+  namespace: default
+
+  # Annotations to add to the IngressRoute metadata
+  annotations: {}
+  # annotations:
+  #   kubernetes.io/ingress.class: traefik-external  # Specify the Traefik ingress class
+
+  # Entry points that Traefik will listen on
+  # Common entry points are 'web' (HTTP) and 'websecure' (HTTPS)
+  entryPoints: []
+  # entryPoints:
+  #   - websecure
+  #   - web
+
+  # List of routes to define how requests are handled
+  routes: []
+  # routes:
+  #   # First route configuration
+  #   - match: Host(`your-domain.example.com`)  # The matching rule for the route (replace with your domain)
+  #     kind: Rule  # Type of match; defaults to 'Rule' if not specified
+  #
+  #     # Middlewares to apply to the route (optional)
+  #     middlewares:
+  #       - name: your-middleware-1             # Name of the middleware
+  #         namespace: middleware-namespace-1   # Namespace where the middleware is located
+  #       - name: your-middleware-2
+  #         namespace: middleware-namespace-2
+  #
+  #     # Services that handle the requests
+  #     services:
+  #       - name: your-service-name             # Name of your Kubernetes service
+  #         namespace: your-service-namespace   # Namespace where your service is deployed
+  #         port: your-service-port             # Port your service is listening on (e.g., 80 or 8080)
+  #
+  #   # Additional routes can be added here
+  #   # - match: PathPrefix(`/api`)
+  #     # ... (additional route configuration)
+
+  # TLS configuration for secure connections (optional)
+  tls:
+    # Set to true to enable TLS for the IngressRoute
+    enabled: false
+
+    # Use a pre-existing TLS secret for SSL termination (optional)
+    secretName: ""
+    # secretName: your-tls-secret-name  # Replace with the name of your TLS secret
+
+    # Alternatively, use a certificate resolver like Let's Encrypt (optional)
+    certResolver: ""
+    # certResolver: your-cert-resolver-name   # Name of your certResolver configured in Traefik
+
+    # Define domains and SANs when using certResolver (optional)
+    domains: []
+    # domains:
+    #   - main: your-domain.example.com       # The main domain for the certificate
+    #     sans:
+    #       - subdomain1.your-domain.example.com  # Additional Subject Alternative Names
+    #       - subdomain2.your-domain.example.com
+
+# Configuration for the ConfigMap
+configmap:
+  enabled: false
+  data: {}
+
+# Configuration for Kubernetes Secret
+secret:
+  enabled: false
+  type: Opaque
+  data: {}
+
+# Configuration for PersistentVolumeClaims
+persistentVolumeClaims:
+  enabled: false
+  claims:
+    - name: data-storage
+      create: true
+      mountPath: /var/www/FreshRSS/data
+      accessModes:
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      size: 1Gi
+      storageClassName: ""
+      existingClaim: ""
+      annotations: {}
+      labels: {}
+      subPath: ""
+      readOnly: false
+      ensurePermissions: true
+
+# Configuration for Kubernetes Services
+services:
+  # Set to true to enable the creation of services
+  enabled: false
+
+  # List of service configurations
+  definitions: []
+  # definitions:
+  #   - name: http-service                       # Unique name for the service
+  #     type: ClusterIP                          # Service type: ClusterIP, NodePort, LoadBalancer, etc.
+  #     ports:
+  #       - port: 80                             # Port that the service will expose
+  #         targetPort: 8080                     # Port on the container where the service will route to
+  #         protocol: TCP                        # Protocol: TCP or UDP
+  #         name: http                           # Name of the port (optional)
+  #     selector:
+  #       app: my-app                            # Labels to select pods
+  #     annotations: {}                          # Additional annotations for the service
+  #     labels: {}                               # Additional labels for the service
+
+
+# Database configuration
+mariadb:
+  enabled: true
+  auth:
+    rootPassword: "rootpassword"
+    database: freshrss
+    username: freshrss
+    password: "freshrsspass"
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 8Gi
+
+externalDatabase:
+  enabled: false
+  type: mysql
+  host: ""
+  port: 3306
+  database: freshrss
+  user: freshrss
+  password: ""
+  existingSecret: ""
+  passwordKey: password
+

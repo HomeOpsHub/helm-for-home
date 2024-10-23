@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "freshrss.fullname" . }}
+  labels:
+    {{- include "freshrss.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "freshrss.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "freshrss.selectorLabels" . | nindent 8 }}
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+    spec:
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "freshrss.serviceAccountName" . }}
+      containers:
+        - name: freshrss
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: 'DATABASE_TYPE'
+              value: {{ .Values.externalDatabase.type | quote }}
+            - name: 'DATABASE_HOST'
+              value: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.host | quote }}{{ else }}{{ include "freshrss.mariadbHost" . | quote }}{{ end }}
+            - name: 'DATABASE_USER'
+              value: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.user | quote }}{{ else }}{{ .Values.mariadb.auth.username | quote }}{{ end }}
+            - name: 'DATABASE_PASSWORD'
+              valueFrom:
+                secretKeyRef:
+                  name: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.existingSecret | default (include "freshrss.fullname" .) | quote }}{{ else }}{{ include "freshrss.mariadbSecretName" . | quote }}{{ end }}
+                  key: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.passwordKey | default "password" | quote }}{{ else }}"mariadb-password"{{ end }}
+            - name: 'DATABASE_NAME'
+              value: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.database | quote }}{{ else }}{{ .Values.mariadb.auth.database | quote }}{{ end }}
+          ports:
+            {{- range .Values.containerPorts }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              protocol: {{ .protocol | default "TCP" }}
+            {{- end }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          volumeMounts:
+            {{- range .Values.persistentVolumeClaims.claims }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              subPath: {{ .subPath | default "" }}
+              readOnly: {{ .readOnly | default false }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        {{- range .Values.persistentVolumeClaims.claims }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .existingClaim | default .name }}
+        {{- end }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}

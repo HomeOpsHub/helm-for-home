@@ -1,0 +1,11 @@
+apiVersion: v2
+name: freshrss
+description: A Helm chart for deploying FreshRSS
+type: application
+version: 0.1.0
+appVersion: "1.20.1"  # Replace with the latest version of FreshRSS
+
+# dependencies:
+#   - name: mariadb
+#     version: 11.6.0   # Use the latest compatible version
+#     repository: "https://charts.bitnami.com/bitnami"
