@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "freshrss.fullname" . }}
+  name: {{ include "freshrss.name" . }}
   labels:
     {{- include "freshrss.labels" . | nindent 4 }}
 spec:
@@ -33,7 +33,7 @@ spec:
             - name: 'DATABASE_PASSWORD'
               valueFrom:
                 secretKeyRef:
-                  name: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.existingSecret | default (include "freshrss.fullname" .) | quote }}{{ else }}{{ include "freshrss.mariadbSecretName" . | quote }}{{ end }}
+                  name: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.existingSecret | default (include "freshrss.name" .) | quote }}{{ else }}{{ include "freshrss.mariadbSecretName" . | quote }}{{ end }}
                   key: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.passwordKey | default "password" | quote }}{{ else }}"mariadb-password"{{ end }}
             - name: 'DATABASE_NAME'
               value: {{ if .Values.externalDatabase.enabled }}{{ .Values.externalDatabase.database | quote }}{{ else }}{{ .Values.mariadb.auth.database | quote }}{{ end }}
