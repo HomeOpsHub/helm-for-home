@@ -85,68 +85,6 @@ tolerations: []
 
 affinity: {}
 
-# Configuration for the ConfigMap
-configmap:
-  # Set to true to enable the creation of the ConfigMap resource
-  enabled: true
-
-  # Data to include in the ConfigMap
-  data:
-    # Key-value pairs to be stored in the ConfigMap.
-    # Uncomment and customize the sample values below.
-
-    # AWS configuration
-    # AWS_REGION: ""                             # AWS region for services (e.g., "us-west-2")
-    # AWS_S3_ACL: ""                             # Access control list for S3 (e.g., "private")
-    # AWS_S3_FORCE_PATH_STYLE: ""                # Force path style for S3 URLs ("true" or "false")
-    # AWS_S3_UPLOAD_BUCKET_NAME: ""              # Name of the S3 bucket for uploads
-    # AWS_S3_UPLOAD_BUCKET_URL: ""               # URL of the S3 bucket (e.g., "https://s3.amazonaws.com/my-bucket")
-    # AWS_S3_UPLOAD_MAX_SIZE: ""                 # Maximum upload size in bytes (e.g., "26214400" for 25MB)
-
-    # CDN configuration
-    # CDN_URL: ""                                # URL of the Content Delivery Network (if applicable)
-
-    # Database configuration
-    # DATABASE_URL: ""                           # Database connection URL (e.g., "postgres://user:pass@host:5432/dbname")
-    # DATABASE_URL_TEST: ""                      # Test database URL (used in testing environments)
-
-    # Debugging and logging
-    # DEBUG: ""                                  # Debugging options (e.g., "cache,presenters,events")
-
-    # Localization
-    # DEFAULT_LANGUAGE: ""                       # Default language setting (e.g., "en_US")
-
-    # Application settings
-    # ENABLE_UPDATES: ""                         # Enable automatic updates ("true" or "false")
-    # FORCE_HTTPS: ""                            # Force HTTPS connections ("true" or "false")
-    # PORT: ""                                   # Port the application listens on (e.g., "80")
-
-    # Authentication and authorization
-    # GOOGLE_ALLOWED_DOMAINS: ""                 # Allowed Google domains for authentication (e.g., "example.com")
-    # GOOGLE_ANALYTICS_ID: ""                    # Google Analytics Tracking ID (e.g., "UA-XXXXXXXXX-X")
-    # SLACK_MESSAGE_ACTIONS: ""                  # Enable Slack message actions ("true" or "false")
-
-    # Security and error tracking
-    # PGSSLMODE: ""                              # PostgreSQL SSL mode (e.g., "disable", "require")
-    # SENTRY_DSN: ""                             # Sentry DSN for error tracking
-
-    # Caching
-    # REDIS_URL: ""                              # Redis connection URL (e.g., "redis://localhost:6379")
-
-    # Email (SMTP) configuration
-    # SMTP_FROM_EMAIL: ""                        # From email address for outgoing emails (e.g., "noreply@example.com")
-    # SMTP_HOST: ""                              # SMTP server host (e.g., "smtp.example.com")
-    # SMTP_PORT: ""                              # SMTP server port (e.g., "587")
-    # SMTP_REPLY_EMAIL: ""                       # Reply-to email address (e.g., "support@example.com")
-    # SMTP_USERNAME: ""                          # SMTP username for authentication
-    # SMTP_PASSWORD: ""                          # SMTP password for authentication (store securely)
-
-    # Branding
-    # TEAM_LOGO: ""                              # URL to the team's logo (e.g., "https://example.com/logo.png")
-
-    # Application URL
-    # URL: ""                                    # Base URL of the application (e.g., "https://app.example.com")
-
 ingress: {}
 
 # Global configuration for the IngressRoute
@@ -214,6 +152,68 @@ ingressRoute:
     #     sans:
     #       - subdomain1.your-domain.example.com  # Additional Subject Alternative Names
     #       - subdomain2.your-domain.example.com
+
+# Configuration for the ConfigMap
+configmap:
+  # Set to true to enable the creation of the ConfigMap resource
+  enabled: true
+
+  # Data to include in the ConfigMap
+  data:
+    # Key-value pairs to be stored in the ConfigMap.
+    # Uncomment and customize the sample values below.
+
+    # AWS configuration
+    # AWS_REGION: ""                             # AWS region for services (e.g., "us-west-2")
+    # AWS_S3_ACL: ""                             # Access control list for S3 (e.g., "private")
+    # AWS_S3_FORCE_PATH_STYLE: ""                # Force path style for S3 URLs ("true" or "false")
+    # AWS_S3_UPLOAD_BUCKET_NAME: ""              # Name of the S3 bucket for uploads
+    # AWS_S3_UPLOAD_BUCKET_URL: ""               # URL of the S3 bucket (e.g., "https://s3.amazonaws.com/my-bucket")
+    # AWS_S3_UPLOAD_MAX_SIZE: ""                 # Maximum upload size in bytes (e.g., "26214400" for 25MB)
+
+    # CDN configuration
+    # CDN_URL: ""                                # URL of the Content Delivery Network (if applicable)
+
+    # Database configuration
+    # DATABASE_URL: ""                           # Database connection URL (e.g., "postgres://user:pass@host:5432/dbname")
+    # DATABASE_URL_TEST: ""                      # Test database URL (used in testing environments)
+
+    # Debugging and logging
+    # DEBUG: ""                                  # Debugging options (e.g., "cache,presenters,events")
+
+    # Localization
+    # DEFAULT_LANGUAGE: ""                       # Default language setting (e.g., "en_US")
+
+    # Application settings
+    # ENABLE_UPDATES: ""                         # Enable automatic updates ("true" or "false")
+    # FORCE_HTTPS: ""                            # Force HTTPS connections ("true" or "false")
+    # PORT: ""                                   # Port the application listens on (e.g., "80")
+
+    # Authentication and authorization
+    # GOOGLE_ALLOWED_DOMAINS: ""                 # Allowed Google domains for authentication (e.g., "example.com")
+    # GOOGLE_ANALYTICS_ID: ""                    # Google Analytics Tracking ID (e.g., "UA-XXXXXXXXX-X")
+    # SLACK_MESSAGE_ACTIONS: ""                  # Enable Slack message actions ("true" or "false")
+
+    # Security and error tracking
+    # PGSSLMODE: ""                              # PostgreSQL SSL mode (e.g., "disable", "require")
+    # SENTRY_DSN: ""                             # Sentry DSN for error tracking
+
+    # Caching
+    # REDIS_URL: ""                              # Redis connection URL (e.g., "redis://localhost:6379")
+
+    # Email (SMTP) configuration
+    # SMTP_FROM_EMAIL: ""                        # From email address for outgoing emails (e.g., "noreply@example.com")
+    # SMTP_HOST: ""                              # SMTP server host (e.g., "smtp.example.com")
+    # SMTP_PORT: ""                              # SMTP server port (e.g., "587")
+    # SMTP_REPLY_EMAIL: ""                       # Reply-to email address (e.g., "support@example.com")
+    # SMTP_USERNAME: ""                          # SMTP username for authentication
+    # SMTP_PASSWORD: ""                          # SMTP password for authentication (store securely)
+
+    # Branding
+    # TEAM_LOGO: ""                              # URL to the team's logo (e.g., "https://example.com/logo.png")
+
+    # Application URL
+    # URL: ""                                    # Base URL of the application (e.g., "https://app.example.com")
 
 # Configuration for Kubernetes Secret
 secret:
@@ -293,8 +293,6 @@ persistentVolumeClaims:
   #     subPath: ""
   #     readOnly: false
   #     ensurePermissions: true
-
-
 
 # Configuration for Kubernetes Services
 services:
