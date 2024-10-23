@@ -117,6 +117,16 @@ entries:
   freshrss:
   - apiVersion: v2
     appVersion: 1.20.1
+    created: "2024-10-23T01:34:29.3132265Z"
+    description: A Helm chart for deploying FreshRSS
+    digest: aa87dcef527c913c2841753b9b115ced61467769e3af2c2c2e008ddedb2a52e0
+    name: freshrss
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/freshrss-0.2.0/freshrss-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.20.1
     created: "2024-10-23T01:12:22.211633243Z"
     description: A Helm chart for deploying FreshRSS
     digest: ae5557c7b949c0bd0f60264f0dd0bc28a4704ce10d13a6309551fcf5d8546643
@@ -865,4 +875,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-23T01:12:22.211800394Z"
+generated: "2024-10-23T01:34:29.313376059Z"
