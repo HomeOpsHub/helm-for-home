@@ -114,6 +114,17 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/custom-error-pages-0.1.0/custom-error-pages-0.1.0.tgz
     version: 0.1.0
+  freshrss:
+  - apiVersion: v2
+    appVersion: 1.20.1
+    created: "2024-10-23T01:12:22.211633243Z"
+    description: A Helm chart for deploying FreshRSS
+    digest: ae5557c7b949c0bd0f60264f0dd0bc28a4704ce10d13a6309551fcf5d8546643
+    name: freshrss
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/freshrss-0.1.0/freshrss-0.1.0.tgz
+    version: 0.1.0
   gotify:
   - apiVersion: v2
     appVersion: 2.1.5
@@ -854,4 +865,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-23T00:47:07.131338535Z"
+generated: "2024-10-23T01:12:22.211800394Z"
