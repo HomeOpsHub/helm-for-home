@@ -2,7 +2,7 @@ apiVersion: v2
 name: teslamate
 description: A Helm chart for deploying TeslaMate with Longhorn
 type: application
-version: 0.9.0
+version: 0.10.0
 appVersion: "1.0"
 keywords:
   - teslamate

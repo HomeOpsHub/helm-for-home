@@ -16,6 +16,8 @@ spec:
         app.kubernetes.io/name: {{ include "teslamate.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      strategy:
+        type: Recreate
       containers:
         - name: teslamate
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
