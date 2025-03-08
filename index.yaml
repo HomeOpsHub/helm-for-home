@@ -3,6 +3,22 @@ entries:
   adguard-home:
   - apiVersion: v2
     appVersion: latest
+    created: "2025-03-08T00:06:38.814830341Z"
+    description: A Helm chart for AdGuard Home
+    digest: 5ef02962803f6de46e727e7814742f953d3fa88809dcc2ad88ef015520f1a9ce
+    keywords:
+    - adguard
+    - dns
+    - adblock
+    - network
+    name: adguard-home
+    sources:
+    - https://github.com/AdguardTeam/AdGuardHome
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/adguard-home-0.10.0/adguard-home-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2024-10-07T04:50:30.018638767Z"
     description: A Helm chart for AdGuard Home
     digest: d82b6293a8df1a3eb7df426c432c628a23eb32c83baaad67d5bfe43d68af2e55
@@ -903,4 +919,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-04T06:03:25.384589722Z"
+generated: "2025-03-08T00:06:38.815020285Z"
