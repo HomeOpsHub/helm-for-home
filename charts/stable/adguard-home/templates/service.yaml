@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "adguard-home.labels" . | nindent 4 }}
 spec:
-  type: type: {{ .Values.service.type | default "LoadBalancer" }}
+  type: {{ .Values.service.type | default "LoadBalancer" }}
   {{- if eq .Values.service.type "LoadBalancer" }}
   loadBalancerIP: {{ .Values.service.loadBalancerIP | default "" }}
   {{- end }}
