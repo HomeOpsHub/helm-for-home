@@ -411,6 +411,16 @@ entries:
   plex:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-03-11T05:02:12.130912848Z"
+    description: A Helm chart for Kubernetes
+    digest: 79df2f76a96252c9098674bf6eb28f6535b062c8bacf4857861c4ae7ede037c2
+    name: plex
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/plex-0.7.0/plex-0.7.0.tgz
+    version: 0.7.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-09-17T19:04:15.572018971Z"
     description: A Helm chart for Kubernetes
     digest: ff96c4ac29bec025f393625b5da5ff210ed43589c1343839a831b9af25c10849
@@ -919,4 +929,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-08T00:06:38.815020285Z"
+generated: "2025-03-11T05:02:12.131092162Z"
