@@ -1,0 +1,39 @@
+{{- if .Values.ingressRoute.enabled }}
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  annotations: {}
+spec:
+  entryPoints:
+    {{- if .Values.ingressRoute.entryPoints }}
+    {{- range .Values.ingressRoute.entryPoints }}
+    - {{ . }}
+    {{- end }}
+    {{- else }}
+    - websecure
+    {{- end }}
+  routes:
+  {{- if .Values.ingressRoute.routes }}
+  {{- range .Values.ingressRoute.routes }}
+  - match: {{ .match }}
+    kind: {{ .kind | default "Rule" }}
+    services:
+    {{- range .services }}
+    - name: {{ .name }}
+      namespace: {{ .namespace | default $.Release.Namespace }}
+      port: {{ .port }}
+    {{- end }}
+    {{- if .middlewares }}
+    middlewares:
+    {{- range .middlewares }}
+    - name: {{ .name }}
+      namespace: {{ .namespace | default $.Release.Namespace }}
+    {{- end }}
+    {{- end }}
+  {{- end }}
+    {{- end }}
+    tls:
+      secretName: {{ .Values.ingressRoute.tlsSecretName | default .Values.ingress.tlsSecretName }}
+  {{- end }}
