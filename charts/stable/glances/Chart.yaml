@@ -1,0 +1,12 @@
+apiVersion: v2
+name: glances
+description: A Helm chart for Glances system monitoring tool
+version: 0.1.0
+appVersion: "latest"
+keywords:
+  - glances
+  - monitoring
+  - system
+  - performance
+sources:
+  - https://github.com/nicolargo/glances

@@ -1,0 +1,11 @@
+{{- if .Values.glances.config }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "glances.fullname" . }}-config
+  labels:
+    {{- include "glances.labels" . | nindent 4 }}
+data:
+  glances.conf: |
+    {{- .Values.glances.config | nindent 4 }}
+{{- end }}
