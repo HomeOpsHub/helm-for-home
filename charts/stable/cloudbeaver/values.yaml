@@ -130,7 +130,7 @@ ingressRoute:
       kind: Rule
       middlewares: []
       services:
-        - name: {{ include "cloudbeaver.fullname" . }}
+        - name: cloudbeaver
           port: 80
 
 # -------------------------------------
