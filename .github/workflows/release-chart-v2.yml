@@ -43,6 +43,15 @@ jobs:
           tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
           sudo mv helm-docs /usr/local/bin
 
+      - name: Build chart dependencies
+        run: |
+          for chart in charts/stable/* charts/beta/*; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              echo "Building dependencies for $chart"
+              helm dependency build "$chart"
+            fi
+          done
+
       - name: Lint all charts
         run: |
           find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm lint
@@ -97,6 +106,15 @@ jobs:
           wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
           tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
           sudo mv helm-docs /usr/local/bin
+
+      - name: Build chart dependencies
+        run: |
+          for chart in charts/stable/* charts/beta/*; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              echo "Building dependencies for $chart"
+              helm dependency build "$chart"
+            fi
+          done
 
       - name: Generate documentation
         run: |
