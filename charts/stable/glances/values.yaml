@@ -1,54 +1,113 @@
-# Default values for glances.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Default values for glances
+# System monitoring and performance analysis tool
 
-replicaCount: 1
+# Common chart configuration
+common:
+  # Chart metadata
+  chart:
+    name: glances
+    description: "Real-time performance monitoring tool"
+    maintainers:
+      - name: "helm-for-home"
+        url: "https://github.com/atulmgupta/helm-for-home"
 
-image:
-  repository: nicolargo/glances
-  tag: "latest-full"
-  pullPolicy: IfNotPresent
+# Application configuration
+app:
+  # Basic deployment settings
+  replicaCount: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+  # Image configuration
+  image:
+    repository: nicolargo/glances
+    tag: "latest-full"
+    pullPolicy: IfNotPresent
+    pullSecrets: []
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  # Service account
+  serviceAccount:
+    create: true
+    automount: true
+    annotations: {}
+    name: ""
 
-podAnnotations: {}
-podLabels: {}
+  # Pod configuration
+  pod:
+    annotations: {}
+    labels: {}
+    securityContext:
+      # Required for system monitoring
+      privileged: true
+      hostNetwork: true
+      hostPID: true
+    terminationGracePeriodSeconds: 30
+    dnsPolicy: ClusterFirst
+    restartPolicy: Always
 
-podSecurityContext:
-  # Required for system monitoring
-  privileged: true
-  hostNetwork: true
-  hostPID: true
+  # Container security context
+  securityContext:
+    privileged: true
+    # Required capabilities for system monitoring
+    # capabilities:
+    #   add:
+    #   - SYS_ADMIN
+    #   - SYS_PTRACE
 
-securityContext:
-  privileged: true
-  # capabilities:
-  #   add:
-  #   - SYS_ADMIN
-  #   - SYS_PTRACE
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+  # Service configuration
+  service:
+    type: ClusterIP
+    port: 61208
+    targetPort: 61208
+    protocol: TCP
+    annotations: {}
 
-service:
-  type: ClusterIP
-  port: 61208
-  targetPort: 61208
+# Networking configuration
+networking:
+  # Ingress configuration
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+      # cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - host: glances.local
+        paths:
+          - path: /
+            pathType: Prefix
+            port: 61208
+    tls: []
+    #  - secretName: glances-tls
+    #    hosts:
+    #      - glances.local
 
-# Glances configuration
+  # Traefik IngressRoute (alternative to Ingress)
+  ingressRoute:
+    enabled: false
+    metadata:
+      name: ""
+      namespace: ""
+      annotations: {}
+    spec:
+      entrypoints:
+        - websecure
+      routes:
+        - match: Host(`glances.local`)
+          kind: Rule
+          services:
+            - name: glances
+              port: 61208
+      tls:
+        enabled: false
+        secretName: ""
+        domains: []
+
+# Application-specific configuration
 glances:
   # Web server mode enabled by default
   mode: "web"
@@ -56,117 +115,155 @@ glances:
   options: "-w"
   # Configuration file content (optional)
   config: ""
+  # Environment variables
+  env: []
+  # - name: TZ
+  #   value: "UTC"
+  # - name: GLANCES_OPT
+  #   value: "-w"
 
-# Volume mounts for system monitoring
-volumeMounts:
-  - name: proc
-    mountPath: /host/proc
-    readOnly: true
-  - name: sys
-    mountPath: /host/sys
-    readOnly: true
-  - name: docker-sock
-    mountPath: /var/run/docker.sock
-    readOnly: true
+# Storage configuration
+storage:
+  # Volume mounts for system monitoring
+  volumeMounts:
+    - name: proc
+      mountPath: /host/proc
+      readOnly: true
+    - name: sys
+      mountPath: /host/sys
+      readOnly: true
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
+      readOnly: true
 
-volumes:
-  - name: proc
-    hostPath:
-      path: /proc
-  - name: sys
-    hostPath:
-      path: /sys
-  - name: docker-sock
-    hostPath:
-      path: /var/run/docker.sock
+  # Volumes for system monitoring
+  volumes:
+    - name: proc
+      hostPath:
+        path: /proc
+    - name: sys
+      hostPath:
+        path: /sys
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
 
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: glances.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: glances-tls
-  #    hosts:
-  #      - glances.local
+  # Additional volumes
+  additionalVolumes: []
+  # - name: foo
+  #   secret:
+  #     secretName: mysecret
+  #     optional: false
 
-ingressRoute:
-  enabled: false
-  metadata:
-    name: ""
-    namespace: ""
-    annotations: {}
-  spec:
-    entrypoints: []
-    routes: []
-    tls:
-      enabled: false
+  # Additional volume mounts
+  additionalVolumeMounts: []
+  # - name: foo
+  #   mountPath: "/etc/foo"
+  #   readOnly: true
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 500m
-  #   memory: 512Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# Resource management
+resources:
+  limits: {}
+    # cpu: 500m
+    # memory: 512Mi
+  requests: {}
+    # cpu: 100m
+    # memory: 128Mi
 
-livenessProbe:
-  httpGet:
-    path: /
-    port: http
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 3
+# Health checks
+healthchecks:
+  livenessProbe:
+    enabled: true
+    httpGet:
+      path: /
+      port: 61208
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
 
-readinessProbe:
-  httpGet:
-    path: /
-    port: http
-  initialDelaySeconds: 5
-  periodSeconds: 5
-  timeoutSeconds: 3
-  failureThreshold: 3
+  readinessProbe:
+    enabled: true
+    httpGet:
+      path: /
+      port: 61208
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
 
+  startupProbe:
+    enabled: false
+    httpGet:
+      path: /
+      port: 61208
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 30
+
+# Autoscaling (disabled for monitoring applications)
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 3
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
 
-# Additional volumes on the output Deployment definition.
-additionalVolumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+# Scheduling
+scheduling:
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  # Example: Run on monitoring nodes
+  # nodeSelector:
+  #   role: monitoring
+  # tolerations:
+  # - key: "monitoring"
+  #   operator: "Equal"
+  #   value: "true"
+  #   effect: "NoSchedule"
 
-# Additional volumeMounts on the output Deployment definition.
-additionalVolumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+# Monitoring and observability
+monitoring:
+  # ServiceMonitor for Prometheus
+  serviceMonitor:
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s
+    labels: {}
+    annotations: {}
 
-nodeSelector: {}
+  # PodMonitor for Prometheus
+  podMonitor:
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s
+    labels: {}
+    annotations: {}
 
-tolerations: []
+# Configuration management
+config:
+  # Create ConfigMap for application configuration
+  enabled: false
+  # Configuration data
+  data: {}
+  # Mount path for configuration
+  mountPath: /config
 
-affinity: {}
+# Secrets management
+secrets:
+  # Create Secret for sensitive data
+  enabled: false
+  # Secret data
+  data: {}
+  # Mount path for secrets
+  mountPath: /secrets
 
-# Environment variables
-env: []
-# - name: TZ
-#   value: "UTC"
-# - name: GLANCES_OPT
-#   value: "-w"
+# Testing
+tests:
+  enabled: true
+  image:
+    repository: busybox
+    tag: 1.35
+    pullPolicy: IfNotPresent

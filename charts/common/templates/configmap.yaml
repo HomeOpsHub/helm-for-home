@@ -1,0 +1,23 @@
+{{/*
+Standard ConfigMap template
+Usage: {{ include "common.configMap" . }}
+*/}}
+{{- define "common.configMap" -}}
+{{- if .Values.configMap.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "common.fullname" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+data:
+  {{- range $key, $value := .Values.configMap.data }}
+  {{ $key }}: |
+    {{- if kindIs "string" $value }}
+    {{ $value | nindent 4 }}
+    {{- else }}
+    {{ toYaml $value | nindent 4 }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- end }}

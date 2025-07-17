@@ -1,0 +1,25 @@
+{{/*
+Standard Service template
+Usage: {{ include "common.service" . }}
+*/}}
+{{- define "common.service" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "common.fullname" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ include "common.serviceType" . }}
+  ports:
+    - port: {{ include "common.servicePort" . }}
+      targetPort: {{ include "common.targetPort" . }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "common.selectorLabels" . | nindent 4 }}
+{{- end }}

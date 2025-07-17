@@ -1,0 +1,47 @@
+{{/*
+Standard Traefik IngressRoute template
+Usage: {{ include "common.ingressRoute" . }}
+*/}}
+{{- define "common.ingressRoute" -}}
+{{- if .Values.ingressRoute.enabled -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Values.ingressRoute.metadata.name | default (include "common.fullname" .) }}
+  namespace: {{ .Values.ingressRoute.metadata.namespace | default .Release.Namespace }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+  {{- with .Values.ingressRoute.metadata.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.ingressRoute.spec.entryPoints }}
+  entryPoints:
+    {{- toYaml .Values.ingressRoute.spec.entryPoints | nindent 4 }}
+  {{- else }}
+  entryPoints:
+    - web
+  {{- end }}
+  routes:
+    {{- if .Values.ingressRoute.spec.routes }}
+    {{- toYaml .Values.ingressRoute.spec.routes | nindent 4 }}
+    {{- else }}
+    - match: Host(`{{ .Values.ingressRoute.host | default (printf "%s.%s" (include "common.name" .) .Values.homelab.domain) }}`)
+      kind: Rule
+      services:
+        - name: {{ include "common.fullname" . }}
+          port: {{ include "common.servicePort" . }}
+    {{- end }}
+  {{- if .Values.ingressRoute.tls.enabled }}
+  tls:
+    {{- if .Values.ingressRoute.tls.secretName }}
+    secretName: {{ .Values.ingressRoute.tls.secretName }}
+    {{- end }}
+    {{- if .Values.ingressRoute.tls.options }}
+    options:
+      {{- toYaml .Values.ingressRoute.tls.options | nindent 6 }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- end }}

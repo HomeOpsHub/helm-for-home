@@ -1,0 +1,72 @@
+{{/*
+Standard NOTES.txt template
+Usage: {{ include "common.notes" . }}
+*/}}
+{{- define "common.notes" -}}
+🎉 **{{ .Chart.Name | title }} has been successfully deployed!**
+
+**Deployment Information:**
+- Release Name: {{ .Release.Name }}
+- Namespace: {{ .Release.Namespace }}
+- Chart Version: {{ .Chart.Version }}
+- App Version: {{ .Chart.AppVersion }}
+
+**Access Information:**
+{{- if .Values.ingressRoute.enabled }}
+{{- if .Values.ingressRoute.tls.enabled }}
+✅ **Your application is available at:** https://{{ .Values.ingressRoute.host | default (printf "%s.%s" (include "common.name" .) .Values.homelab.domain) }}
+{{- else }}
+✅ **Your application is available at:** http://{{ .Values.ingressRoute.host | default (printf "%s.%s" (include "common.name" .) .Values.homelab.domain) }}
+{{- end }}
+{{- else if .Values.ingress.enabled }}
+{{- range $host := .Values.ingress.hosts }}
+  {{- range .paths }}
+  ✅ **Your application is available at:** http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
+  {{- end }}
+{{- end }}
+{{- else if contains "NodePort" .Values.service.type }}
+  ℹ️ **Get the application URL by running these commands:**
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "common.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo http://$NODE_IP:$NODE_PORT
+{{- else if contains "LoadBalancer" .Values.service.type }}
+  ℹ️ **Get the application URL by running these commands:**
+     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+           You can watch the status by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "common.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "common.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo http://$SERVICE_IP:{{ .Values.service.port }}
+{{- else if contains "ClusterIP" .Values.service.type }}
+  ℹ️ **Get the application URL by running these commands:**
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "common.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
+{{- end }}
+
+**Management Commands:**
+📊 **Check deployment status:**
+  kubectl get deployment {{ include "common.fullname" . }} -n {{ .Release.Namespace }}
+
+📋 **View pod logs:**
+  kubectl logs -f deployment/{{ include "common.fullname" . }} -n {{ .Release.Namespace }}
+
+🔍 **Describe the deployment:**
+  kubectl describe deployment {{ include "common.fullname" . }} -n {{ .Release.Namespace }}
+
+**Useful Tips:**
+- To upgrade this release: `helm upgrade {{ .Release.Name }} {{ .Chart.Name }}`
+- To uninstall this release: `helm uninstall {{ .Release.Name }}`
+- For more information, visit the chart repository: https://github.com/HomeOpsHub/helm-for-home
+
+{{- if .Values.persistence.enabled }}
+
+**Persistent Storage:**
+{{- if .Values.persistence.existingClaim }}
+📁 **Using existing PVC:** {{ .Values.persistence.existingClaim }}
+{{- else }}
+📁 **PVC created:** {{ include "common.fullname" . }} ({{ .Values.persistence.size }})
+{{- end }}
+{{- end }}
+
+**Happy Home Labbing! 🏠✨**
+{{- end }}
