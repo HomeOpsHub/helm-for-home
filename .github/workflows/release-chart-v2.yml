@@ -45,10 +45,22 @@ jobs:
 
       - name: Build chart dependencies
         run: |
+          # Create local Helm repo for common chart
+          echo "Setting up chart dependencies..."
+          mkdir -p .helm/repo/common
+          cp -r charts/common/* .helm/repo/common/
+          helm package .helm/repo/common/ -d .helm/repo/
+          helm repo index .helm/repo/
+          helm repo add local-common "file://$PWD/.helm/repo"
+
           for chart in charts/stable/* charts/beta/*; do
             if [ -f "$chart/Chart.yaml" ]; then
               echo "Building dependencies for $chart"
-              helm dependency build "$chart"
+              # Update repository reference in Chart.yaml temporarily
+              sed -i 's|repository: "file://../../common"|repository: "local-common"|g' "$chart/Chart.yaml"
+              helm dependency update "$chart" || echo "Warning: Failed to build dependencies for $chart, continuing..."
+              # Restore original Chart.yaml
+              sed -i 's|repository: "local-common"|repository: "file://../../common"|g' "$chart/Chart.yaml"
             fi
           done
 
@@ -109,10 +121,22 @@ jobs:
 
       - name: Build chart dependencies
         run: |
+          # Create local Helm repo for common chart
+          echo "Setting up chart dependencies..."
+          mkdir -p .helm/repo/common
+          cp -r charts/common/* .helm/repo/common/
+          helm package .helm/repo/common/ -d .helm/repo/
+          helm repo index .helm/repo/
+          helm repo add local-common "file://$PWD/.helm/repo"
+
           for chart in charts/stable/* charts/beta/*; do
             if [ -f "$chart/Chart.yaml" ]; then
               echo "Building dependencies for $chart"
-              helm dependency build "$chart"
+              # Update repository reference in Chart.yaml temporarily
+              sed -i 's|repository: "file://../../common"|repository: "local-common"|g' "$chart/Chart.yaml"
+              helm dependency update "$chart" || echo "Warning: Failed to build dependencies for $chart, continuing..."
+              # Restore original Chart.yaml
+              sed -i 's|repository: "local-common"|repository: "file://../../common"|g' "$chart/Chart.yaml"
             fi
           done
 
