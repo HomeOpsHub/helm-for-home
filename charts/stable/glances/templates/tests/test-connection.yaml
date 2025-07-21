@@ -12,4 +12,4 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "glances.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "glances.fullname" . }}:{{ .Values.app.service.port }}']
