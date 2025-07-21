@@ -1,0 +1,27 @@
+{{/*
+Standard PersistentVolumeClaim template
+Usage: {{ include "common.persistentVolumeClaim" . }}
+*/}}
+{{- define "common.persistentVolumeClaim" -}}
+{{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "common.fullname" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+  {{- with .Values.persistence.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+  {{- with (include "common.storageClass" .) }}
+  {{- . | nindent 2 }}
+  {{- end }}
+{{- end }}
+{{- end }}

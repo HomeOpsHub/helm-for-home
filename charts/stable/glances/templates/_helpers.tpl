@@ -1,62 +1,24 @@
-{{/*
-Expand the name of the chart.
-*/}}
+{{/* Import common helpers */}}
 {{- define "glances.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- include "common.name" . -}}
 {{- end }}
 
-{{/*
-Create a default fully qualified app name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
-*/}}
 {{- define "glances.fullname" -}}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
-{{- if contains $name .Release.Name }}
-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
-{{- end }}
-{{- end }}
+{{- include "common.fullname" . -}}
 {{- end }}
 
-{{/*
-Create chart name and version as used by the chart label.
-*/}}
 {{- define "glances.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- include "common.chart" . -}}
 {{- end }}
 
-{{/*
-Common labels
-*/}}
 {{- define "glances.labels" -}}
-helm.sh/chart: {{ include "glances.chart" . }}
-{{ include "glances.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- include "common.labels" . -}}
 {{- end }}
 
-{{/*
-Selector labels
-*/}}
 {{- define "glances.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "glances.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{- include "common.selectorLabels" . -}}
 {{- end }}
 
-{{/*
-Create the name of the service account to use
-*/}}
 {{- define "glances.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "glances.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
+{{- include "common.serviceAccountName" . -}}
 {{- end }}

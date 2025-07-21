@@ -1,0 +1,160 @@
+# Common values schema for Home Lab Helm charts
+# This file serves as a template for standardizing values across all charts
+
+# Application configuration
+replicaCount: 1
+
+# Image configuration
+image:
+  repository: ""  # Required: Container image repository
+  tag: ""         # Optional: Image tag (defaults to Chart.AppVersion)
+  pullPolicy: IfNotPresent
+
+# Image pull secrets
+imagePullSecrets: []
+
+# Name overrides
+nameOverride: ""
+fullnameOverride: ""
+
+# Service account configuration
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+# Pod configuration
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: http
+  annotations: {}
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts: []
+  tls: []
+
+# Traefik IngressRoute configuration (for home lab environments)
+ingressRoute:
+  enabled: false
+  metadata:
+    name: ""
+    namespace: ""
+    annotations: {}
+  spec:
+    entryPoints: []
+    routes: []
+    tls:
+      enabled: false
+      secretName: ""
+
+# Resources configuration
+resources:
+  limits: {}
+  requests: {}
+
+# Horizontal Pod Autoscaler
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+# Volume mounts and volumes
+volumeMounts: []
+volumes: []
+
+# Persistence configuration
+persistence:
+  enabled: false
+  existingClaim: ""
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 8Gi
+  annotations: {}
+
+# Environment variables
+env: []
+envFromConfigMap: ""
+envFromSecret: ""
+
+# ConfigMap configuration
+configMap:
+  enabled: false
+  data: {}
+
+# Secret configuration
+secret:
+  enabled: false
+  type: Opaque
+  data: {}
+
+# Node selection
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Priority class
+priorityClassName: ""
+
+# Deployment strategy
+deploymentStrategy: {}
+
+# Init containers
+initContainers: []
+
+# Sidecar containers
+sidecarContainers: []
+
+# Probes
+livenessProbe: {}
+readinessProbe: {}
+startupProbe: {}
+
+# Service monitor (Prometheus)
+serviceMonitor:
+  enabled: false
+  port: http
+  path: /metrics
+  interval: 30s
+  scrapeTimeout: 10s
+  labels: {}
+
+# Network policies
+networkPolicy:
+  enabled: false
+  ingress: []
+  egress: []
+
+# Pod disruption budget
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+  maxUnavailable: ""
+
+# Common labels and annotations
+commonLabels: {}
+commonAnnotations: {}
+
+# Home lab specific configurations
+homelab:
+  # Timezone for applications
+  timezone: UTC
+  # Default domain for ingress
+  domain: home.local
+  # Default storage class for home lab
+  storageClass: longhorn
+  # Default ingress class
+  ingressClass: traefik

@@ -1,0 +1,175 @@
+name: Release Charts V2
+
+on:
+  push:
+    # Trigger when chart version tags are pushed
+    tags:
+      - '*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  HELM_DOCS_VERSION: "1.11.0"
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.12.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+
+      - name: Install helm-docs
+        run: |
+          cd /tmp
+          wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          sudo mv helm-docs /usr/local/bin
+
+      - name: Build chart dependencies
+        run: |
+          # Create local Helm repo for common chart
+          echo "Setting up chart dependencies..."
+          mkdir -p .helm/repo/common
+          cp -r charts/common/* .helm/repo/common/
+          helm package .helm/repo/common/ -d .helm/repo/
+          helm repo index .helm/repo/
+          helm repo add local-common "file://$PWD/.helm/repo"
+
+          for chart in charts/stable/* charts/beta/*; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              echo "Building dependencies for $chart"
+              # Update repository reference in Chart.yaml temporarily
+              sed -i 's|repository: "file://../../common"|repository: "local-common"|g' "$chart/Chart.yaml"
+              helm dependency update "$chart" || echo "Warning: Failed to build dependencies for $chart, continuing..."
+              # Restore original Chart.yaml
+              sed -i 's|repository: "local-common"|repository: "file://../../common"|g' "$chart/Chart.yaml"
+            fi
+          done
+
+      - name: Lint all charts
+        run: |
+          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm lint
+
+      - name: Check documentation
+        run: |
+          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs --dry-run
+
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }})
+          if [[ -n "$changed" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run chart-testing (lint)
+        if: steps.list-changed.outputs.changed == 'true'
+        run: ct lint --target-branch ${{ github.event.repository.default_branch }}
+
+      - name: Create kind cluster
+        if: steps.list-changed.outputs.changed == 'true'
+        uses: helm/kind-action@v1.8.0
+
+      - name: Run chart-testing (install)
+        if: steps.list-changed.outputs.changed == 'true'
+        run: ct install --target-branch ${{ github.event.repository.default_branch }}
+
+  release:
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        env:
+          access_token: "${{ secrets.access_token }}"
+
+      - name: Install helm-docs
+        run: |
+          cd /tmp
+          wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          sudo mv helm-docs /usr/local/bin
+
+      - name: Build chart dependencies
+        run: |
+          # Create local Helm repo for common chart
+          echo "Setting up chart dependencies..."
+          mkdir -p .helm/repo/common
+          cp -r charts/common/* .helm/repo/common/
+          helm package .helm/repo/common/ -d .helm/repo/
+          helm repo index .helm/repo/
+          helm repo add local-common "file://$PWD/.helm/repo"
+
+          for chart in charts/stable/* charts/beta/*; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              echo "Building dependencies for $chart"
+              # Update repository reference in Chart.yaml temporarily
+              sed -i 's|repository: "file://../../common"|repository: "local-common"|g' "$chart/Chart.yaml"
+              helm dependency update "$chart" || echo "Warning: Failed to build dependencies for $chart, continuing..."
+              # Restore original Chart.yaml
+              sed -i 's|repository: "local-common"|repository: "file://../../common"|g' "$chart/Chart.yaml"
+            fi
+          done
+
+      - name: Generate documentation
+        run: |
+          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs
+
+      - name: Package charts
+        run: |
+          mkdir -p .cr-release-packages
+          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs -I {} helm package {} -d .cr-release-packages
+
+      - name: Run chart-releaser for stable charts
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts/stable/
+          skip_existing: true
+          mark_as_latest: true
+        env:
+          CR_TOKEN: "${{ secrets.access_token }}"
+
+      - name: Run chart-releaser for beta charts
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts/beta/
+          skip_existing: true
+          mark_as_latest: false
+        env:
+          CR_TOKEN: "${{ secrets.access_token }}"
+
+      - name: Update repository index
+        run: |
+          helm repo index . --url https://homeops.github.io/helm-for-home/
+          git add index.yaml
+          git commit -m "Update repository index" || exit 0
+          git push

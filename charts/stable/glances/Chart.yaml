@@ -1,12 +1,26 @@
 apiVersion: v2
 name: glances
 description: A Helm chart for Glances system monitoring tool
-version: 0.1.0
-appVersion: "latest"
+type: application
+version: 0.2.0
+appVersion: "3.4"
+
 keywords:
   - glances
   - monitoring
   - system
   - performance
+  - homelab
+
+maintainers:
+  - name: HomeOpsHub
+    email: support@homeops.io
+
+home: https://nicolargo.github.io/glances/
 sources:
   - https://github.com/nicolargo/glances
+
+dependencies:
+  - name: common
+    version: 1.0.0
+    repository: "file://../../common"
