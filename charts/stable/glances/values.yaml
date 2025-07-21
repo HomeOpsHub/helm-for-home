@@ -260,6 +260,17 @@ secrets:
   # Mount path for secrets
   mountPath: /secrets
 
+# ServiceMonitor configuration for Prometheus operator
+serviceMonitor:
+  enabled: false
+  namespace: ""
+  interval: 30s
+  scrapeTimeout: 10s
+  port: http
+  path: /metrics
+  labels: {}
+  annotations: {}
+
 # Testing
 tests:
   enabled: true
