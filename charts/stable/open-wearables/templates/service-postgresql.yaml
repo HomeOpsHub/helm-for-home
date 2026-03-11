@@ -1,0 +1,20 @@
+{{- if .Values.postgresql.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-postgresql
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "open-wearables.labels" . | nindent 4 }}
+    app.kubernetes.io/component: postgresql
+spec:
+  type: {{ .Values.postgresql.service.type }}
+  ports:
+    - port: {{ .Values.postgresql.service.port }}
+      targetPort: postgres
+      protocol: TCP
+      name: postgres
+  selector:
+    {{- include "open-wearables.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: postgresql
+{{- end }}

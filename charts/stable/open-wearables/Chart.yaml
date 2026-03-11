@@ -1,0 +1,22 @@
+apiVersion: v2
+name: open-wearables
+description: A Helm chart for deploying Open Wearables - a self-hosted platform to unify wearable health data through one AI-ready API.
+type: application
+version: 0.1.0
+appVersion: "0.3"
+home: https://github.com/the-momentum/open-wearables
+sources:
+  - https://github.com/the-momentum/open-wearables
+keywords:
+  - health
+  - wearables
+  - fitness
+  - self-hosted
+  - garmin
+  - apple-health
+  - fastapi
+  - quantified-self
+dependencies: []
+annotations:
+  category: Health
+

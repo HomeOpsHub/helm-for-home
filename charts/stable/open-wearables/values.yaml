@@ -1,0 +1,303 @@
+# Default values for open-wearables.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+serviceAccount: {}
+
+securityContext: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+imagePullSecrets: []
+
+# -----------------------------------------------------------
+# Backend (FastAPI API server)
+# -----------------------------------------------------------
+backend:
+  replicaCount: 1
+
+  image:
+    repository: ghcr.io/the-momentum/open-wearables-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  containerPorts:
+    - name: http
+      containerPort: 8000
+      protocol: TCP
+
+  service:
+    type: ClusterIP
+    port: 8000
+
+  resources: {}
+
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
+
+  # Extra environment variables for the backend container
+  extraEnv: []
+  # - name: LOG_LEVEL
+  #   value: "info"
+
+# -----------------------------------------------------------
+# Frontend (React / Node.js)
+# -----------------------------------------------------------
+frontend:
+  enabled: true
+  replicaCount: 1
+
+  image:
+    repository: ghcr.io/the-momentum/open-wearables-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  containerPorts:
+    - name: http
+      containerPort: 3000
+      protocol: TCP
+
+  service:
+    type: ClusterIP
+    port: 3000
+
+  resources: {}
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 20
+    periodSeconds: 10
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 10
+    periodSeconds: 5
+
+  # Extra environment variables for the frontend container
+  extraEnv: []
+
+# -----------------------------------------------------------
+# Celery Worker
+# -----------------------------------------------------------
+worker:
+  enabled: true
+  replicaCount: 1
+
+  image:
+    repository: ghcr.io/the-momentum/open-wearables-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  command: ["celery", "-A", "app.celery_app", "worker", "--loglevel=info"]
+
+  resources: {}
+
+  # Extra environment variables for the worker container
+  extraEnv: []
+
+# -----------------------------------------------------------
+# Celery Beat (periodic task scheduler)
+# -----------------------------------------------------------
+beat:
+  enabled: true
+  replicaCount: 1
+
+  image:
+    repository: ghcr.io/the-momentum/open-wearables-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  command: ["celery", "-A", "app.celery_app", "beat", "--loglevel=info"]
+
+  resources: {}
+
+  # Extra environment variables for the beat container
+  extraEnv: []
+
+# -----------------------------------------------------------
+# Redis (message broker for Celery)
+# -----------------------------------------------------------
+redis:
+  # Set to true to deploy a Redis instance as part of this chart.
+  # Set to false if using an external Redis.
+  enabled: true
+
+  image:
+    repository: redis
+    tag: "7-alpine"
+    pullPolicy: IfNotPresent
+
+  containerPorts:
+    - name: redis
+      containerPort: 6379
+      protocol: TCP
+
+  service:
+    type: ClusterIP
+    port: 6379
+
+  resources: {}
+
+  persistence:
+    enabled: false
+    size: 1Gi
+    storageClassName: ""
+    accessModes:
+      - ReadWriteOnce
+
+# -----------------------------------------------------------
+# PostgreSQL
+# -----------------------------------------------------------
+postgresql:
+  # Set to true to deploy a PostgreSQL instance as part of this chart.
+  # Set to false if using an external / pre-existing PostgreSQL.
+  enabled: true
+
+  image:
+    repository: postgres
+    tag: "16-alpine"
+    pullPolicy: IfNotPresent
+
+  containerPorts:
+    - name: postgres
+      containerPort: 5432
+      protocol: TCP
+
+  service:
+    type: ClusterIP
+    port: 5432
+
+  auth:
+    database: "open_wearables"
+    username: "open_wearables"
+    password: "changeme"          # Change this! Or supply via --set / secret
+    postgresPassword: "changeme"  # superuser password
+
+  resources: {}
+
+  persistence:
+    enabled: false
+    size: 5Gi
+    storageClassName: ""
+    accessModes:
+      - ReadWriteOnce
+
+# -----------------------------------------------------------
+# External PostgreSQL (used when postgresql.enabled is false)
+# -----------------------------------------------------------
+externalPostgresql:
+  host: "postgresql"
+  port: 5432
+  database: "open_wearables"
+  username: "open_wearables"
+  # Password should be provided via secret or --set
+  password: ""
+
+# -----------------------------------------------------------
+# Ingress
+# -----------------------------------------------------------
+ingress: {}
+
+# Global configuration for the IngressRoute (Traefik)
+ingressRoute:
+  enabled: true
+
+  namespace: default
+
+  annotations: {}
+
+  entryPoints: []
+  # entryPoints:
+  #   - websecure
+  #   - web
+
+  routes: []
+  # routes:
+  #   - match: Host(`wearables.example.com`)
+  #     kind: Rule
+  #     middlewares: []
+  #     services:
+  #       - name: open-wearables-frontend
+  #         namespace: default
+  #         port: 3000
+  #   - match: Host(`wearables.example.com`) && PathPrefix(`/api`)
+  #     kind: Rule
+  #     middlewares: []
+  #     services:
+  #       - name: open-wearables-backend
+  #         namespace: default
+  #         port: 8000
+
+  tls:
+    enabled: false
+    secretName: ""
+    certResolver: ""
+    domains: []
+
+# -----------------------------------------------------------
+# ConfigMap
+# -----------------------------------------------------------
+configmap:
+  enabled: false
+  data: {}
+  # data:
+  #   APP_ENV: "production"
+  #   LOG_LEVEL: "info"
+
+# -----------------------------------------------------------
+# Secret
+# -----------------------------------------------------------
+secret:
+  enabled: false
+  type: Opaque
+  data: {}
+  # data:
+  #   SECRET_KEY: <base64-encoded-value>
+  #   DATABASE_PASSWORD: <base64-encoded-value>
+
+# -----------------------------------------------------------
+# Persistent Volume Claims
+# -----------------------------------------------------------
+persistentVolumeClaims:
+  enabled: false
+  claims: []
+  # claims:
+  #   - name: open-wearables-data
+  #     create: true
+  #     mountPath: /app/data
+  #     accessModes:
+  #       - ReadWriteOnce
+  #     volumeMode: Filesystem
+  #     size: 5Gi
+  #     storageClassName: ""
+  #     existingClaim: ""
+  #     annotations: {}
+  #     labels: {}
+  #     subPath: ""
+  #     readOnly: false
