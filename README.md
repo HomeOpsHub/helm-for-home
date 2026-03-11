@@ -1,45 +1,143 @@
 # Helm for Home
 
-Welcome to **Helm for Home**! This repository contains a collection of curated Helm charts specifically designed for deploying and managing self-hosted applications and services on a home server or personal Kubernetes cluster. If you're a home lab enthusiast looking to streamline your Kubernetes deployments, you've come to the right place!
+[![Release Charts](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/release.yml/badge.svg)](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/release.yml)
+[![Validate Charts](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/lint.yml/badge.svg)](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/lint.yml)
+[![Security Scan](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/security.yml/badge.svg)](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/security.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+A curated collection of Helm charts for deploying self-hosted applications on home Kubernetes clusters.
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Why Use Helm for Home?](#why-use-helm-for-home)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Available Charts](#available-charts)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Support](#support)
-- [License](#license)
 
-## Introduction
+- [Helm for Home](#helm-for-home)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start](#quick-start)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Available Charts](#available-charts)
+    - [Stable](#stable)
+    - [Beta](#beta)
+  - [Usage](#usage)
+    - [Installing a Chart](#installing-a-chart)
+    - [Upgrading a Release](#upgrading-a-release)
+    - [Uninstalling a Release](#uninstalling-a-release)
+    - [Customizing Values](#customizing-values)
+  - [Repository Structure](#repository-structure)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-**Helm for Home** is designed to simplify the process of deploying, managing, and maintaining self-hosted applications in a home lab environment. With a focus on ease of use, these Helm charts are pre-configured to suit small-scale Kubernetes clusters, making them perfect for anyone looking to create a home server setup.
-
-## Why Use Helm for Home?
-
-- **Curated for Home Labs**: All charts are specifically crafted for small-scale, personal Kubernetes environments.
-- **Pre-Configured and Easy to Use**: Get started quickly with ready-to-use configurations, or customize them to suit your specific needs.
-- **Wide Range of Applications**: Includes charts for various self-hosted applications, such as media servers, file sharing, home automation, and more.
-- **Community-Driven**: Contribute your own charts or improvements, and benefit from updates and enhancements from others.
-
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
-Before you start using the Helm charts from this repository, ensure you have the following:
-
-- A running Kubernetes cluster (e.g., [k3s](https://k3s.io/), [MicroK8s](https://microk8s.io/), or any other Kubernetes distribution)
-- [Helm](https://helm.sh/docs/intro/install/) installed on your local machine
+- A running Kubernetes cluster ([k3s](https://k3s.io/), [MicroK8s](https://microk8s.io/), or similar)
+- [Helm](https://helm.sh/docs/intro/install/) v3.12+
 
 ### Installation
 
-1. **Add the Helm Repository**
+```bash
+# Add the repository
+helm repo add helm-for-home https://homeopshub.github.io/helm-for-home/
+helm repo update
 
-   To add this repository to your Helm setup, run:
+# Search available charts
+helm search repo helm-for-home
 
-   ```bash   
-   helm repo add myhelm https://homeopshub.github.io/helm-for-home/
-   helm repo update
+# Install a chart (example: uptime-kuma)
+helm install uptime-kuma helm-for-home/uptime-kuma
+```
+
+## Available Charts
+
+### Stable
+
+Production-ready charts that have been tested and validated.
+
+| Chart | Description |
+|-------|-------------|
+| [adguard-home](charts/stable/adguard-home) | AdGuard Home - network-wide ad blocking |
+| [cloudbeaver](charts/stable/cloudbeaver) | CloudBeaver - web-based database manager |
+| [custom-error-pages](charts/stable/custom-error-pages) | Custom error pages (tarampampam/error-pages) |
+| [freshrss](charts/stable/freshrss) | FreshRSS - self-hosted RSS feed aggregator |
+| [glances](charts/stable/glances) | Glances - system monitoring tool |
+| [gotify](charts/stable/gotify) | Gotify - server for sending and receiving messages |
+| [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
+| [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
+| [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
+| [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
+| [plex](charts/stable/plex) | Plex Media Server |
+| [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
+| [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |
+| [uptime-kuma](charts/stable/uptime-kuma) | Uptime Kuma - self-hosted monitoring tool |
+| [whoogle](charts/stable/whoogle) | Whoogle - self-hosted Google search proxy |
+
+### Beta
+
+Charts under active development. May have breaking changes between versions.
+
+| Chart | Description |
+|-------|-------------|
+| [plex](charts/beta/plex) | Plex Media Server (experimental) |
+| [teslamate](charts/beta/teslamate) | TeslaMate (experimental) |
+
+## Usage
+
+### Installing a Chart
+
+```bash
+# Install with default values
+helm install <release-name> helm-for-home/<chart-name>
+
+# Install with custom values
+helm install <release-name> helm-for-home/<chart-name> -f my-values.yaml
+
+# Install in a specific namespace
+helm install <release-name> helm-for-home/<chart-name> -n <namespace> --create-namespace
+```
+
+### Upgrading a Release
+
+```bash
+helm repo update
+helm upgrade <release-name> helm-for-home/<chart-name>
+```
+
+### Uninstalling a Release
+
+```bash
+helm uninstall <release-name>
+```
+
+### Customizing Values
+
+Each chart includes a `values.yaml` with documented defaults. To see all configurable options:
+
+```bash
+helm show values helm-for-home/<chart-name>
+```
+
+## Repository Structure
+
+```
+charts/
+  stable/       # Production-ready charts
+  beta/         # Charts under development
+common/         # Shared templates and helpers
+scripts/        # Utility scripts
+docs/           # Additional documentation
+```
+
+## Contributing
+
+Contributions are welcome! To add or improve a chart:
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/my-chart`)
+3. Make your changes — ensure charts pass `helm lint`
+4. Submit a pull request against `main`
+
+All pull requests are automatically validated with linting, chart-testing, and security scanning.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
