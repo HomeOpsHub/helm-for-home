@@ -143,9 +143,4 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Update repository index
-        run: |
-          helm repo index . --url https://homeops.github.io/helm-for-home/
-          git add index.yaml
-          git commit -m "Update repository index" || exit 0
-          git push
+
