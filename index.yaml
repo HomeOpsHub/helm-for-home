@@ -99,6 +99,17 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/adguard-home-0.1.0/adguard-home-0.1.0.tgz
     version: 0.1.0
+  cloudbeaver:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-03-11T20:16:26.624576889Z"
+    description: A Helm chart for Kubernetes
+    digest: ee8e22e73931ed9cb07e9ae89f5d22d7a23163a9a44ec5693d58a0780c5ef895
+    name: cloudbeaver
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/cloudbeaver-0.1.0/cloudbeaver-0.1.0.tgz
+    version: 0.1.0
   custom-error-pages:
   - apiVersion: v2
     appVersion: latest
@@ -150,6 +161,23 @@ entries:
     type: application
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/freshrss-0.1.0/freshrss-0.1.0.tgz
+    version: 0.1.0
+  glances:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2026-03-11T20:16:27.049107581Z"
+    description: A Helm chart for Glances system monitoring tool
+    digest: fd0e7def0e9cbe51d220a8f867ed3a1dbf092926c683ff6d96441a35f4f8d753
+    keywords:
+    - glances
+    - monitoring
+    - system
+    - performance
+    name: glances
+    sources:
+    - https://github.com/nicolargo/glances
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/glances-0.1.0/glances-0.1.0.tgz
     version: 0.1.0
   gotify:
   - apiVersion: v2
@@ -217,6 +245,32 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/netdata-0.1.0/netdata-0.1.0.tgz
     version: 0.1.0
+  open-wearables:
+  - annotations:
+      category: Health
+    apiVersion: v2
+    appVersion: "0.3"
+    created: "2026-03-11T20:16:27.718145053Z"
+    description: A Helm chart for deploying Open Wearables - a self-hosted platform
+      to unify wearable health data through one AI-ready API.
+    digest: 88dabf672cf99254be3f5f4c4a571bcc664282e94278cfecba5003515150c3b7
+    home: https://github.com/the-momentum/open-wearables
+    keywords:
+    - health
+    - wearables
+    - fitness
+    - self-hosted
+    - garmin
+    - apple-health
+    - fastapi
+    - quantified-self
+    name: open-wearables
+    sources:
+    - https://github.com/the-momentum/open-wearables
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/open-wearables-0.2.0/open-wearables-0.2.0.tgz
+    version: 0.2.0
   outline:
   - apiVersion: v2
     appVersion: 0.80.2
@@ -929,4 +983,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-11T05:02:12.131092162Z"
+generated: "2026-03-11T20:16:28.589834216Z"
