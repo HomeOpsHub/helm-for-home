@@ -31,7 +31,7 @@ jobs:
           python-version: "3.x"
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.1
+        uses: helm/chart-testing-action@v2.8.0
 
       - name: Build chart dependencies
         run: |
@@ -71,7 +71,7 @@ jobs:
           python-version: "3.x"
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.1
+        uses: helm/chart-testing-action@v2.8.0
 
       - name: Detect changed charts
         id: list-changed
