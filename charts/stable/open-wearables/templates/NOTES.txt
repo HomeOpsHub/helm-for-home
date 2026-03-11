@@ -1,0 +1,45 @@
+Open Wearables has been deployed!
+
+Components:
+  - Backend (FastAPI):  {{ .Release.Name }}-backend:{{ .Values.backend.service.port }}
+{{- if .Values.frontend.enabled }}
+  - Frontend (React):   {{ .Release.Name }}-frontend:{{ .Values.frontend.service.port }}
+{{- end }}
+{{- if .Values.worker.enabled }}
+  - Celery Worker:      {{ .Release.Name }}-worker
+{{- end }}
+{{- if .Values.beat.enabled }}
+  - Celery Beat:        {{ .Release.Name }}-beat
+{{- end }}
+{{- if .Values.redis.enabled }}
+  - Redis:              {{ .Release.Name }}-redis:{{ .Values.redis.service.port }}
+{{- end }}
+{{- if .Values.postgresql.enabled }}
+  - PostgreSQL:         {{ .Release.Name }}-postgresql:{{ .Values.postgresql.service.port }}
+{{- end }}
+
+{{- if .Values.ingressRoute.enabled }}
+
+Access the application via your configured IngressRoute.
+{{- else }}
+
+To access the backend API, run:
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-backend {{ .Values.backend.service.port }}:{{ .Values.backend.service.port }}
+
+{{- if .Values.frontend.enabled }}
+To access the frontend UI, run:
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-frontend {{ .Values.frontend.service.port }}:{{ .Values.frontend.service.port }}
+{{- end }}
+{{- end }}
+
+{{- if .Values.postgresql.enabled }}
+
+NOTE: This chart is deploying its own PostgreSQL instance.
+      To use an external database instead, set postgresql.enabled=false
+      and configure the externalPostgresql section in your values file.
+{{- else }}
+
+NOTE: This chart expects an external PostgreSQL database.
+      Configure connection details under `externalPostgresql` in your values file.
+      To deploy PostgreSQL as part of this chart, set postgresql.enabled=true.
+{{- end }}
