@@ -1,0 +1,54 @@
+name: Generate Documentation
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "charts/**/Chart.yaml"
+      - "charts/**/values.yaml"
+      - "charts/**/templates/**"
+
+permissions:
+  contents: write
+
+env:
+  HELM_DOCS_VERSION: "1.11.0"
+
+jobs:
+  generate-docs:
+    name: Auto-generate Chart READMEs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Install helm-docs
+        run: |
+          cd /tmp
+          wget -q https://github.com/norwoodj/helm-docs/releases/download/v${{ env.HELM_DOCS_VERSION }}/helm-docs_${{ env.HELM_DOCS_VERSION }}_Linux_x86_64.tar.gz
+          tar -xzf helm-docs_${{ env.HELM_DOCS_VERSION }}_Linux_x86_64.tar.gz
+          sudo mv helm-docs /usr/local/bin
+
+      - name: Generate documentation
+        run: |
+          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit updated docs
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "charts/**/README.md"
+          git commit -m "docs: auto-generate chart documentation"
+          git push
