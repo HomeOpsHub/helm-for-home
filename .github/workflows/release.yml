@@ -128,7 +128,7 @@ jobs:
           find charts -type f -name 'Chart.yaml' | xargs dirname | xargs -I {} helm package {} -d .cr-release-packages
 
       - name: Publish stable charts
-        uses: helm/chart-releaser-action@v1.6.0
+        uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts/stable/
           skip_existing: true
@@ -137,7 +137,7 @@ jobs:
           CR_TOKEN: "${{ secrets.access_token }}"
 
       - name: Publish beta charts
-        uses: helm/chart-releaser-action@v1.6.0
+        uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts/beta/
           skip_existing: true
