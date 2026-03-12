@@ -250,6 +250,31 @@ entries:
       category: Health
     apiVersion: v2
     appVersion: "0.3"
+    created: "2026-03-12T17:38:50.17412892Z"
+    description: A Helm chart for deploying Open Wearables - a self-hosted platform
+      to unify wearable health data through one AI-ready API.
+    digest: 2aa28e548131938f2bd4a72d8cf8c9ae9e0ca79567000529643281a64bdf6b3f
+    home: https://github.com/the-momentum/open-wearables
+    keywords:
+    - health
+    - wearables
+    - fitness
+    - self-hosted
+    - garmin
+    - apple-health
+    - fastapi
+    - quantified-self
+    name: open-wearables
+    sources:
+    - https://github.com/the-momentum/open-wearables
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/open-wearables-0.4.0/open-wearables-0.4.0.tgz
+    version: 0.4.0
+  - annotations:
+      category: Health
+    apiVersion: v2
+    appVersion: "0.3"
     created: "2026-03-12T16:26:35.815335207Z"
     description: A Helm chart for deploying Open Wearables - a self-hosted platform
       to unify wearable health data through one AI-ready API.
@@ -1008,4 +1033,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-12T16:26:35.815469797Z"
+generated: "2026-03-12T17:38:50.17435272Z"
