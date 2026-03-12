@@ -2,7 +2,7 @@ apiVersion: v2
 name: open-wearables
 description: A Helm chart for deploying Open Wearables - a self-hosted platform to unify wearable health data through one AI-ready API.
 type: application
-version: 0.3.0
+version: 0.4.0
 appVersion: "0.3"
 home: https://github.com/the-momentum/open-wearables
 sources:
