@@ -31,7 +31,7 @@ backend:
 
   image:
     repository: ghcr.io/atulmgupta/open-wearables-backend
-    tag: "2cf67f8"
+    tag: "v1.0.0"
     pullPolicy: IfNotPresent
 
   containerPorts:
@@ -111,10 +111,10 @@ worker:
 
   image:
     repository: ghcr.io/atulmgupta/open-wearables-backend
-    tag: "2cf67f8"
+    tag: "v1.0.0"
     pullPolicy: IfNotPresent
 
-  command: ["python", "-m", "celery", "-A", "app.celery_app", "worker", "--loglevel=info"]
+  command: ["celery", "-A", "app.celery_app", "worker", "--loglevel=debug"]
 
   resources: {}
 
@@ -130,10 +130,10 @@ beat:
 
   image:
     repository: ghcr.io/atulmgupta/open-wearables-backend
-    tag: "2cf67f8"
+    tag: "v1.0.0"
     pullPolicy: IfNotPresent
 
-  command: ["python", "-m", "celery", "-A", "app.celery_app", "beat", "--loglevel=info"]
+  command: ["celery", "-A", "app.celery_app", "beat", "--loglevel=debug"]
 
   resources: {}
 
@@ -274,12 +274,11 @@ configmap:
 # Secret
 # -----------------------------------------------------------
 secret:
-  enabled: false
+  enabled: true
   type: Opaque
-  data: {}
-  # data:
-  #   SECRET_KEY: <base64-encoded-value>
-  #   DATABASE_PASSWORD: <base64-encoded-value>
+  data:
+    SECRET_KEY: "changeme-replace-with-a-strong-random-key"
+    # DATABASE_PASSWORD: <plaintext-value>
 
 # -----------------------------------------------------------
 # Persistent Volume Claims
