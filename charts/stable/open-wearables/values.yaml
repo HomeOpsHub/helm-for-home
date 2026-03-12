@@ -30,8 +30,8 @@ backend:
   replicaCount: 1
 
   image:
-    repository: ghcr.io/the-momentum/open-wearables-backend
-    tag: latest
+    repository: ghcr.io/atulmgupta/open-wearables-backend
+    tag: "2cf67f8"
     pullPolicy: IfNotPresent
 
   containerPorts:
@@ -71,8 +71,8 @@ frontend:
   replicaCount: 1
 
   image:
-    repository: ghcr.io/the-momentum/open-wearables-frontend
-    tag: latest
+    repository: ghcr.io/atulmgupta/open-wearables-frontend
+    tag: "2cf67f8"
     pullPolicy: IfNotPresent
 
   containerPorts:
@@ -110,8 +110,8 @@ worker:
   replicaCount: 1
 
   image:
-    repository: ghcr.io/the-momentum/open-wearables-backend
-    tag: latest
+    repository: ghcr.io/atulmgupta/open-wearables-backend
+    tag: "2cf67f8"
     pullPolicy: IfNotPresent
 
   command: ["celery", "-A", "app.celery_app", "worker", "--loglevel=info"]
@@ -129,8 +129,8 @@ beat:
   replicaCount: 1
 
   image:
-    repository: ghcr.io/the-momentum/open-wearables-backend
-    tag: latest
+    repository: ghcr.io/atulmgupta/open-wearables-backend
+    tag: "2cf67f8"
     pullPolicy: IfNotPresent
 
   command: ["celery", "-A", "app.celery_app", "beat", "--loglevel=info"]
