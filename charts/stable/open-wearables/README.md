@@ -1,6 +1,6 @@
 # open-wearables
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3](https://img.shields.io/badge/AppVersion-0.3-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3](https://img.shields.io/badge/AppVersion-0.3-informational?style=flat-square)
 
 A Helm chart for deploying Open Wearables - a self-hosted platform to unify wearable health data through one AI-ready API.
 
@@ -15,7 +15,7 @@ A Helm chart for deploying Open Wearables - a self-hosted platform to unify wear
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| backend | object | `{"containerPorts":[{"containerPort":8000,"name":"http","protocol":"TCP"}],"extraEnv":[],"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/atulmgupta/open-wearables-backend","tag":"v1.0.0"},"livenessProbe":{"httpGet":{"path":"/health","port":"http"},"initialDelaySeconds":30,"periodSeconds":10},"readinessProbe":{"httpGet":{"path":"/health","port":"http"},"initialDelaySeconds":15,"periodSeconds":5},"replicaCount":1,"resources":{},"service":{"port":8000,"type":"ClusterIP"}}` | --------------------------------------------------------- |
+| backend | object | `{"command":["/bin/bash","scripts/start/app.sh"],"containerPorts":[{"containerPort":8000,"name":"http","protocol":"TCP"}],"extraEnv":[],"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/atulmgupta/open-wearables-backend","tag":"v1.0.0"},"livenessProbe":{"httpGet":{"path":"/health","port":"http"},"initialDelaySeconds":30,"periodSeconds":10},"readinessProbe":{"httpGet":{"path":"/health","port":"http"},"initialDelaySeconds":15,"periodSeconds":5},"replicaCount":1,"resources":{},"service":{"port":8000,"type":"ClusterIP"}}` | --------------------------------------------------------- |
 | beat | object | `{"command":["celery","-A","app.celery_app","beat","--loglevel=debug"],"enabled":true,"extraEnv":[],"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/atulmgupta/open-wearables-backend","tag":"v1.0.0"},"replicaCount":1,"resources":{}}` | --------------------------------------------------------- |
 | configmap | object | `{"data":{},"enabled":false}` | --------------------------------------------------------- |
 | externalPostgresql | object | `{"database":"open_wearables","host":"postgresql","password":"","port":5432,"username":"open_wearables"}` | --------------------------------------------------------- |
