@@ -34,6 +34,8 @@ backend:
     tag: "v1.0.0"
     pullPolicy: IfNotPresent
 
+  command: ["/bin/bash", "scripts/start/app.sh"]
+
   containerPorts:
     - name: http
       containerPort: 8000
