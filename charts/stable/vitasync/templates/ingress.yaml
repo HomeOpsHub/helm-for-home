@@ -1,0 +1,57 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "vitasync.fullname" . }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vitasync.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- end }}
+  {{- $hasTls := or .Values.ingress.api.tls .Values.ingress.web.tls }}
+  {{- if $hasTls }}
+  tls:
+    {{- if .Values.ingress.api.tls }}
+    - hosts:
+        - {{ .Values.ingress.api.host | quote }}
+      secretName: {{ .Values.ingress.api.secretName }}
+    {{- end }}
+    {{- if .Values.ingress.web.tls }}
+    - hosts:
+        - {{ .Values.ingress.web.host | quote }}
+      secretName: {{ .Values.ingress.web.secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- if .Values.api.enabled }}
+    - host: {{ .Values.ingress.api.host | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}-api
+                port:
+                  number: {{ .Values.api.service.port }}
+    {{- end }}
+    {{- if .Values.web.enabled }}
+    - host: {{ .Values.ingress.web.host | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}-web
+                port:
+                  number: {{ .Values.web.service.port }}
+    {{- end }}
+{{- end }}

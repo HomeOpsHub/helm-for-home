@@ -1,0 +1,86 @@
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  VitaSync — Wearable Health Data Aggregation Platform
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Release   : {{ .Release.Name }}
+Namespace : {{ .Release.Namespace }}
+
+Components deployed:
+{{- if .Values.api.enabled }}
+  ✓ API (Fastify)   — {{ include "vitasync.api.image" . }}
+{{- end }}
+{{- if .Values.worker.enabled }}
+  ✓ Worker (BullMQ) — {{ include "vitasync.worker.image" . }}
+{{- end }}
+{{- if .Values.web.enabled }}
+  ✓ Web (Next.js)   — {{ include "vitasync.web.image" . }}
+{{- end }}
+{{- if .Values.migrations.enabled }}
+  ✓ Migration job   — runs as a pre-install/pre-upgrade hook
+{{- end }}
+{{- if .Values.postgresql.enabled }}
+  ✓ PostgreSQL      — bundled ({{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }})
+{{- else }}
+  • PostgreSQL       — external ({{ .Values.externalPostgresql.host }}:{{ .Values.externalPostgresql.port }})
+{{- end }}
+{{- if .Values.redis.enabled }}
+  ✓ Redis           — bundled ({{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }})
+{{- else }}
+  • Redis            — external ({{ .Values.externalRedis.host }}:{{ .Values.externalRedis.port }})
+{{- end }}
+
+──────────────────────────────────────────────────────
+  Accessing the services
+──────────────────────────────────────────────────────
+{{- if .Values.ingress.enabled }}
+
+  API:  http{{ if .Values.ingress.api.tls }}s{{ end }}://{{ .Values.ingress.api.host }}
+  Web:  http{{ if .Values.ingress.web.tls }}s{{ end }}://{{ .Values.ingress.web.host }}
+  Docs: http{{ if .Values.ingress.api.tls }}s{{ end }}://{{ .Values.ingress.api.host }}/docs
+{{- else }}
+
+  Ingress is disabled. Use port-forward to access locally:
+
+  # API
+  kubectl port-forward -n {{ .Release.Namespace }} \
+    svc/{{ include "vitasync.fullname" . }}-api {{ .Values.api.service.port }}:{{ .Values.api.service.port }}
+
+  # Web dashboard
+  kubectl port-forward -n {{ .Release.Namespace }} \
+    svc/{{ include "vitasync.fullname" . }}-web {{ .Values.web.service.port }}:{{ .Values.web.service.port }}
+
+  Then open:
+    Web dashboard : http://localhost:{{ .Values.web.service.port }}
+    API docs      : http://localhost:{{ .Values.api.service.port }}/docs
+{{- end }}
+
+──────────────────────────────────────────────────────
+  Secrets
+──────────────────────────────────────────────────────
+{{- if .Values.secrets.existingSecret }}
+
+  Using pre-existing secret: {{ .Values.secrets.existingSecret }}
+{{- else }}
+
+  A Secret named {{ include "vitasync.fullname" . }}-secrets was created.
+  DATABASE_URL and REDIS_URL are set from postgresql/redis values.
+
+  ⚠  Change secrets.JWT_SECRET, secrets.ENCRYPTION_KEY, and
+     postgresql.auth.password before exposing this to the network.
+     For production, provide a pre-created secret via secrets.existingSecret.
+{{- end }}
+
+──────────────────────────────────────────────────────
+  Troubleshooting
+──────────────────────────────────────────────────────
+
+  View all logs:
+    kubectl logs -n {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }} --prefix -f
+
+  Check migration job:
+    kubectl get jobs -n {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Check pod status:
+    kubectl get pods -n {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
