@@ -20,6 +20,7 @@ jobs:
   request-review:
     name: Request Copilot Review
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     # Skip draft PRs — request review once they are marked ready
     if: github.event.pull_request.draft == false
     steps:
