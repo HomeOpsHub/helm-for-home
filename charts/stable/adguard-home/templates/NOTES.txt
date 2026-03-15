@@ -1,22 +1,63 @@
-1. Get the application URL by running these commands:
-{{- if .Values.ingress.enabled }}
-{{- range $host := .Values.ingress.hosts }}
-  {{- range .paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+AdGuard Home is a network-wide ad and tracker blocking DNS server.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Web UI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.ingressRoute.enabled }}
+  IngressRoute is enabled. Access via your configured host.
+{{- else if .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/
   {{- end }}
-{{- end }}
 {{- else if contains "NodePort" .Values.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "adguard-home.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
+  echo "Web UI: http://$NODE_IP:$NODE_PORT"
 {{- else if contains "LoadBalancer" .Values.service.type }}
-     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch its status by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "adguard-home.fullname" . }}'
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "adguard-home.fullname" . }}
   export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "adguard-home.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  echo http://$SERVICE_IP:{{ .Values.service.port }}
-{{- else if contains "ClusterIP" .Values.service.type }}
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "adguard-home.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
-  export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
-  echo "Visit http://127.0.0.1:8080 to use your application"
-  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
+  echo "Web UI: http://$SERVICE_IP:{{ .Values.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "adguard-home.fullname" . }} 3000:{{ .Values.service.port }}
+  Web UI: http://localhost:3000
 {{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  First-Time Setup
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. Open the web UI — you will be greeted with the setup wizard.
+  2. Complete the wizard to set your admin username and password.
+  3. The DNS server will begin listening on port {{ .Values.service.dnsPort }} (UDP/TCP).
+
+  To point your network at AdGuard Home, set your router or device DNS to:
+    kubectl get svc --namespace {{ .Release.Namespace }} {{ include "adguard-home.fullname" . }} -o jsonpath="{.spec.clusterIP}"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Persistence
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.persistence.enabled }}
+  Persistent storage is ENABLED.
+  - Data PVC  : {{ .Values.persistence.dataPvcName }}
+  - Config PVC: {{ .Values.persistence.configPvcName }}
+{{- else }}
+  WARNING: Persistence is DISABLED. Configuration and query logs will be lost on pod restart.
+  Set persistence.enabled=true to retain data across restarts.
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://github.com/AdguardTeam/AdGuardHome/wiki

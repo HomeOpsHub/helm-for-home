@@ -1,23 +1,83 @@
-{{- /*
-NOTES.txt for TeslaMate Helm Chart
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
 
-This template provides helpful post-installation notes to guide the user on how to access and manage the deployed application.
-*/ -}}
+TeslaMate is a self-hosted data logger and visualizer for Tesla vehicles.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing TeslaMate
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 {{- if .Values.ingressRoute.enabled }}
-  {{- if .Values.ingressRoute.tls.enabled }}
-⚠️ **TLS is enabled for your IngressRoute. Ensure that your TLS certificates are correctly configured.**
-  {{- end }}
-
-🎉 **TeslaMate has been successfully deployed!**
-
-**Access TeslaMate at:**
-  {{- if .Values.ingressRoute.tls.enabled }}
-  https://{{ .Values.ingressRoute.host }}/
+  IngressRoute is enabled.
+  {{- if .Values.ingressRoute.spec.tls.enabled }}
+  Access TeslaMate at: https://{{ (index .Values.ingressRoute.spec.routes 0).match | replace "Host(`" "" | replace "`)" "" }}
   {{- else }}
-  http://{{ .Values.ingressRoute.host }}/
+  Access TeslaMate at: http://{{ (index .Values.ingressRoute.spec.routes 0).match | replace "Host(`" "" | replace "`)" "" }}
   {{- end }}
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "teslamate.fullname" . }} 4000:{{ .Values.service.port }}
+  Web UI: http://localhost:4000
 {{- end }}
-🔍 **Check the status of your IngressRoute:**
-  ```bash
-  kubectl get ingressroute -l app.kubernetes.io/name={{ include "teslamate.name" . }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Required Configuration
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  TeslaMate will NOT start until the following secrets are configured:
+
+    ENCRYPTION_KEY  — generate with: openssl rand -hex 32
+    DATABASE_PASS   — strong PostgreSQL password
+
+  Set these before installation:
+    helm upgrade --install {{ .Release.Name }} <chart> \
+      --set secrets.ENCRYPTION_KEY="$(openssl rand -hex 32)" \
+      --set secrets.DATABASE_PASS="<your-db-password>"
+
+  Or store them in a pre-created Kubernetes Secret and reference it.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  External Dependencies
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  TeslaMate requires the following services to be deployed separately:
+
+    PostgreSQL  — host: {{ .Values.env.DATABASE_HOST }}
+                  user: {{ .Values.secrets.DATABASE_USER }}
+                  db:   {{ .Values.secrets.DATABASE_NAME }}
+
+    MQTT broker — host: {{ .Values.env.MQTT_HOST }}
+                  (used to publish real-time car data)
+
+  Grafana dashboards are available at:
+    https://github.com/teslamate-org/teslamate/tree/master/grafana
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  First Login
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Open the URL above and sign in with your Tesla account credentials.
+  TeslaMate will immediately begin recording driving and charging data.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Persistence
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.persistence.enabled }}
+  Persistence is ENABLED. Import directory is mounted for data imports.
+{{- else }}
+  WARNING: Persistence is DISABLED. Import directory will not survive restarts.
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Check IngressRoute:
+    kubectl get ingressroute --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://docs.teslamate.org/

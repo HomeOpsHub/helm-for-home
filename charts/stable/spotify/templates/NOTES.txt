@@ -1,5 +1,61 @@
-1. **Spotify Application Access**
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
 
-3. **Traefik Ingress**
+Your Spotify is a self-hosted application that provides statistics and history
+for your Spotify account.
 
-   The application is using Traefik `IngressRoute`. Ensure that Traefik is installed and properly configured in your cluster.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Web UI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ .Values.fullnameOverride | default .Release.Name }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "Web UI: http://$NODE_IP:$NODE_PORT"
+{{- else if contains "LoadBalancer" .Values.service.type }}
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ .Values.fullnameOverride | default .Release.Name }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo "Web UI: http://$SERVICE_IP:{{ .Values.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Values.fullnameOverride | default .Release.Name }} {{ .Values.service.port }}:{{ .Values.service.port }}
+  Web UI: http://localhost:{{ .Values.service.port }}
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Required Configuration
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Before this application works, you MUST configure Spotify API credentials:
+
+  1. Go to https://developer.spotify.com/dashboard and create an application.
+  2. Add the following Redirect URI in the Spotify app settings:
+       {{ .Values.env.APP_URL }}/api/oauth/spotify/callback
+
+  3. Set the credentials in values.yaml (or via --set):
+       env.SPOTIFY_PUBLIC:  <your-client-id>
+       env.SPOTIFY_SECRET:  <your-client-secret>
+       env.APP_URL:         <public URL of this deployment>
+
+  4. Ensure MongoDB is reachable at: {{ .Values.env.MONGO_ENDPOINT }}
+
+  WARNING: The default env.SPOTIFY_PUBLIC and env.SPOTIFY_SECRET are
+  placeholders. The application will not function until real values are provided.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  First Login
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Navigate to the web UI and click "Login with Spotify."
+  You will be redirected to authorize the application with your Spotify account.
+  Statistics will begin populating once you have authorized and started listening.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/name={{ .Values.nameOverride | default .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/name={{ .Values.nameOverride | default .Release.Name }}
+
+  Docs: https://github.com/Yooooomi/your_spotify

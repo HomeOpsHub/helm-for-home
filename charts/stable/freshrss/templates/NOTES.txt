@@ -1,22 +1,63 @@
-1. Get the application URL by running these commands:
-{{- if .Values.ingress.enabled }}
-{{- range $host := .Values.ingress.hosts }}
-  {{- range .paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+FreshRSS is a self-hosted RSS and Atom feed aggregator.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Web UI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.ingressRoute.enabled }}
+  IngressRoute is enabled. Access via your configured host.
+{{- else if .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/
   {{- end }}
-{{- end }}
 {{- else if contains "NodePort" .Values.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "freshrss.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
+  echo "Web UI: http://$NODE_IP:$NODE_PORT"
 {{- else if contains "LoadBalancer" .Values.service.type }}
-     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch its status by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "freshrss.fullname" . }}'
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "freshrss.fullname" . }}
   export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "freshrss.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  echo http://$SERVICE_IP:{{ .Values.service.port }}
-{{- else if contains "ClusterIP" .Values.service.type }}
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "freshrss.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
-  export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
-  echo "Visit http://127.0.0.1:8080 to use your application"
-  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
+  echo "Web UI: http://$SERVICE_IP:{{ .Values.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "freshrss.fullname" . }} 8080:{{ .Values.service.port }}
+  Web UI: http://localhost:8080
 {{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  First-Time Setup
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  On first access you will be directed to the install wizard at /i/
+  Complete the wizard to:
+    1. Choose a language and confirm system requirements.
+    2. Set up the database (SQLite is easiest for single-user installs).
+    3. Create your admin user with a strong password.
+
+  Default credentials (if pre-configured in values):
+    Username: {{ .Values.database.user | default "freshrss" }}
+    Password: (as set in database.password)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  API Access (for RSS readers)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  FreshRSS supports the Google Reader API and the Fever API.
+  Enable API access in Settings > Authentication > Allow API access.
+
+  Google Reader API endpoint:
+    http://<host>/api/greader.php
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://freshrss.github.io/FreshRSS/
