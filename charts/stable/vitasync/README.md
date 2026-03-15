@@ -1,6 +1,6 @@
 # vitasync
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
+![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
 
 A Helm chart for deploying VitaSync — a self-hosted wearable health data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
 
@@ -90,6 +90,24 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | ingress.web.host | string | `"app.vitasync.example.com"` |  |
 | ingress.web.secretName | string | `"vitasync-web-tls"` |  |
 | ingress.web.tls | bool | `false` |  |
+| ingressRoute.annotations | object | `{}` |  |
+| ingressRoute.enabled | bool | `false` |  |
+| ingressRoute.entryPoints[0] | string | `"websecure"` |  |
+| ingressRoute.namespace | string | `""` |  |
+| ingressRoute.routes[0].kind | string | `"Rule"` |  |
+| ingressRoute.routes[0].match | string | `"Host(`app.vitasync.example.com`)"` |  |
+| ingressRoute.routes[0].middlewares | list | `[]` |  |
+| ingressRoute.routes[0].services[0].name | string | `""` |  |
+| ingressRoute.routes[0].services[0].port | int | `3000` |  |
+| ingressRoute.routes[1].kind | string | `"Rule"` |  |
+| ingressRoute.routes[1].match | string | `"Host(`api.vitasync.example.com`)"` |  |
+| ingressRoute.routes[1].middlewares | list | `[]` |  |
+| ingressRoute.routes[1].services[0].name | string | `""` |  |
+| ingressRoute.routes[1].services[0].port | int | `3001` |  |
+| ingressRoute.tls.certResolver | string | `""` |  |
+| ingressRoute.tls.domains | list | `[]` |  |
+| ingressRoute.tls.enabled | bool | `false` |  |
+| ingressRoute.tls.secretName | string | `"vitasync-tls"` |  |
 | migrations.annotations."helm.sh/hook" | string | `"pre-install,pre-upgrade"` |  |
 | migrations.annotations."helm.sh/hook-delete-policy" | string | `"hook-succeeded"` |  |
 | migrations.annotations."helm.sh/hook-weight" | string | `"-5"` |  |
