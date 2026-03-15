@@ -250,6 +250,31 @@ entries:
       category: Health
     apiVersion: v2
     appVersion: "0.3"
+    created: "2026-03-15T06:54:22.619280476Z"
+    description: A Helm chart for deploying Open Wearables - a self-hosted platform
+      to unify wearable health data through one AI-ready API.
+    digest: 2e1a51b2baef98fd8cecb860a589fcafc88895e87498c8409c57d3d81ee6d903
+    home: https://github.com/the-momentum/open-wearables
+    keywords:
+    - health
+    - wearables
+    - fitness
+    - self-hosted
+    - garmin
+    - apple-health
+    - fastapi
+    - quantified-self
+    name: open-wearables
+    sources:
+    - https://github.com/the-momentum/open-wearables
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/open-wearables-0.7.0/open-wearables-0.7.0.tgz
+    version: 0.7.0
+  - annotations:
+      category: Health
+    apiVersion: v2
+    appVersion: "0.3"
     created: "2026-03-13T02:43:50.732673659Z"
     description: A Helm chart for deploying Open Wearables - a self-hosted platform
       to unify wearable health data through one AI-ready API.
@@ -1072,6 +1097,41 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/uptime-kuma-0.1.0/uptime-kuma-0.1.0.tgz
     version: 0.1.0
+  vitasync:
+  - annotations:
+      category: Health
+    apiVersion: v2
+    appVersion: 0.2.0
+    created: "2026-03-15T06:54:22.7465255Z"
+    description: A Helm chart for deploying VitaSync — a self-hosted wearable health
+      data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
+    digest: 3e47ee54294f32b8ba6d59681a55ffe800fea3ebb71b217a44349cbc3128727d
+    home: https://github.com/HomeOpsHub/vitasync
+    keywords:
+    - health
+    - wearables
+    - fitness
+    - self-hosted
+    - fitbit
+    - garmin
+    - strava
+    - whoop
+    - withings
+    - polar
+    - quantified-self
+    - fastify
+    - nextjs
+    - bullmq
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: vitasync
+    sources:
+    - https://github.com/HomeOpsHub/vitasync
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/vitasync-0.1.0/vitasync-0.1.0.tgz
+    version: 0.1.0
   whoogle:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -1083,4 +1143,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-13T02:43:50.732883439Z"
+generated: "2026-03-15T06:54:22.7467179Z"
