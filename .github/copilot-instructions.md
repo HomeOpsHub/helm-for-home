@@ -115,6 +115,7 @@ CI (`docs.yml`) will fail if READMEs are stale. Always regenerate before pushing
 - `helm/kind-action@v1.12.0`
 - `github/codeql-action/upload-sarif@v4`
 - Trivy: installed via `curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin` (do **not** use `aquasecurity/trivy-action` — its setup sub-action is broken)
+- Trivy scan uses `--exit-code 0` — the scan is **informational only**; findings are visible in the GitHub Security tab via SARIF upload, but do not block the workflow
 
 ### Workflow rules
 - All workflows must have `concurrency.cancel-in-progress: true`

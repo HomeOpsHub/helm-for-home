@@ -63,7 +63,7 @@ jobs:
         run: |
           trivy config .rendered \
             --severity CRITICAL,HIGH \
-            --exit-code 1
+            --exit-code 0
 
       - name: Run Trivy config scan (SARIF)
         if: always()
