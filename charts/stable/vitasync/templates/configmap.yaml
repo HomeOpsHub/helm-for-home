@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "vitasync.configMapName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vitasync.labels" . | nindent 4 }}
+data:
+  NODE_ENV: {{ .Values.config.NODE_ENV | quote }}
+  PORT: {{ .Values.config.PORT | quote }}
+  HOST: {{ .Values.config.HOST | quote }}
+  LOG_LEVEL: {{ .Values.config.LOG_LEVEL | quote }}
+  CORS_ORIGINS: {{ .Values.config.CORS_ORIGINS | quote }}
+  RATE_LIMIT_MAX: {{ .Values.config.RATE_LIMIT_MAX | quote }}
+  RATE_LIMIT_WINDOW_MS: {{ .Values.config.RATE_LIMIT_WINDOW_MS | quote }}
+  OAUTH_REDIRECT_BASE_URL: {{ .Values.config.OAUTH_REDIRECT_BASE_URL | quote }}
+  NEXT_PUBLIC_API_URL: {{ .Values.config.NEXT_PUBLIC_API_URL | quote }}
+  ADMIN_WORKSPACE_SLUG: {{ .Values.config.ADMIN_WORKSPACE_SLUG | quote }}
+  DATABASE_POOL_MIN: {{ .Values.config.DATABASE_POOL_MIN | quote }}
+  DATABASE_POOL_MAX: {{ .Values.config.DATABASE_POOL_MAX | quote }}
