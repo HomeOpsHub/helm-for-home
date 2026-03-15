@@ -2,7 +2,7 @@ apiVersion: v2
 name: plex
 description: A Helm chart for Plex Media Server — a media streaming platform for your home
 type: application
-version: 0.1.0
+version: 0.2.0
 appVersion: "1.41.4.9314"
 home: https://www.plex.tv
 sources:

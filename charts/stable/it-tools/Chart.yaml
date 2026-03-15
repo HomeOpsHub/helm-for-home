@@ -2,7 +2,7 @@ apiVersion: v2
 name: it-tools
 description: A Helm chart for IT-Tools — a collection of handy online developer tools
 type: application
-version: 0.3.0
+version: 0.4.0
 appVersion: "2024.5.13-a0bc346"
 home: https://it-tools.tech
 sources:
