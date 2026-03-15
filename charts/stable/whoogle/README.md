@@ -1,8 +1,20 @@
 # whoogle
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.0](https://img.shields.io/badge/AppVersion-0.9.0-informational?style=flat-square)
 
-A Helm chart for Kubernetes
+A Helm chart for Whoogle Search — a self-hosted, ad-free, privacy-respecting Google search proxy
+
+**Homepage:** <https://github.com/benbusby/whoogle-search>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| HomeOpsHub |  | <https://github.com/HomeOpsHub> |
+
+## Source Code
+
+* <https://github.com/benbusby/whoogle-search>
 
 ## Values
 
