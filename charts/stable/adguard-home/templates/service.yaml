@@ -24,9 +24,11 @@ spec:
       name: http
     - port: {{ .Values.service.dhcpPort }}
       targetPort: {{ .Values.service.target.dhcpPort | default .Values.service.dhcpPort }}
+      protocol: UDP
       name: dhcp
     - port: {{ .Values.service.dhcpSecPort }}
       targetPort: {{ .Values.service.target.dhcpSecPort | default .Values.service.dhcpSecPort }}
+      protocol: UDP
       name: dhcp-sec
     - port: {{ .Values.service.tlsPort }}
       targetPort: {{ .Values.service.target.tlsPort | default .Values.service.tlsPort }}

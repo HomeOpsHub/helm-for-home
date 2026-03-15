@@ -2,7 +2,7 @@ apiVersion: v2
 name: adguard-home
 description: A Helm chart for AdGuard Home — a network-wide ad and tracker blocking DNS server
 type: application
-version: 0.12.0
+version: 0.13.0
 appVersion: "0.107.57"
 keywords:
   - adguard
