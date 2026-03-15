@@ -143,6 +143,8 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | secrets.POLAR_CLIENT_SECRET | string | `""` |  |
 | secrets.STRAVA_CLIENT_ID | string | `""` |  |
 | secrets.STRAVA_CLIENT_SECRET | string | `""` |  |
+| secrets.WHOOP_CLIENT_ID | string | `""` |  |
+| secrets.WHOOP_CLIENT_SECRET | string | `""` |  |
 | secrets.WITHINGS_CLIENT_ID | string | `""` |  |
 | secrets.WITHINGS_CLIENT_SECRET | string | `""` |  |
 | secrets.existingSecret | string | `""` |  |
