@@ -179,10 +179,13 @@ services:
 mariadb:
   enabled: true
   auth:
-    rootPassword: "rootpassword"
+    # REQUIRED: Set all passwords before deploying.
+    # Use existingSecret or set these via --set at deploy time.
+    # Do NOT store real credentials in this file or in version control.
+    rootPassword: ""  # Required: set a strong root password
     database: freshrss
     username: freshrss
-    password: "freshrsspass"
+    password: ""  # Required: set a strong password
   primary:
     persistence:
       enabled: true

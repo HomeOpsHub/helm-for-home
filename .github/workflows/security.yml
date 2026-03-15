@@ -1,18 +1,20 @@
 name: Security Scan
 
-# Temporarily disabled while securityContext defaults are being validated
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
-#   schedule:
-#     # Run weekly on Monday at 06:00 UTC
-#     - cron: "0 6 * * 1"
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    # Run weekly on Monday at 06:00 UTC
+    - cron: "0 6 * * 1"
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -22,16 +24,17 @@ jobs:
   scan:
     name: Scan Charts for Misconfigurations
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Helm
-        uses: azure/setup-helm@v4.2.0
+        uses: azure/setup-helm@v4
         with:
-          version: v3.12.1
+          version: v3.17.0
 
       - name: Build chart dependencies
         run: |
@@ -52,7 +55,7 @@ jobs:
           done
 
       - name: Run Trivy config scan on templates
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.30.0
         with:
           scan-type: config
           scan-ref: .rendered
@@ -62,7 +65,7 @@ jobs:
 
       - name: Run Trivy config scan (SARIF)
         if: always()
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.30.0
         with:
           scan-type: config
           scan-ref: .rendered

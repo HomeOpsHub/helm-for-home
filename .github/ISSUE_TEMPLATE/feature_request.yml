@@ -1,0 +1,59 @@
+---
+name: New Chart / Feature Request
+description: Request a new chart or an improvement to an existing one
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your suggestion! Feature requests and new chart ideas are welcome.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Request Type
+      options:
+        - New chart
+        - Enhancement to existing chart
+        - Workflow / CI improvement
+        - Documentation improvement
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: chart
+    attributes:
+      label: Chart Name (if applicable)
+      description: Name of the existing chart, or the application you'd like a chart for
+      placeholder: "e.g., adguard-home or paperless-ngx"
+
+  - type: input
+    id: upstream
+    attributes:
+      label: Upstream Project URL
+      description: GitHub / official project URL for a new chart request
+      placeholder: "https://github.com/..."
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of what you'd like to see added or changed, and why.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information, screenshots, or links that might be helpful.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have checked existing issues and this is not a duplicate
+          required: true
+        - label: I am willing to submit a PR to implement this

@@ -1,0 +1,32 @@
+# Patterns to ignore when building packages.
+# This supports shell glob matching, relative path matching, and negation (prefixed with !)
+# For more information: https://helm.sh/docs/helm/helm_package/
+
+# Common VCS dirs
+.git/
+.gitignore
+.gitattributes
+.bzr/
+.bzrignore
+.hg/
+.hgignore
+.svn/
+
+# CI/CD
+.github/
+.circleci/
+.travis.yml
+.drone.yml
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.bak
+*.tmp
+*~
+
+# Docs only needed at repo level
+CONTRIBUTING.md
+LICENSE

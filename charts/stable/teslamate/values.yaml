@@ -14,9 +14,12 @@ env:
   MQTT_HOST: "mosquitto"
 
 secrets:
-  ENCRYPTION_KEY: "your-strong-encryption-key" # Replace with a secure key
+  # REQUIRED: Set all secret values before deploying.
+  # Use a Kubernetes Secret or an external secrets manager (e.g., External Secrets Operator).
+  # Do NOT store real credentials in this file or in version control.
+  ENCRYPTION_KEY: ""  # Required: generate with: openssl rand -hex 32
   DATABASE_USER: "teslamate"
-  DATABASE_PASS: "your-secure-database-password" # Replace with a secure password
+  DATABASE_PASS: ""  # Required: set a strong password
   DATABASE_NAME: "teslamate"
 
 persistence:

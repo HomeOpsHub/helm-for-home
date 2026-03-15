@@ -1,6 +1,19 @@
 apiVersion: v2
 name: gotify
-description: A Helm chart for Gotify, a server for receiving and sending messages.
+description: A Helm chart for Gotify — a self-hosted push notification server
 type: application
 version: 0.2.0
-appVersion: "2.1.5"  # Replace with the desired app version
+appVersion: "2.6.1"
+home: https://gotify.net
+sources:
+  - https://github.com/gotify/server
+keywords:
+  - gotify
+  - notifications
+  - push
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Notifications

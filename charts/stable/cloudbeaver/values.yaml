@@ -157,9 +157,11 @@ secret:
   enabled: true
   type: Opaque
   data:
+    # REQUIRED: Set admin credentials before deploying.
+    # Use existingSecret or pass via --set at deploy time.
+    # Do NOT store real credentials in this file or in version control.
     CB_ADMIN_NAME: "admin"
-    CB_ADMIN_PASSWORD: "securepassword"
-    # Consider using Helm's built-in functions to handle sensitive data
+    CB_ADMIN_PASSWORD: ""  # Required: set a strong password
 
 # -------------------------------------
 # Additional Kubernetes Services

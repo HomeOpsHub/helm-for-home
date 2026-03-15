@@ -2,32 +2,37 @@ name: Release Charts
 
 on:
   push:
-    # Trigger when chart version tags are pushed
+    # Trigger on semantic version tags only (e.g., v1.2.3)
     tags:
-      - '*'
+      - 'v*.*.*'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
   packages: write
 
 env:
-  HELM_DOCS_VERSION: "1.11.0"
+  HELM_DOCS_VERSION: "1.14.2"
 
 jobs:
   validate:
     name: Lint, Test & Validate Charts
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Helm
-        uses: azure/setup-helm@v4.2.0
+        uses: azure/setup-helm@v4
         with:
-          version: v3.12.1
+          version: v3.17.0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,13 +40,13 @@ jobs:
           python-version: '3.x'
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.8.0
+        uses: helm/chart-testing-action@v2.7.0
 
       - name: Install helm-docs
         run: |
           cd /tmp
-          wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
-          tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          wget -q https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          tar -xzf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
           sudo mv helm-docs /usr/local/bin
 
       - name: Build chart dependencies
@@ -85,10 +90,11 @@ jobs:
     name: Package & Publish Charts
     runs-on: ubuntu-latest
     needs: validate
+    timeout-minutes: 20
     if: (github.event_name == 'push' && contains(github.ref, 'refs/tags/')) || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -98,13 +104,13 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Set up Helm
-        uses: azure/setup-helm@v4.2.0
+        uses: azure/setup-helm@v4
 
       - name: Install helm-docs
         run: |
           cd /tmp
-          wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
-          tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          wget -q https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          tar -xzf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
           sudo mv helm-docs /usr/local/bin
 
       - name: Build chart dependencies
@@ -120,10 +126,14 @@ jobs:
         run: |
           find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs
 
-      - name: Package charts
+      - name: Package stable charts
         run: |
           mkdir -p .cr-release-packages
-          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs -I {} helm package {} -d .cr-release-packages
+          find charts/stable -type f -name 'Chart.yaml' | xargs dirname | xargs -I {} helm package {} -d .cr-release-packages
+
+      - name: Package beta charts
+        run: |
+          find charts/beta -type f -name 'Chart.yaml' | xargs dirname | xargs -I {} helm package {} -d .cr-release-packages
 
       - name: Publish stable charts
         uses: helm/chart-releaser-action@v1.7.0

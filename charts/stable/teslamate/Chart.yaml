@@ -1,10 +1,20 @@
 apiVersion: v2
 name: teslamate
-description: A Helm chart for deploying TeslaMate with Longhorn
+description: A Helm chart for TeslaMate — a self-hosted Tesla data logger and visualizer
 type: application
 version: 0.10.0
-appVersion: "1.0"
+appVersion: "1.32.0"
 keywords:
   - teslamate
   - tesla
+  - ev
+  - self-hosted
+home: https://docs.teslamate.org
+sources:
+  - https://github.com/teslamate-org/teslamate
 icon: https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Tesla_Motors.svg/793px-Tesla_Motors.svg.png
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: IoT

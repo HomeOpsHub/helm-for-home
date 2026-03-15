@@ -1,6 +1,20 @@
 apiVersion: v2
 name: outline
-description: Helm chart to deploy Outline Wiki
+description: A Helm chart for Outline Wiki — a fast, collaborative knowledge base
 type: application
 version: 0.19.0
 appVersion: "0.80.2"
+home: https://www.getoutline.com
+sources:
+  - https://github.com/outline/outline
+keywords:
+  - outline
+  - wiki
+  - knowledge-base
+  - documentation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity
