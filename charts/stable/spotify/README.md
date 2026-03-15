@@ -1,16 +1,21 @@
 # spotify
 
-![Version: 0.29.0](https://img.shields.io/badge/Version-0.29.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.9](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
+![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.9](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
 
 A Helm chart for a self-hosted Spotify server and client
 
-**Homepage:** <https://github.com/spotify>
+**Homepage:** <https://github.com/Yooooomi/your_spotify>
 
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
 | HomeOpsHub |  | <https://github.com/HomeOpsHub> |
+
+## Source Code
+
+* <https://github.com/Yooooomi/your_spotify>
+* <https://github.com/linuxserver/docker-your_spotify>
 
 ## Values
 

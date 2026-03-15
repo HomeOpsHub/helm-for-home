@@ -2,9 +2,12 @@ apiVersion: v2
 name: spotify
 description: A Helm chart for a self-hosted Spotify server and client
 type: application
-version: 0.29.0
+version: 0.30.0
 appVersion: "1.9"
-home: https://github.com/spotify
+home: https://github.com/Yooooomi/your_spotify
+sources:
+  - https://github.com/Yooooomi/your_spotify
+  - https://github.com/linuxserver/docker-your_spotify
 keywords:
   - spotify
   - music

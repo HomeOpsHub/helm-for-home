@@ -8,10 +8,14 @@ TeslaMate is a self-hosted data logger and visualizer for Tesla vehicles.
 
 {{- if .Values.ingressRoute.enabled }}
   IngressRoute is enabled.
+  {{- if and .Values.ingressRoute.spec.routes (gt (len .Values.ingressRoute.spec.routes) 0) }}
   {{- if .Values.ingressRoute.spec.tls.enabled }}
   Access TeslaMate at: https://{{ (index .Values.ingressRoute.spec.routes 0).match | replace "Host(`" "" | replace "`)" "" }}
   {{- else }}
   Access TeslaMate at: http://{{ (index .Values.ingressRoute.spec.routes 0).match | replace "Host(`" "" | replace "`)" "" }}
+  {{- end }}
+  {{- else }}
+  Access TeslaMate via your configured IngressRoute host.
   {{- end }}
 {{- else }}
   kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "teslamate.fullname" . }} 4000:{{ .Values.service.port }}

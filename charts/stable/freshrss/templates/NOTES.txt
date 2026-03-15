@@ -37,8 +37,8 @@ FreshRSS is a self-hosted RSS and Atom feed aggregator.
     3. Create your admin user with a strong password.
 
   Default credentials (if pre-configured in values):
-    Username: {{ .Values.mariadb.username | default "freshrss" }}
-    Password: (as set in mariadb.password)
+    Username: {{ .Values.mariadb.auth.username | default "freshrss" }}
+    Password: (as set in mariadb.auth.password)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   API Access (for RSS readers)

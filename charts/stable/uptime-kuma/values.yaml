@@ -7,7 +7,8 @@ replicaCount: 1
 image:
   repository: louislam/uptime-kuma
   pullPolicy: IfNotPresent
-  tag: latest
+  # Overrides the image tag. Defaults to the chart appVersion when empty.
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""

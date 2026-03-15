@@ -2,7 +2,7 @@ apiVersion: v2
 name: gotify
 description: A Helm chart for Gotify — a self-hosted push notification server
 type: application
-version: 0.3.0
+version: 0.4.0
 appVersion: "2.6.1"
 home: https://gotify.net
 sources:

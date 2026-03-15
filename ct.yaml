@@ -6,9 +6,6 @@ chart-dirs:
   - charts/stable
   - charts/beta
 
-# Helm linting settings
-lint-conf: lint-conf.yaml
-
 # Target branch for detecting changed charts
 # This is overridden by --target-branch flag in CI
 target-branch: main

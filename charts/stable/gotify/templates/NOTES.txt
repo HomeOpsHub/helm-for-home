@@ -29,7 +29,7 @@ Gotify is a self-hosted push notification server with a simple REST API.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Username: {{ .Values.gotify.defaultuser.name }}
-  Password: {{ .Values.gotify.defaultuser.pass }}
+  Password: (as configured via gotify.defaultuser.pass — retrieve from your values or the Kubernetes Secret)
 
   IMPORTANT: Change the default password immediately after first login via
   the User Management section in the web UI.
