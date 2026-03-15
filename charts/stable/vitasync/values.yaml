@@ -332,6 +332,42 @@ ingress:
     secretName: vitasync-web-tls
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Traefik IngressRoute (alternative to standard Ingress)
+# Set enabled: true and configure routes when using Traefik as your ingress
+# controller. Both the web dashboard and the API can share one IngressRoute
+# with separate Host() match rules.
+# ─────────────────────────────────────────────────────────────────────────────
+ingressRoute:
+  enabled: false
+  namespace: ""
+  annotations: {}
+  entryPoints:
+    - websecure
+  routes:
+    # Web dashboard (Next.js)
+    - match: Host(`app.vitasync.example.com`)
+      kind: Rule
+      middlewares: []
+      services:
+        - name: ""   # leave empty → set to <release>-web at deploy time
+          port: 3000
+    # REST API (Fastify)
+    - match: Host(`api.vitasync.example.com`)
+      kind: Rule
+      middlewares: []
+      services:
+        - name: ""   # leave empty → set to <release>-api at deploy time
+          port: 3001
+  tls:
+    enabled: false
+    secretName: vitasync-tls
+    certResolver: ""
+    domains: []
+    # - main: app.vitasync.example.com
+    #   sans:
+    #     - api.vitasync.example.com
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Service Account
 # ─────────────────────────────────────────────────────────────────────────────
 serviceAccount:
@@ -381,8 +417,30 @@ config:
 #   NEVER commit real secrets to version control.
 # ─────────────────────────────────────────────────────────────────────────────
 secrets:
-  # Name of an existing Secret to use instead of creating one.
+  # Name of a pre-existing Kubernetes Secret to use instead of letting the
+  # chart create one.  The Secret MUST contain ALL of the following keys:
+  #
+  #   DATABASE_URL       postgresql://<user>:<pass>@<host>:<port>/<db>
+  #   REDIS_URL          redis://[:<pass>@]<host>:<port>
+  #   JWT_SECRET         ≥32 random characters  (openssl rand -hex 32)
+  #   ENCRYPTION_KEY     64-char hex string      (openssl rand -hex 32)
+  #   ADMIN_API_KEY      any strong API key
+  #
+  # Optional keys (include only the providers you have registered apps for):
+  #   FITBIT_CLIENT_ID / FITBIT_CLIENT_SECRET
+  #   GARMIN_CONSUMER_KEY / GARMIN_CONSUMER_SECRET
+  #   WITHINGS_CLIENT_ID / WITHINGS_CLIENT_SECRET
+  #   POLAR_CLIENT_ID / POLAR_CLIENT_SECRET
+  #   STRAVA_CLIENT_ID / STRAVA_CLIENT_SECRET
+  #   WHOOP_CLIENT_ID / WHOOP_CLIENT_SECRET
+  #
+  # When existingSecret is set the values below are IGNORED and the chart
+  # will NOT create a Secret resource.
   existingSecret: ""
+
+  # ── Values below are only used when existingSecret is empty ──────────────
+  # The chart will REFUSE to install if these are left at their placeholder
+  # defaults — change them before running `helm install`.
 
   # Minimum 32 random characters — generate with: openssl rand -hex 32
   JWT_SECRET: "change-me-to-a-long-random-string"
