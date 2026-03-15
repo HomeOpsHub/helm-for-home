@@ -12,7 +12,7 @@ permissions:
   packages: write
 
 env:
-  HELM_DOCS_VERSION: "1.11.0"
+  HELM_DOCS_VERSION: "1.14.2"
 
 jobs:
   validate:

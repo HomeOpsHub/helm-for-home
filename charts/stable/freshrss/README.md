@@ -1,6 +1,6 @@
 # freshrss
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.24.3](https://img.shields.io/badge/AppVersion-1.24.3-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.24.3](https://img.shields.io/badge/AppVersion-1.24.3-informational?style=flat-square)
 
 A Helm chart for FreshRSS — a self-hosted RSS and Atom feed aggregator
 
@@ -38,7 +38,7 @@ A Helm chart for FreshRSS — a self-hosted RSS and Atom feed aggregator
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"freshrss/freshrss"` |  |
-| image.tag | string | `"latest"` |  |
+| image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress | object | `{}` |  |
 | ingressRoute.annotations | object | `{}` |  |

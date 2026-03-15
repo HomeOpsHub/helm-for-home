@@ -2,7 +2,7 @@ apiVersion: v2
 name: glances
 description: A Helm chart for Glances — a cross-platform system monitoring tool
 type: application
-version: 0.2.0
+version: 0.3.0
 appVersion: "4.2.1"
 home: https://nicolargo.github.io/glances/
 sources:

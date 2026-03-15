@@ -1,6 +1,6 @@
 # it-tools
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2024.5.13-a0bc346](https://img.shields.io/badge/AppVersion-2024.5.13--a0bc346-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2024.5.13-a0bc346](https://img.shields.io/badge/AppVersion-2024.5.13--a0bc346-informational?style=flat-square)
 
 A Helm chart for IT-Tools — a collection of handy online developer tools
 
@@ -28,7 +28,7 @@ A Helm chart for IT-Tools — a collection of handy online developer tools
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"corentinth/it-tools"` |  |
-| image.tag | string | `"latest"` |  |
+| image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |

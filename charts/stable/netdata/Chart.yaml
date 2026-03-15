@@ -2,7 +2,7 @@ apiVersion: v2
 name: netdata
 description: A Helm chart for Netdata — real-time performance monitoring
 type: application
-version: 0.2.0
+version: 0.3.0
 appVersion: "1.47.5"
 home: https://www.netdata.cloud
 sources:

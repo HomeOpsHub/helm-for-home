@@ -1,8 +1,8 @@
 # custom-error-pages
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.28.0](https://img.shields.io/badge/AppVersion-2.28.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.28.0](https://img.shields.io/badge/AppVersion-2.28.0-informational?style=flat-square)
 
-A Helm chart for tarampampam/error-pages — a beautiful server error response pages
+A Helm chart for tarampampam/error-pages — beautiful server error response pages
 
 **Homepage:** <https://github.com/tarampampam/error-pages>
 
@@ -25,7 +25,7 @@ A Helm chart for tarampampam/error-pages — a beautiful server error response p
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"tarampampam/error-pages"` |  |
-| image.tag | string | `"latest"` |  |
+| image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |

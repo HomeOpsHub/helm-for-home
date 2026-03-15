@@ -2,8 +2,9 @@ replicaCount: 1
 
 image:
   repository: teslamate/teslamate
-  tag: latest
   pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 service:
   type: ClusterIP

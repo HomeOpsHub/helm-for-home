@@ -1,7 +1,8 @@
 image:
   repository: gotify/server
-  tag: "2.1.5"
   pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 service:
   type: ClusterIP

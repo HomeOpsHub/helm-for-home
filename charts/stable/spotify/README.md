@@ -1,6 +1,6 @@
 # spotify
 
-![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.9](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
+![Version: 0.31.0](https://img.shields.io/badge/Version-0.31.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.9](https://img.shields.io/badge/AppVersion-1.9-informational?style=flat-square)
 
 A Helm chart for a self-hosted Spotify server and client
 
@@ -30,7 +30,7 @@ A Helm chart for a self-hosted Spotify server and client
 | fullnameOverride | string | `"spotify"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"lscr.io/linuxserver/your_spotify"` |  |
-| image.tag | string | `"1.6.0"` |  |
+| image.tag | string | `""` |  |
 | nameOverride | string | `"spotify"` |  |
 | replicaCount | int | `1` |  |
 | service.port | int | `8080` |  |

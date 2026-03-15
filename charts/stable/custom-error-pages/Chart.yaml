@@ -1,8 +1,8 @@
 apiVersion: v2
 name: custom-error-pages
-description: A Helm chart for tarampampam/error-pages — a beautiful server error response pages
+description: A Helm chart for tarampampam/error-pages — beautiful server error response pages
 type: application
-version: 0.4.0
+version: 0.5.0
 appVersion: "2.28.0"
 home: https://github.com/tarampampam/error-pages
 sources:

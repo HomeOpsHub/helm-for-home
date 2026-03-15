@@ -1,6 +1,6 @@
 # cloudbeaver
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 24.3.4](https://img.shields.io/badge/AppVersion-24.3.4-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 24.3.4](https://img.shields.io/badge/AppVersion-24.3.4-informational?style=flat-square)
 
 A Helm chart for CloudBeaver — a cloud database manager with web UI
 
@@ -28,7 +28,7 @@ A Helm chart for CloudBeaver — a cloud database manager with web UI
 | extraEnvVars | list | `[]` | ----------------------------------- |
 | extraVolumeMounts | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
-| image | object | `{"pullPolicy":"IfNotPresent","repository":"dbeaver/cloudbeaver","tag":"23.1.3"}` | ----------------------------------- |
+| image | object | `{"pullPolicy":"IfNotPresent","repository":"dbeaver/cloudbeaver","tag":""}` | ----------------------------------- |
 | imagePullSecrets | list | `[]` |  |
 | ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[{"host":"cloudbeaver.example.com","paths":[{"path":"/","pathType":"Prefix"}]}],"tls":[{"hosts":["cloudbeaver.example.com"],"secretName":"cloudbeaver-tls"}]}` | ----------------------------------- |
 | ingressRoute | object | `{"annotations":{},"enabled":false,"entryPoints":["websecure"],"namespace":"","routes":[{"kind":"Rule","match":"Host(`cloudbeaver.example.com`)","middlewares":[],"services":[{"name":"cloudbeaver","port":80}]}]}` | ----------------------------------- |

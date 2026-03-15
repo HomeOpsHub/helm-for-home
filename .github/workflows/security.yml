@@ -50,7 +50,10 @@ jobs:
           for chart in charts/stable/* charts/beta/*; do
             if [ -f "$chart/Chart.yaml" ]; then
               name=$(basename "$chart")
-              helm template "$name" "$chart" > ".rendered/${name}.yaml" 2>/dev/null || true
+              helm template "$name" "$chart" > ".rendered/${name}.yaml" || {
+                echo "WARNING: helm template failed for $chart"
+                rm -f ".rendered/${name}.yaml"
+              }
             fi
           done
 

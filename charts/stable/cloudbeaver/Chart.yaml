@@ -2,7 +2,7 @@ apiVersion: v2
 name: cloudbeaver
 description: A Helm chart for CloudBeaver — a cloud database manager with web UI
 type: application
-version: 0.2.0
+version: 0.3.0
 appVersion: "24.3.4"
 home: https://dbeaver.com/docs/cloudbeaver/
 sources:
