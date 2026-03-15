@@ -1,6 +1,14 @@
-Open Wearables has been deployed!
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
 
-Components:
+Open Wearables is a platform for aggregating and visualizing wearable device data.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Deployed Components
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Release  : {{ .Release.Name }}
+  Namespace: {{ .Release.Namespace }}
+
   - Backend (FastAPI):  {{ .Release.Name }}-backend:{{ .Values.backend.service.port }}
 {{- if .Values.frontend.enabled }}
   - Frontend (React):   {{ .Release.Name }}-frontend:{{ .Values.frontend.service.port }}
@@ -18,28 +26,45 @@ Components:
   - PostgreSQL:         {{ .Release.Name }}-postgresql:{{ .Values.postgresql.service.port }}
 {{- end }}
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Application
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 {{- if .Values.ingressRoute.enabled }}
-
-Access the application via your configured IngressRoute.
+  IngressRoute is enabled. Access via your configured Traefik routes.
 {{- else }}
-
-To access the backend API, run:
-  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-backend {{ .Values.backend.service.port }}:{{ .Values.backend.service.port }}
-
+  Backend API:
+    kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-backend {{ .Values.backend.service.port }}:{{ .Values.backend.service.port }}
+    API:  http://localhost:{{ .Values.backend.service.port }}
+    Docs: http://localhost:{{ .Values.backend.service.port }}/docs
 {{- if .Values.frontend.enabled }}
-To access the frontend UI, run:
-  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-frontend {{ .Values.frontend.service.port }}:{{ .Values.frontend.service.port }}
+
+  Frontend UI:
+    kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-frontend {{ .Values.frontend.service.port }}:{{ .Values.frontend.service.port }}
+    Web: http://localhost:{{ .Values.frontend.service.port }}
 {{- end }}
 {{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Database
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 {{- if .Values.postgresql.enabled }}
-
-NOTE: This chart is deploying its own PostgreSQL instance.
-      To use an external database instead, set postgresql.enabled=false
-      and configure the externalPostgresql section in your values file.
+  Bundled PostgreSQL is ENABLED.
+  To use an external database instead, set postgresql.enabled=false
+  and configure externalPostgresql in your values file.
 {{- else }}
-
-NOTE: This chart expects an external PostgreSQL database.
-      Configure connection details under `externalPostgresql` in your values file.
-      To deploy PostgreSQL as part of this chart, set postgresql.enabled=true.
+  Using an EXTERNAL PostgreSQL database.
+  Ensure connection details are set under externalPostgresql in your values file.
+  To deploy a bundled PostgreSQL instance, set postgresql.enabled=true.
 {{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  View all pod logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }} --prefix -f
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}

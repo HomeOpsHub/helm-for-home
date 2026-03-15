@@ -1,0 +1,114 @@
+---
+name: Bug Report
+description: Report a problem with an existing chart
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: dropdown
+    id: chart
+    attributes:
+      label: Chart Name
+      description: Which chart are you experiencing the issue with?
+      options:
+        - adguard-home
+        - cloudbeaver
+        - custom-error-pages
+        - freshrss
+        - glances
+        - gotify
+        - it-tools
+        - netdata
+        - open-wearables
+        - outline
+        - plex
+        - spotify
+        - teslamate
+        - uptime-kuma
+        - vitasync
+        - whoogle
+        - beta/plex
+        - beta/teslamate
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: chart-version
+    attributes:
+      label: Chart Version
+      description: The version of the chart (`helm list` output or `Chart.yaml`)
+      placeholder: "e.g., 0.10.0"
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App Version
+      description: The version of the application being deployed
+      placeholder: "e.g., 0.107.57"
+
+  - type: input
+    id: k8s-version
+    attributes:
+      label: Kubernetes Version
+      description: Output of `kubectl version --short`
+      placeholder: "e.g., v1.28.5"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. helm install ... --set ...
+        2. kubectl get pods ...
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: values
+    attributes:
+      label: Custom values.yaml
+      description: Share any custom values used (redact all secrets and passwords)
+      render: yaml
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs
+      description: Pod logs, Helm output, or error messages
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have checked existing issues and this is not a duplicate
+          required: true
+        - label: I have redacted all secrets and sensitive information
+          required: true

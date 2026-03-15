@@ -12,3 +12,20 @@ updates:
     commit-message:
       prefix: "ci"
     open-pull-requests-limit: 5
+
+  # Keep Docker image references in workflow files up to date
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "chore"
+    open-pull-requests-limit: 5
+    ignore:
+      # Ignore major version bumps (review manually)
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]

@@ -9,21 +9,27 @@ on:
       - "charts/**/values.yaml"
       - "charts/**/templates/**"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
-  contents: write
+  contents: read
 
 env:
-  HELM_DOCS_VERSION: "1.11.0"
+  HELM_DOCS_VERSION: "1.14.2"
 
 jobs:
   generate-docs:
-    name: Auto-generate Chart READMEs
+    name: Verify Chart READMEs are up to date
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: Install helm-docs
@@ -37,18 +43,11 @@ jobs:
         run: |
           find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs
 
-      - name: Check for changes
-        id: changes
+      - name: Check for uncommitted documentation changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "::error::Chart README files are out of date. Run 'helm-docs' locally and commit the changes."
+            git diff --name-only
+            exit 1
           fi
-
-      - name: Commit updated docs
-        if: steps.changes.outputs.changed == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "charts/**/README.md"
-          git commit -m "docs: auto-generate chart documentation"
-          git push
+          echo "All chart documentation is up to date."

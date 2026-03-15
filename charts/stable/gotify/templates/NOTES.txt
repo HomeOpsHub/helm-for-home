@@ -1,18 +1,74 @@
-Gotify has been installed!
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
 
-To access Gotify:
+Gotify is a self-hosted push notification server with a simple REST API.
 
-1. Port-forward:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Web UI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-   kubectl port-forward svc/{{ include "gotify.fullname" . }} 8080:{{ .Values.service.port }}
+{{- if .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+    {{- range $path := $host.paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path.path }}
+    {{- end }}
+  {{- end }}
+{{- else if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "gotify.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "Web UI: http://$NODE_IP:$NODE_PORT"
+{{- else if contains "LoadBalancer" .Values.service.type }}
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "gotify.fullname" . }}
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "gotify.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo "Web UI: http://$SERVICE_IP:{{ .Values.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "gotify.fullname" . }} 8080:{{ .Values.service.port }}
+  Web UI: http://localhost:8080
+{{- end }}
 
-   Access it at: http://localhost:8080
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Default Admin Credentials
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-2. If Ingress is enabled, access it via the configured host:
+  Username: {{ .Values.gotify.defaultuser.name }}
+  Password: (as configured via gotify.defaultuser.pass — retrieve from your values or the Kubernetes Secret)
 
-   http://{{ (index .Values.ingress.hosts 0).host }}
+  IMPORTANT: Change the default password immediately after first login via
+  the User Management section in the web UI.
 
-Default admin credentials:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Getting Started
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-- Username: {{ .Values.gotify.defaultuser.name }}
-- Password: {{ .Values.gotify.defaultuser.pass }}
+  1. Log in with the admin credentials above.
+  2. Create an Application to receive a token for sending messages.
+  3. Create a Client to receive push notifications (e.g., the Gotify Android app).
+  4. Send a test message using the API:
+
+     curl -X POST "http://<gotify-host>/message?token=<APP_TOKEN>" \
+       -F "title=Hello" \
+       -F "message=Test notification from Gotify" \
+       -F "priority=5"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Persistence
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.persistence.enabled }}
+  Persistent storage is ENABLED (SQLite database and uploaded images are retained).
+{{- else }}
+  WARNING: Persistence is DISABLED. All data will be lost on pod restart.
+  Set persistence.enabled=true to retain messages, apps, and users.
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://gotify.net/docs/

@@ -1,22 +1,59 @@
-1. Get the application URL by running these commands:
-{{- if .Values.ingress.enabled }}
-{{- range $host := .Values.ingress.hosts }}
-  {{- range .paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
-  {{- end }}
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+Custom Error Pages provides styled HTTP error responses for use with Traefik
+or other ingress controllers that support custom error backends.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Service Endpoint
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Release  : {{ .Release.Name }}
+  Namespace: {{ .Release.Namespace }}
+  Service  : {{ include "custom-error-pages.fullname" . }}:{{ .Values.service.port }}
+
+{{- if contains "ClusterIP" .Values.service.type }}
+  This service is of type ClusterIP and is intended to be used as a backend
+  by an ingress controller — not accessed directly by end users.
 {{- end }}
-{{- else if contains "NodePort" .Values.service.type }}
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "custom-error-pages.fullname" . }})
-  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
-{{- else if contains "LoadBalancer" .Values.service.type }}
-     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch its status by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "custom-error-pages.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "custom-error-pages.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  echo http://$SERVICE_IP:{{ .Values.service.port }}
-{{- else if contains "ClusterIP" .Values.service.type }}
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "custom-error-pages.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
-  export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
-  echo "Visit http://127.0.0.1:8080 to use your application"
-  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
-{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Integrating with Traefik
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Configure a Traefik Middleware to forward HTTP errors to this service:
+
+    apiVersion: traefik.io/v1alpha1
+    kind: Middleware
+    metadata:
+      name: error-pages
+      namespace: {{ .Release.Namespace }}
+    spec:
+      errors:
+        status:
+          - "400-599"
+        query: "/{status}.html"
+        service:
+          name: {{ include "custom-error-pages.fullname" . }}
+          port: {{ .Values.service.port }}
+
+  Then reference that middleware in your IngressRoute:
+    middlewares:
+      - name: error-pages
+        namespace: {{ .Release.Namespace }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Testing the Error Pages
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Port-forward and preview an error page directly:
+    kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "custom-error-pages.fullname" . }} 8080:{{ .Values.service.port }}
+    curl -s http://localhost:8080/404.html | head -20
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://github.com/tarampampam/error-pages

@@ -7,7 +7,8 @@ replicaCount: 1
 image:
   repository: louislam/uptime-kuma
   pullPolicy: IfNotPresent
-  tag: latest
+  # Overrides the image tag. Defaults to the chart appVersion when empty.
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -68,6 +69,26 @@ persistence:
     - ReadWriteOnce
   size: 1Gi
   mountPath: /app/data
+
+# Liveness probe configuration. Adjust or set to {} to disable.
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# Readiness probe configuration. Adjust or set to {} to disable.
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

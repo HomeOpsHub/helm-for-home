@@ -1,0 +1,26 @@
+# chart-testing (ct) configuration
+# https://github.com/helm/chart-testing
+
+# Chart directories to search
+chart-dirs:
+  - charts/stable
+  - charts/beta
+
+# Target branch for detecting changed charts
+# This is overridden by --target-branch flag in CI
+target-branch: main
+
+# Validate chart versions are incremented for every change
+check-version-increment: true
+
+# Validate chart schema
+validate-chart-schema: true
+
+# Validate maintainers
+validate-maintainers: false
+
+# Remote chart repository URL for installing dependencies
+# Uncomment and set if your charts have external dependencies
+# helm-repo-extra-args:
+#   - "--repository-config"
+#   - ""

@@ -1,6 +1,20 @@
 apiVersion: v2
 name: spotify
-description: A Helm chart for deploying Spotify server and client
+description: A Helm chart for a self-hosted Spotify server and client
 type: application
-version: 0.28.0
-appVersion: "1.0"
+version: 0.31.0
+appVersion: "1.9"
+home: https://github.com/Yooooomi/your_spotify
+sources:
+  - https://github.com/Yooooomi/your_spotify
+  - https://github.com/linuxserver/docker-your_spotify
+keywords:
+  - spotify
+  - music
+  - streaming
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

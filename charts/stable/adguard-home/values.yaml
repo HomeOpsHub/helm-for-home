@@ -6,8 +6,9 @@ replicaCount: 1
 
 image:
   repository: adguard/adguardhome
-  tag: "latest"
   pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -92,7 +93,7 @@ ingressRoute:
     entrypoints: []
     routes: []
     tls:
-      enabled: fal
+      enabled: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

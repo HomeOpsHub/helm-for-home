@@ -1,12 +1,20 @@
 apiVersion: v2
 name: glances
-description: A Helm chart for Glances system monitoring tool
-version: 0.1.0
-appVersion: "latest"
+description: A Helm chart for Glances — a cross-platform system monitoring tool
+type: application
+version: 0.3.0
+appVersion: "4.2.1"
+home: https://nicolargo.github.io/glances/
+sources:
+  - https://github.com/nicolargo/glances
 keywords:
   - glances
   - monitoring
   - system
   - performance
-sources:
-  - https://github.com/nicolargo/glances
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Monitoring

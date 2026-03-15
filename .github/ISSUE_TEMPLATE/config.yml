@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussion / Q&A
+    url: https://github.com/HomeOpsHub/helm-for-home/discussions
+    about: Ask questions, share ideas, and discuss usage.
+  - name: Helm Documentation
+    url: https://helm.sh/docs/
+    about: Official Helm documentation.
