@@ -396,8 +396,11 @@ config:
   RATE_LIMIT_WINDOW_MS: "60000"
   # Base URL the API is publicly reachable at — used to build OAuth callback URLs
   OAUTH_REDIRECT_BASE_URL: ""
-  # Public URL of the API that the browser-side Next.js app talks to
-  NEXT_PUBLIC_API_URL: ""
+  # Internal (server-side) URL the Next.js proxy route handler uses to reach
+  # the API. Never exposed to the browser — no build-time baking required.
+  # In K8s this is the ClusterIP service name; in docker-compose it's the
+  # service name on the shared network.
+  INTERNAL_API_URL: "http://vitasync-api:3001"
   # Slug of the admin workspace auto-created on first boot
   ADMIN_WORKSPACE_SLUG: "default"
   # Database connection pool limits
