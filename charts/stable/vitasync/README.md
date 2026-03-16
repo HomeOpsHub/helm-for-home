@@ -1,6 +1,6 @@
 # vitasync
 
-![Version: 0.2.6](https://img.shields.io/badge/Version-0.2.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2](https://img.shields.io/badge/AppVersion-0.2-informational?style=flat-square)
+![Version: 0.2.7](https://img.shields.io/badge/Version-0.2.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2](https://img.shields.io/badge/AppVersion-0.2-informational?style=flat-square)
 
 A Helm chart for deploying VitaSync — a self-hosted wearable health data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
 
@@ -65,6 +65,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | config.HOST | string | `"0.0.0.0"` |  |
 | config.INTERNAL_API_URL | string | `"http://vitasync-api:3001"` |  |
 | config.LOG_LEVEL | string | `"info"` |  |
+| config.NEXT_PUBLIC_API_URL | string | `""` |  |
 | config.NODE_ENV | string | `"production"` |  |
 | config.OAUTH_REDIRECT_BASE_URL | string | `""` |  |
 | config.PORT | string | `"3001"` |  |

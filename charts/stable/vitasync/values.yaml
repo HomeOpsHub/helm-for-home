@@ -401,6 +401,10 @@ config:
   # In K8s this is the ClusterIP service name; in docker-compose it's the
   # service name on the shared network.
   INTERNAL_API_URL: "http://vitasync-api:3001"
+  # Public-facing API URL baked into the Next.js bundle at build time for
+  # client-side calls. Falls back in the proxy route if INTERNAL_API_URL is
+  # not set. e.g. https://api.vitasync.example.com
+  NEXT_PUBLIC_API_URL: ""
   # Slug of the admin workspace auto-created on first boot
   ADMIN_WORKSPACE_SLUG: "default"
   # Database connection pool limits
