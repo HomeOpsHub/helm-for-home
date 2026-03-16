@@ -25,6 +25,27 @@ spec:
         runAsNonRoot: true
         runAsUser: 1001
         fsGroup: 1001
+      initContainers:
+        - name: wait-for-postgres
+          image: "{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
+          imagePullPolicy: {{ .Values.postgresql.image.pullPolicy }}
+          command:
+            - sh
+            - -c
+            - |
+              until pg_isready \
+                -h {{ include "vitasync.postgresqlHost" . }} \
+                -p {{ include "vitasync.postgresqlPort" . }} \
+                -U {{ include "vitasync.postgresqlUsername" . }}; do
+                echo "Waiting for PostgreSQL to be ready...";
+                sleep 2;
+              done;
+              echo "PostgreSQL is ready."
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
       containers:
         - name: migrate
           image: {{ include "vitasync.migrations.image" . }}

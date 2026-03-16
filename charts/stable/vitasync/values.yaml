@@ -139,6 +139,10 @@ web:
   enabled: true
   replicaCount: 1
 
+  # -- Hostname the Next.js standalone server binds to.
+  # Must be 0.0.0.0 in Kubernetes so liveness/readiness probes can reach the container.
+  hostname: "0.0.0.0"
+
   image:
     repository: ghcr.io/biosync-io/vitasync-web
     tag: ""
@@ -221,7 +225,7 @@ migrations:
 
   # Helm hook annotations — compatible with ArgoCD / Flux
   annotations:
-    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-weight: "-5"
     helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
 
@@ -374,7 +378,7 @@ serviceAccount:
   create: true
   automount: false
   annotations: {}
-  name: "vistasync"
+  name: ""
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Non-sensitive application configuration

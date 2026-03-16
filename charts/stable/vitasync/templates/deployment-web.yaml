@@ -40,10 +40,14 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "vitasync.configMapName" . }}
-          {{- with .Values.web.extraEnv }}
           env:
+            - name: HOSTNAME
+              value: {{ .Values.web.hostname | quote }}
+            - name: PORT
+              value: {{ .Values.web.service.port | quote }}
+            {{- with .Values.web.extraEnv }}
             {{- toYaml . | nindent 12 }}
-          {{- end }}
+            {{- end }}
           livenessProbe:
             {{- toYaml .Values.web.livenessProbe | nindent 12 }}
           readinessProbe:

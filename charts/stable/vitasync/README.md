@@ -1,6 +1,6 @@
 # vitasync
 
-![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2](https://img.shields.io/badge/AppVersion-0.2-informational?style=flat-square)
+![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2](https://img.shields.io/badge/AppVersion-0.2-informational?style=flat-square)
 
 A Helm chart for deploying VitaSync — a self-hosted wearable health data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
 
@@ -108,7 +108,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | ingressRoute.tls.domains | list | `[]` |  |
 | ingressRoute.tls.enabled | bool | `false` |  |
 | ingressRoute.tls.secretName | string | `"vitasync-tls"` |  |
-| migrations.annotations."helm.sh/hook" | string | `"pre-install,pre-upgrade"` |  |
+| migrations.annotations."helm.sh/hook" | string | `"post-install,post-upgrade"` |  |
 | migrations.annotations."helm.sh/hook-delete-policy" | string | `"before-hook-creation,hook-succeeded"` |  |
 | migrations.annotations."helm.sh/hook-weight" | string | `"-5"` |  |
 | migrations.enabled | bool | `true` |  |
@@ -169,7 +169,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.automount | bool | `false` |  |
 | serviceAccount.create | bool | `true` |  |
-| serviceAccount.name | string | `"vistasync"` |  |
+| serviceAccount.name | string | `""` |  |
 | web.affinity | object | `{}` |  |
 | web.autoscaling.enabled | bool | `false` |  |
 | web.autoscaling.maxReplicas | int | `5` |  |
@@ -177,6 +177,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | web.autoscaling.targetCPUUtilizationPercentage | int | `70` |  |
 | web.enabled | bool | `true` |  |
 | web.extraEnv | list | `[]` |  |
+| web.hostname | string | `"0.0.0.0"` | Hostname the Next.js standalone server binds to. Must be 0.0.0.0 in Kubernetes so liveness/readiness probes can reach the container. |
 | web.image.pullPolicy | string | `"IfNotPresent"` |  |
 | web.image.repository | string | `"ghcr.io/biosync-io/vitasync-web"` |  |
 | web.image.tag | string | `""` |  |
