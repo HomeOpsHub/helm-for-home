@@ -2,8 +2,8 @@ apiVersion: v2
 name: vitasync
 description: A Helm chart for deploying VitaSync — a self-hosted wearable health data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
 type: application
-version: 0.2.3
-appVersion: "0.2.0"
+version: 0.2.4
+appVersion: "0.2"
 home: https://github.com/biosync-io/vitasync
 sources:
   - https://github.com/biosync-io/vitasync

@@ -29,7 +29,7 @@ spec:
         - name: migrate
           image: {{ include "vitasync.migrations.image" . }}
           imagePullPolicy: {{ .Values.migrations.image.pullPolicy }}
-          command: ["node", "--import", "tsx/esm", "src/migrate.ts"]
+          command: ["node", "apps/api/dist/migrate.js"]
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

@@ -1,10 +1,10 @@
 # vitasync
 
-![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
+![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2](https://img.shields.io/badge/AppVersion-0.2-informational?style=flat-square)
 
 A Helm chart for deploying VitaSync — a self-hosted wearable health data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
 
-**Homepage:** <https://github.com/HomeOpsHub/vitasync>
+**Homepage:** <https://github.com/biosync-io/vitasync>
 
 ## Maintainers
 
@@ -14,7 +14,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 
 ## Source Code
 
-* <https://github.com/HomeOpsHub/vitasync>
+* <https://github.com/biosync-io/vitasync>
 
 ## Values
 
@@ -28,7 +28,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | api.enabled | bool | `true` |  |
 | api.extraEnv | list | `[]` |  |
 | api.image.pullPolicy | string | `"IfNotPresent"` |  |
-| api.image.repository | string | `"ghcr.io/homeophub/vitasync-api"` |  |
+| api.image.repository | string | `"ghcr.io/biosync-io/vitasync-api"` |  |
 | api.image.tag | string | `""` |  |
 | api.livenessProbe.failureThreshold | int | `3` |  |
 | api.livenessProbe.httpGet.path | string | `"/health"` |  |
@@ -109,11 +109,11 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | ingressRoute.tls.enabled | bool | `false` |  |
 | ingressRoute.tls.secretName | string | `"vitasync-tls"` |  |
 | migrations.annotations."helm.sh/hook" | string | `"pre-install,pre-upgrade"` |  |
-| migrations.annotations."helm.sh/hook-delete-policy" | string | `"hook-succeeded"` |  |
+| migrations.annotations."helm.sh/hook-delete-policy" | string | `"before-hook-creation,hook-succeeded"` |  |
 | migrations.annotations."helm.sh/hook-weight" | string | `"-5"` |  |
 | migrations.enabled | bool | `true` |  |
 | migrations.image.pullPolicy | string | `"IfNotPresent"` |  |
-| migrations.image.repository | string | `"ghcr.io/homeophub/vitasync-api"` |  |
+| migrations.image.repository | string | `"ghcr.io/biosync-io/vitasync-api"` |  |
 | migrations.image.tag | string | `""` |  |
 | migrations.resources.limits.cpu | string | `"200m"` |  |
 | migrations.resources.limits.memory | string | `"256Mi"` |  |
@@ -169,7 +169,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.automount | bool | `false` |  |
 | serviceAccount.create | bool | `true` |  |
-| serviceAccount.name | string | `""` |  |
+| serviceAccount.name | string | `"vistasync"` |  |
 | web.affinity | object | `{}` |  |
 | web.autoscaling.enabled | bool | `false` |  |
 | web.autoscaling.maxReplicas | int | `5` |  |
@@ -178,7 +178,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | web.enabled | bool | `true` |  |
 | web.extraEnv | list | `[]` |  |
 | web.image.pullPolicy | string | `"IfNotPresent"` |  |
-| web.image.repository | string | `"ghcr.io/homeophub/vitasync-web"` |  |
+| web.image.repository | string | `"ghcr.io/biosync-io/vitasync-web"` |  |
 | web.image.tag | string | `""` |  |
 | web.livenessProbe.failureThreshold | int | `3` |  |
 | web.livenessProbe.httpGet.path | string | `"/"` |  |
@@ -216,7 +216,7 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | worker.enabled | bool | `true` |  |
 | worker.extraEnv | list | `[]` |  |
 | worker.image.pullPolicy | string | `"IfNotPresent"` |  |
-| worker.image.repository | string | `"ghcr.io/homeophub/vitasync-worker"` |  |
+| worker.image.repository | string | `"ghcr.io/biosync-io/vitasync-worker"` |  |
 | worker.image.tag | string | `""` |  |
 | worker.nodeSelector | object | `{}` |  |
 | worker.podAnnotations | object | `{}` |  |

@@ -374,7 +374,7 @@ serviceAccount:
   create: true
   automount: false
   annotations: {}
-  name: ""
+  name: "vistasync"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Non-sensitive application configuration
