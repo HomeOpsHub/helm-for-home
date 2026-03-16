@@ -1447,6 +1447,40 @@ entries:
       category: Health
     apiVersion: v2
     appVersion: "0.2"
+    created: "2026-03-16T16:20:29.730164451Z"
+    description: A Helm chart for deploying VitaSync — a self-hosted wearable health
+      data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
+    digest: 46e976a48fb75819e010059bd6b0c760ef1a0f4e638e9944cc4b57a464e8506d
+    home: https://github.com/biosync-io/vitasync
+    keywords:
+    - health
+    - wearables
+    - fitness
+    - self-hosted
+    - fitbit
+    - garmin
+    - strava
+    - whoop
+    - withings
+    - polar
+    - quantified-self
+    - fastify
+    - nextjs
+    - bullmq
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: vitasync
+    sources:
+    - https://github.com/biosync-io/vitasync
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/vitasync-0.2.5/vitasync-0.2.5.tgz
+    version: 0.2.5
+  - annotations:
+      category: Health
+    apiVersion: v2
+    appVersion: "0.2"
     created: "2026-03-16T06:16:44.675034335Z"
     description: A Helm chart for deploying VitaSync — a self-hosted wearable health
       data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
@@ -1649,4 +1683,4 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-16T06:16:44.675307436Z"
+generated: "2026-03-16T16:20:29.730548487Z"
