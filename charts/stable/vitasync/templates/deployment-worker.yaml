@@ -28,6 +28,33 @@ spec:
       serviceAccountName: {{ include "vitasync.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.worker.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: wait-for-migrations
+          image: "{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
+          imagePullPolicy: {{ .Values.postgresql.image.pullPolicy }}
+          command:
+            - sh
+            - -c
+            - |
+              until psql "$DATABASE_URL" \
+                --no-psqlrc --no-readline \
+                -c "SELECT 1 FROM provider_connections LIMIT 0" \
+                >/dev/null 2>&1; do
+                echo "Waiting for database schema migrations to complete...";
+                sleep 5;
+              done;
+              echo "Database schema is ready."
+          envFrom:
+            - secretRef:
+                name: {{ include "vitasync.secretName" . }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
       containers:
         - name: worker
           image: {{ include "vitasync.worker.image" . }}
