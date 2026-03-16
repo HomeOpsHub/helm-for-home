@@ -2,7 +2,8 @@ name: Release Charts
 
 on:
   push:
-    # Trigger when chart version tags are pushed
+    branches:
+      - main
     tags:
       - '*'
   workflow_dispatch:
