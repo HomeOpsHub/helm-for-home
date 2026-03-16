@@ -21,6 +21,9 @@ data:
   # Server-side URL injected at runtime — browser calls /api/v1/* which the
   # Next.js route handler proxies to this address (never baked into the bundle).
   INTERNAL_API_URL: {{ .Values.config.INTERNAL_API_URL | quote }}
+  # Public-facing API URL — fallback used by the proxy route and available
+  # to the Next.js bundle at build time for any client-side API calls.
+  NEXT_PUBLIC_API_URL: {{ .Values.config.NEXT_PUBLIC_API_URL | quote }}
   ADMIN_WORKSPACE_SLUG: {{ .Values.config.ADMIN_WORKSPACE_SLUG | quote }}
   DATABASE_POOL_MIN: {{ .Values.config.DATABASE_POOL_MIN | quote }}
   DATABASE_POOL_MAX: {{ .Values.config.DATABASE_POOL_MAX | quote }}
