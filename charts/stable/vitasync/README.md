@@ -1,6 +1,6 @@
 # vitasync
 
-![Version: 0.2.7](https://img.shields.io/badge/Version-0.2.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2](https://img.shields.io/badge/AppVersion-0.2-informational?style=flat-square)
+![Version: 0.2.9](https://img.shields.io/badge/Version-0.2.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2](https://img.shields.io/badge/AppVersion-0.2-informational?style=flat-square)
 
 A Helm chart for deploying VitaSync — a self-hosted wearable health data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
 
@@ -159,7 +159,6 @@ A Helm chart for deploying VitaSync — a self-hosted wearable health data aggre
 | secrets.GARMIN_CONSUMER_SECRET | string | `""` |  |
 | secrets.GARMIN_WEBHOOK_SECRET | string | `""` |  |
 | secrets.JWT_SECRET | string | `"change-me-to-a-long-random-string"` |  |
-| secrets.NEXT_PUBLIC_DEFAULT_API_KEY | string | `""` |  |
 | secrets.STRAVA_CLIENT_ID | string | `""` |  |
 | secrets.STRAVA_CLIENT_SECRET | string | `""` |  |
 | secrets.STRAVA_WEBHOOK_SECRET | string | `""` |  |
