@@ -53,12 +53,15 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "vitasync.secretName" . }}
-                  key: ADMIN_API_KEY
+                  key: NEXT_PUBLIC_DEFAULT_API_KEY
+            # DEFAULT_API_KEY is the server-side counterpart: readable by the
+            # Next.js Node.js process at runtime (unlike NEXT_PUBLIC_* which
+            # is baked into the bundle at image build time).
             - name: DEFAULT_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ include "vitasync.secretName" . }}
-                  key: ADMIN_API_KEY
+                  key: NEXT_PUBLIC_DEFAULT_API_KEY
             {{- with .Values.web.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
