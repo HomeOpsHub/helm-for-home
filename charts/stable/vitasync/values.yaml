@@ -459,13 +459,12 @@ secrets:
   JWT_SECRET: "change-me-to-a-long-random-string"
   # 64-char hex string (256-bit key) — generate with: openssl rand -hex 32
   ENCRYPTION_KEY: "change-me-32-byte-hex-encoded-key"
-  # Initial admin API key seeded on first boot
+  # Initial admin API key seeded on first boot.
+  # The web dashboard also uses this key as its default credential — do NOT
+  # set NEXT_PUBLIC_DEFAULT_API_KEY to a different value; that key would not
+  # exist in the database and every dashboard request would return 401.
+  # Generate with: openssl rand -hex 20  (then prefix with "vs_live_")
   ADMIN_API_KEY: "vs_live_changeme_for_production"
-  # API key pre-loaded into the Next.js web app as a server-side fallback.
-  # Used when no key is stored in the browser (localStorage). Typically set to
-  # the same value as ADMIN_API_KEY so the dashboard works out of the box.
-  # Generate with: openssl rand -hex 20 (then prefix with "vs_live_")
-  NEXT_PUBLIC_DEFAULT_API_KEY: ""
 
   # Provider OAuth credentials — only the providers you have registered apps for.
   FITBIT_CLIENT_ID: ""

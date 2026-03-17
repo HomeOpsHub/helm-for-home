@@ -45,6 +45,10 @@ spec:
               value: {{ .Values.web.hostname | quote }}
             - name: PORT
               value: {{ .Values.web.service.port | quote }}
+            # NEXT_PUBLIC_DEFAULT_API_KEY and DEFAULT_API_KEY both point to
+            # ADMIN_API_KEY — the one key actually seeded into the database.
+            # NEXT_PUBLIC_* is a build-time concept so has no effect in a
+            # pre-built image; DEFAULT_API_KEY is read at runtime by /api/config.
             - name: NEXT_PUBLIC_DEFAULT_API_KEY
               valueFrom:
                 secretKeyRef:
