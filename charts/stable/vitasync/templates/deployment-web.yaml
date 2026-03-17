@@ -45,6 +45,11 @@ spec:
               value: {{ .Values.web.hostname | quote }}
             - name: PORT
               value: {{ .Values.web.service.port | quote }}
+            - name: NEXT_PUBLIC_DEFAULT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "vitasync.secretName" . }}
+                  key: NEXT_PUBLIC_DEFAULT_API_KEY
             {{- with .Values.web.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
