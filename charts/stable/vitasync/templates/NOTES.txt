@@ -18,7 +18,7 @@ Components deployed:
   ✓ Web (Next.js)   — {{ include "vitasync.web.image" . }}
 {{- end }}
 {{- if .Values.migrations.enabled }}
-  ✓ Migration job   — runs as a pre-install/pre-upgrade hook
+  ✓ Migration job   — runs as a post-install/post-upgrade hook
 {{- end }}
 {{- if .Values.postgresql.enabled }}
   ✓ PostgreSQL      — bundled ({{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }})

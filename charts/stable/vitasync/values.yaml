@@ -407,6 +407,8 @@ config:
   NEXT_PUBLIC_API_URL: ""
   # Slug of the admin workspace auto-created on first boot
   ADMIN_WORKSPACE_SLUG: "default"
+  # Minimum number of DB connections in the pool (postgres.js `min` option)
+  DATABASE_POOL_MIN: "2"
   # Maximum number of DB connections in the pool (postgres.js `max` option)
   DATABASE_POOL_MAX: "20"
 
@@ -441,11 +443,13 @@ secrets:
   #   GARMIN_CONSUMER_KEY / GARMIN_CONSUMER_SECRET
   #   STRAVA_CLIENT_ID / STRAVA_CLIENT_SECRET
   #   WHOOP_CLIENT_ID / WHOOP_CLIENT_SECRET
+  #   WITHINGS_CLIENT_ID / WITHINGS_CLIENT_SECRET
   #
   # Optional per-provider inbound webhook secrets:
   #   FITBIT_WEBHOOK_SECRET
   #   GARMIN_WEBHOOK_SECRET
   #   STRAVA_WEBHOOK_SECRET
+  #   WHOOP_WEBHOOK_SECRET
   #
   # When existingSecret is set the values below are IGNORED and the chart
   # will NOT create a Secret resource.
@@ -475,6 +479,8 @@ secrets:
   STRAVA_CLIENT_SECRET: ""
   WHOOP_CLIENT_ID: ""
   WHOOP_CLIENT_SECRET: ""
+  WITHINGS_CLIENT_ID: ""
+  WITHINGS_CLIENT_SECRET: ""
 
   # Per-provider inbound webhook secrets — used to verify HMAC signatures on
   # push notifications from the provider to POST /v1/inbound/:providerId/webhook.
@@ -483,3 +489,4 @@ secrets:
   FITBIT_WEBHOOK_SECRET: ""
   GARMIN_WEBHOOK_SECRET: ""
   STRAVA_WEBHOOK_SECRET: ""
+  WHOOP_WEBHOOK_SECRET: ""
