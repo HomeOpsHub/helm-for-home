@@ -1,0 +1,122 @@
+# -- Values passed through to the upstream headlamp subchart.
+# Full list of available values: https://github.com/kubernetes-sigs/headlamp/tree/main/charts/headlamp
+headlamp:
+  # -- Number of pod replicas
+  replicaCount: 1
+
+  image:
+    # -- Container image repository
+    repository: ghcr.io/headlamp-k8s/headlamp
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+    # -- Overrides the image tag (defaults to chart appVersion)
+    tag: ""
+
+  # -- Init container to copy the Headlamp plugins dir
+  initContainers: []
+
+  # -- Headlamp configuration passed via env vars / CLI args
+  # Ref: https://headlamp.dev/docs/latest/installation/in-cluster
+  config:
+    # -- Base URL path to serve Headlamp at (e.g. /headlamp)
+    baseURL: ""
+    # -- OIDC client ID
+    oidcClientID: ""
+    # -- OIDC client secret
+    oidcClientSecret: ""
+    # -- OIDC issuer URL
+    oidcIdpIssuerURL: ""
+    # -- OIDC scopes
+    oidcScopes: ""
+
+  serviceAccount:
+    # -- Create a service account for Headlamp
+    create: true
+    # -- Annotations for the service account
+    annotations: {}
+    # -- Service account name override; generated from fullname if empty
+    name: ""
+
+  clusterRoleBinding:
+    # -- Create a ClusterRoleBinding giving Headlamp cluster-admin access
+    create: true
+    # -- Annotations for the ClusterRoleBinding
+    annotations: {}
+
+  service:
+    # -- Service type
+    type: ClusterIP
+    # -- Service port
+    port: 4466
+
+  ingress:
+    # -- Disable the upstream ingress — we use Traefik IngressRoute instead
+    enabled: false
+    className: ""
+    annotations: {}
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  podAnnotations: {}
+  podLabels: {}
+  podSecurityContext: {}
+  securityContext: {}
+
+  # -- Persistent volume for plugins
+  persistentVolumeClaim:
+    # -- Enable a PVC for Headlamp plugin storage
+    enabled: false
+    accessModes:
+      - ReadWriteOnce
+    storageClassName: ""
+    size: 256Mi
+
+# -- Traefik IngressRoute — this repo's standard pattern.
+# The service name is derived from your Helm release name.
+# If your release is "my-headlamp", the upstream service will be named
+# "my-headlamp-headlamp" (or "my-headlamp" if the release contains "headlamp").
+# Set ingressRoute.spec.routes[].services[].name accordingly.
+ingressRoute:
+  # -- Enable Traefik IngressRoute
+  enabled: false
+  metadata:
+    # -- Override for the IngressRoute resource name (defaults to release name)
+    name: ""
+    # -- Override for the IngressRoute namespace (defaults to release namespace)
+    namespace: ""
+    # -- Annotations for the IngressRoute resource
+    annotations: {}
+  spec:
+    # -- Traefik entrypoints to bind (e.g. websecure, web)
+    entrypoints:
+      - websecure
+    # -- Routing rules
+    routes:
+      - match: Host(`headlamp.example.com`)
+        kind: Rule
+        services:
+          # -- Must match the upstream service name: <release-name>-headlamp
+          # or <release-name> if the release name already contains "headlamp"
+          - name: my-headlamp-headlamp
+            port: 4466
+    tls:
+      # -- Enable TLS on the IngressRoute
+      enabled: true
+      # -- TLS secret name (leave empty to use Traefik's default cert)
+      secretName: ""
