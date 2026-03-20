@@ -68,6 +68,7 @@ Production-ready charts that have been tested and validated.
 | [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
 | [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
 | [plex](charts/stable/plex) | Plex Media Server |
+| [portainer](charts/stable/portainer) | Portainer - container management UI |
 | [radarr](charts/stable/radarr) | Radarr - movie collection manager |
 | [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
 | [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |
