@@ -1,10 +1,10 @@
 Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
 
-Tautulli is a monitoring and statistics tool for Plex Media Server,
-providing detailed analytics on your media library and user activity.
+Sonarr is a PVR for Usenet and BitTorrent users that automatically
+monitors, downloads, and manages your TV show library.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Accessing Tautulli
+  Accessing Sonarr
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 {{- if .Values.ingress.enabled }}
@@ -14,46 +14,38 @@ providing detailed analytics on your media library and user activity.
     {{- end }}
   {{- end }}
 {{- else if contains "NodePort" .Values.service.type }}
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "tautulli.fullname" . }})
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "sonarr.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo "Tautulli: http://$NODE_IP:$NODE_PORT"
+  echo "Sonarr: http://$NODE_IP:$NODE_PORT"
 {{- else if contains "LoadBalancer" .Values.service.type }}
   NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "tautulli.fullname" . }}
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "tautulli.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "tautulli.fullname" . }} --template "{{""}}{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}{{""}}")
-  echo "Tautulli: http://$SERVICE_IP:{{ .Values.service.port }}"
+        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "sonarr.fullname" . }}
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "sonarr.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo "Sonarr: http://$SERVICE_IP:{{ .Values.service.port }}"
 {{- else }}
-  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "tautulli.fullname" . }} 8181:{{ .Values.service.port }}
-  Tautulli: http://localhost:8181
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "sonarr.fullname" . }} 8989:{{ .Values.service.port }}
+  Sonarr: http://localhost:8989
 {{- end }}
 
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Getting Started
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
------------------------------------------------
-  Getting Started
------------------------------------------------
 
-  1. Open the Tautulli web interface in your browser.
-  2. Follow the setup wizard to connect to your Plex Media Server.
-  3. Configure notification agents (email, Discord, Slack, etc.).
-  4. Explore viewing history, statistics, and graphs.
-
+  1. Open the Sonarr web UI in your browser.
+  2. Configure your download client (SABnzbd, NZBGet, qBittorrent, etc.).
+  3. Add an indexer (Newznab, Torznab, etc.).
+  4. Set your root folder for TV shows.
+  5. Start adding series to monitor and download automatically.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Persistence
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
------------------------------------------------
-  Persistence
------------------------------------------------
 
 {{- if .Values.persistence.config.enabled }}
   Persistent storage is ENABLED (configuration and database are retained).
 {{- else }}
-  WARNING: Persistence is DISABLED. All data will be lost on pod restart.
-  Set persistence.config.enabled=true to retain your configuration and history.
+  WARNING: Persistence is DISABLED. All configuration will be lost on pod restart.
+  Set persistence.config.enabled=true to retain your Sonarr configuration.
 {{- end }}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -66,4 +58,4 @@ providing detailed analytics on your media library and user activity.
   View logs:
     kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
 
-  Docs: https://tautulli.com
+  Docs: https://wiki.servarr.com/sonarr

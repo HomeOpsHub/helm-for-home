@@ -10,6 +10,12 @@
 
 ## Migration Progress
 
+- [x] **Bazarr** (subtitle management) — migrated to `charts/stable/bazarr` (branch: `bazarr`)
+- [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
+- [x] **Tautulli** (Plex monitoring) — migrated to `charts/stable/tautulli` (branch: `tautulli`)
+- [x] **Sonarr** (TV show management) — migrated to `charts/stable/sonarr` (branch: `sonarr`)
+- [x] **Prowlarr** (indexer manager) — migrated to `charts/stable/prowlarr` (branch: `prowlarr`)
+- [x] **Overseerr** (media requests) — migrated to `charts/stable/overseerr` (branch: `overseerr`)
 - [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
 - [x] **Overseerr** (media requests) — migrated to `charts/stable/overseerr` (branch: `overseerr`)
 - [x] **Tautulli** (Plex monitoring) — migrated to `charts/stable/tautulli` (branch: `tautulli`)

@@ -20,6 +20,7 @@ Plex, Sonarr, and Radarr to manage your media requests.
 {{- else if contains "LoadBalancer" .Values.service.type }}
   NOTE: It may take a few minutes for the LoadBalancer IP to be available.
         Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "overseerr.fullname" . }}
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "overseerr.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
   export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "overseerr.fullname" . }} --template "{{""}}{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}{{""}}")
   echo "Overseerr: http://$SERVICE_IP:{{ .Values.service.port }}"
 {{- else }}

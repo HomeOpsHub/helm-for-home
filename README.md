@@ -56,6 +56,7 @@ Production-ready charts that have been tested and validated.
 | Chart | Description |
 |-------|-------------|
 | [adguard-home](charts/stable/adguard-home) | AdGuard Home - network-wide ad blocking |
+| [bazarr](charts/stable/bazarr) | Bazarr - automatic subtitle management |
 | [cloudbeaver](charts/stable/cloudbeaver) | CloudBeaver - web-based database manager |
 | [custom-error-pages](charts/stable/custom-error-pages) | Custom error pages (tarampampam/error-pages) |
 | [freshrss](charts/stable/freshrss) | FreshRSS - self-hosted RSS feed aggregator |
@@ -70,6 +71,7 @@ Production-ready charts that have been tested and validated.
 | [overseerr](charts/stable/overseerr) | Overseerr - media request management |
 | [plex](charts/stable/plex) | Plex Media Server |
 | [prowlarr](charts/stable/prowlarr) | Prowlarr - indexer manager for Sonarr/Radarr |
+| [sonarr](charts/stable/sonarr) | Sonarr - TV show management and automation PVR |
 | [radarr](charts/stable/radarr) | Radarr - movie collection manager |
 | [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
 | [tautulli](charts/stable/tautulli) | Tautulli - Plex media server monitoring |
