@@ -1,0 +1,94 @@
+# jellyfin
+
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.10.6](https://img.shields.io/badge/AppVersion-10.10.6-informational?style=flat-square)
+
+A Helm chart for Jellyfin — a free software media system
+
+**Homepage:** <https://jellyfin.org>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| HomeOpsHub |  | <https://github.com/HomeOpsHub> |
+
+## Source Code
+
+* <https://github.com/jellyfin/jellyfin>
+* <https://github.com/linuxserver/docker-jellyfin>
+
+## Description
+
+Jellyfin is a free software media system that puts you in control of managing and streaming your digital media. Originally deployed via [ansible-nas](https://github.com/davestephens/ansible-nas), this chart migrates Jellyfin to a Kubernetes-native Helm deployment.
+
+### Features
+
+- Stream movies, TV shows, music, photos, and more
+- Hardware transcoding support (Intel QSV, NVIDIA NVENC)
+- Flexible media volume mounting (hostPath, PVC, NFS)
+- DLNA server support
+- No tracking, no premium features — completely free
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Pod affinity rules |
+| autoscaling.enabled | bool | `false` | Enable HPA |
+| autoscaling.maxReplicas | int | `3` | Maximum replicas |
+| autoscaling.minReplicas | int | `1` | Minimum replicas |
+| autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization |
+| deviceMounts | list | `[]` | GPU/hardware device pass-through (e.g., /dev/dri/renderD128) |
+| env.PGID | string | `"1000"` | Group ID for file permissions |
+| env.PUID | string | `"1000"` | User ID for file permissions |
+| env.TZ | string | `"UTC"` | Timezone |
+| extraEnv | list | `[]` | Additional environment variables |
+| fullnameOverride | string | `""` | Override the fullname |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.repository | string | `"linuxserver/jellyfin"` |  |
+| image.tag | string | `""` | Overrides the image tag (default is chart appVersion) |
+| imagePullSecrets | list | `[]` | Image pull secrets |
+| ingress.annotations | object | `{}` |  |
+| ingress.className | string | `""` | Ingress class name |
+| ingress.enabled | bool | `false` |  |
+| ingress.hosts[0].host | string | `"jellyfin.local"` |  |
+| ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.tls | list | `[]` |  |
+| ingressRoute.enabled | bool | `false` | Enable Traefik IngressRoute |
+| ingressRoute.metadata.annotations | object | `{}` | IngressRoute annotations |
+| ingressRoute.metadata.name | string | `""` | Override IngressRoute name |
+| ingressRoute.metadata.namespace | string | `""` | Override IngressRoute namespace |
+| ingressRoute.spec.entrypoints | list | `[]` | Traefik entrypoints |
+| ingressRoute.spec.routes | list | `[]` | Traefik routing rules |
+| ingressRoute.spec.tls.certResolver | string | `""` | Cert resolver (e.g. letsencrypt) |
+| ingressRoute.spec.tls.domains | list | `[]` | TLS domain configuration |
+| ingressRoute.spec.tls.enabled | bool | `false` | Enable TLS |
+| ingressRoute.spec.tls.secretName | string | `""` | TLS secret name |
+| livenessProbe | object | httpGet on `/health` port `http` | Liveness probe configuration |
+| mediaVolumes | list | `[]` | Media library volumes (hostPath, PVC, or NFS) |
+| nameOverride | string | `""` | Override the chart name |
+| nodeSelector | object | `{}` | Node selector |
+| persistence.config.accessModes | list | `["ReadWriteOnce"]` | PVC access modes |
+| persistence.config.enabled | bool | `true` | Enable persistent storage for config |
+| persistence.config.size | string | `"5Gi"` | PVC size |
+| persistence.config.storageClass | string | `""` | Storage class name |
+| podAnnotations | object | `{}` | Additional pod annotations |
+| podLabels | object | `{}` | Additional pod labels |
+| podSecurityContext | object | `{}` | Pod-level security context |
+| readinessProbe | object | httpGet on `/health` port `http` | Readiness probe configuration |
+| replicaCount | int | `1` | Number of replicas |
+| resources | object | `{}` | CPU/memory resource requests and limits |
+| securityContext | object | `{}` | Container-level security context |
+| service.port | int | `8096` |  |
+| service.type | string | `"ClusterIP"` |  |
+| serviceAccount.annotations | object | `{}` | ServiceAccount annotations |
+| serviceAccount.automount | bool | `false` | Auto-mount API credentials |
+| serviceAccount.create | bool | `true` | Create a ServiceAccount |
+| serviceAccount.name | string | `""` | ServiceAccount name override |
+| tolerations | list | `[]` | Pod tolerations |
+| volumeMounts | list | `[]` | Additional volume mounts |
+| volumes | list | `[]` | Additional volumes |
+
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.14.2](https://github.com/norwoodj/helm-docs/releases/v1.14.2)

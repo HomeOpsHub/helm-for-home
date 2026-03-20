@@ -63,12 +63,16 @@ Production-ready charts that have been tested and validated.
 | [gotify](charts/stable/gotify) | Gotify - server for sending and receiving messages |
 | [heimdall](charts/stable/heimdall) | Heimdall - application dashboard for your services |
 | [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
+| [jellyfin](charts/stable/jellyfin) | Jellyfin - free software media system |
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
 | [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
 | [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
 | [overseerr](charts/stable/overseerr) | Overseerr - media request management |
 | [plex](charts/stable/plex) | Plex Media Server |
+| [prowlarr](charts/stable/prowlarr) | Prowlarr - indexer manager for Sonarr/Radarr |
+| [radarr](charts/stable/radarr) | Radarr - movie collection manager |
 | [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
+| [tautulli](charts/stable/tautulli) | Tautulli - Plex media server monitoring |
 | [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |
 | [uptime-kuma](charts/stable/uptime-kuma) | Uptime Kuma - self-hosted monitoring tool |
 | [whoogle](charts/stable/whoogle) | Whoogle - self-hosted Google search proxy |

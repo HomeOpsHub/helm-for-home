@@ -12,3 +12,5 @@
 
 - [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
 - [x] **Overseerr** (media requests) — migrated to `charts/stable/overseerr` (branch: `overseerr`)
+- [x] **Tautulli** (Plex monitoring) — migrated to `charts/stable/tautulli` (branch: `tautulli`)
+- [x] **Prowlarr** (indexer manager) — migrated to `charts/stable/prowlarr` (branch: `prowlarr`)

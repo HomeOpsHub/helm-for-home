@@ -1,0 +1,60 @@
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+Tautulli is a monitoring and statistics tool for Plex Media Server,
+providing detailed analytics on your media library and user activity.
+
+-----------------------------------------------
+  Accessing Tautulli
+-----------------------------------------------
+
+{{- if .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+    {{- range $path := $host.paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path }}
+    {{- end }}
+  {{- end }}
+{{- else if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "tautulli.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "Tautulli: http://$NODE_IP:$NODE_PORT"
+{{- else if contains "LoadBalancer" .Values.service.type }}
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "tautulli.fullname" . }}
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "tautulli.fullname" . }} --template "{{""}}{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}{{""}}")
+  echo "Tautulli: http://$SERVICE_IP:{{ .Values.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "tautulli.fullname" . }} 8181:{{ .Values.service.port }}
+  Tautulli: http://localhost:8181
+{{- end }}
+
+-----------------------------------------------
+  Getting Started
+-----------------------------------------------
+
+  1. Open the Tautulli web interface in your browser.
+  2. Follow the setup wizard to connect to your Plex Media Server.
+  3. Configure notification agents (email, Discord, Slack, etc.).
+  4. Explore viewing history, statistics, and graphs.
+
+-----------------------------------------------
+  Persistence
+-----------------------------------------------
+
+{{- if .Values.persistence.config.enabled }}
+  Persistent storage is ENABLED (configuration and database are retained).
+{{- else }}
+  WARNING: Persistence is DISABLED. All data will be lost on pod restart.
+  Set persistence.config.enabled=true to retain your configuration and history.
+{{- end }}
+
+-----------------------------------------------
+  Troubleshooting
+-----------------------------------------------
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://tautulli.com
