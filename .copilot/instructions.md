@@ -11,3 +11,4 @@
 ## Migration Progress
 
 - [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
+- [x] **Overseerr** (media requests) — migrated to `charts/stable/overseerr` (branch: `overseerr`)
