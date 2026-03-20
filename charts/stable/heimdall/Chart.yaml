@@ -1,0 +1,19 @@
+apiVersion: v2
+name: heimdall
+description: A Helm chart for Heimdall — a self-hosted application dashboard
+type: application
+version: 0.1.0
+appVersion: "2.6.1"
+home: https://heimdall.site
+sources:
+  - https://github.com/linuxserver/Heimdall
+keywords:
+  - heimdall
+  - dashboard
+  - homepage
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Dashboard

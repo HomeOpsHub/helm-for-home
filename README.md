@@ -61,6 +61,7 @@ Production-ready charts that have been tested and validated.
 | [freshrss](charts/stable/freshrss) | FreshRSS - self-hosted RSS feed aggregator |
 | [glances](charts/stable/glances) | Glances - system monitoring tool |
 | [gotify](charts/stable/gotify) | Gotify - server for sending and receiving messages |
+| [heimdall](charts/stable/heimdall) | Heimdall - application dashboard for your services |
 | [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
 | [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
