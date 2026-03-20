@@ -79,6 +79,7 @@ Production-ready charts that have been tested and validated.
 | [tautulli](charts/stable/tautulli) | Tautulli - Plex media server monitoring |
 | [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |
 | [uptime-kuma](charts/stable/uptime-kuma) | Uptime Kuma - self-hosted monitoring tool |
+| [transmission](charts/stable/transmission) | Transmission - BitTorrent client |
 | [whoogle](charts/stable/whoogle) | Whoogle - self-hosted Google search proxy |
 
 ### Beta
