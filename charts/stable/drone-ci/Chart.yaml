@@ -1,0 +1,20 @@
+apiVersion: v2
+name: drone-ci
+description: A Helm chart for Drone CI - continuous integration platform
+type: application
+version: 0.1.0
+appVersion: "2.24.0"
+home: https://www.drone.io
+sources:
+  - https://github.com/harness/drone
+keywords:
+  - drone
+  - ci
+  - cd
+  - automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: CI-CD

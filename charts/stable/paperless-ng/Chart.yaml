@@ -1,0 +1,20 @@
+apiVersion: v2
+name: paperless-ng
+description: A Helm chart for Paperless-ngx - document management
+type: application
+version: 0.1.0
+appVersion: "2.14.7"
+home: https://docs.paperless-ngx.com
+sources:
+  - https://github.com/paperless-ngx/paperless-ngx
+keywords:
+  - paperless
+  - documents
+  - ocr
+  - management
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity

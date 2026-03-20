@@ -1,0 +1,20 @@
+apiVersion: v2
+name: silverbullet
+description: A Helm chart for SilverBullet - note-taking and wiki
+type: application
+version: 0.1.0
+appVersion: "0.9.5"
+home: https://silverbullet.md
+sources:
+  - https://github.com/silverbulletmd/silverbullet
+keywords:
+  - silverbullet
+  - notes
+  - wiki
+  - markdown
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity

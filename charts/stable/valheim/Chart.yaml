@@ -1,0 +1,19 @@
+apiVersion: v2
+name: valheim
+description: A Helm chart for Valheim - dedicated game server
+type: application
+version: 0.1.0
+appVersion: "latest"
+home: https://www.valheimgame.com
+sources:
+  - https://github.com/lloesche/valheim-server-docker
+keywords:
+  - valheim
+  - gaming
+  - server
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Gaming

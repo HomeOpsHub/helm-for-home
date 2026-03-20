@@ -1,0 +1,19 @@
+apiVersion: v2
+name: organizr
+description: A Helm chart for Organizr - HTPC dashboard
+type: application
+version: 0.1.0
+appVersion: "2.1.2850"
+home: https://organizr.app
+sources:
+  - https://github.com/causefx/Organizr
+keywords:
+  - organizr
+  - dashboard
+  - htpc
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Dashboard

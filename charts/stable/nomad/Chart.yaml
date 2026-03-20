@@ -1,0 +1,19 @@
+apiVersion: v2
+name: nomad
+description: A Helm chart for HashiCorp Nomad - workload orchestrator
+type: application
+version: 0.1.0
+appVersion: "1.9.4"
+home: https://www.nomadproject.io
+sources:
+  - https://github.com/hashicorp/nomad
+keywords:
+  - nomad
+  - orchestration
+  - hashicorp
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Management

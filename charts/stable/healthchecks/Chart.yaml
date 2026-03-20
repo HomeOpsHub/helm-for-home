@@ -1,0 +1,19 @@
+apiVersion: v2
+name: healthchecks
+description: A Helm chart for Healthchecks - cron job monitoring
+type: application
+version: 0.1.0
+appVersion: "3.7"
+home: https://healthchecks.io
+sources:
+  - https://github.com/healthchecks/healthchecks
+keywords:
+  - healthchecks
+  - monitoring
+  - cron
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Monitoring

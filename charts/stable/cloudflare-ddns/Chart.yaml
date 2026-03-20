@@ -1,0 +1,19 @@
+apiVersion: v2
+name: cloudflare-ddns
+description: A Helm chart for Cloudflare DDNS - dynamic DNS updater
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+home: https://github.com/oznu/docker-cloudflare-ddns
+sources:
+  - https://github.com/oznu/docker-cloudflare-ddns
+keywords:
+  - cloudflare
+  - ddns
+  - dns
+  - networking
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Networking

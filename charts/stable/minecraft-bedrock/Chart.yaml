@@ -1,0 +1,19 @@
+apiVersion: v2
+name: minecraft-bedrock
+description: A Helm chart for Minecraft Bedrock Server
+type: application
+version: 0.1.0
+appVersion: "latest"
+home: https://www.minecraft.net
+sources:
+  - https://github.com/itzg/docker-minecraft-bedrock-server
+keywords:
+  - minecraft
+  - bedrock
+  - gaming
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Gaming

@@ -1,0 +1,20 @@
+apiVersion: v2
+name: loki
+description: A Helm chart for Grafana Loki - log aggregation
+type: application
+version: 0.1.0
+appVersion: "3.3.2"
+home: https://grafana.com/oss/loki
+sources:
+  - https://github.com/grafana/loki
+keywords:
+  - loki
+  - logging
+  - grafana
+  - monitoring
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Monitoring

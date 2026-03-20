@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "piwigo.fullname" . }}-test-connection"
+  labels:
+    {{- include "piwigo.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "piwigo.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

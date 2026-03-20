@@ -1,0 +1,19 @@
+apiVersion: v2
+name: miniflux
+description: A Helm chart for Miniflux - minimalist RSS reader
+type: application
+version: 0.1.0
+appVersion: "2.2.4"
+home: https://miniflux.app
+sources:
+  - https://github.com/miniflux/v2
+keywords:
+  - miniflux
+  - rss
+  - reader
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity

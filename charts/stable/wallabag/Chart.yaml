@@ -1,0 +1,19 @@
+apiVersion: v2
+name: wallabag
+description: A Helm chart for Wallabag - read-it-later app
+type: application
+version: 0.1.0
+appVersion: "2.6.10"
+home: https://wallabag.org
+sources:
+  - https://github.com/wallabag/wallabag
+keywords:
+  - wallabag
+  - bookmarks
+  - reading
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity

@@ -1,0 +1,20 @@
+apiVersion: v2
+name: traefik
+description: A Helm chart for Traefik - cloud-native reverse proxy
+type: application
+version: 0.1.0
+appVersion: "3.2.3"
+home: https://traefik.io
+sources:
+  - https://github.com/traefik/traefik
+keywords:
+  - traefik
+  - proxy
+  - ingress
+  - loadbalancer
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Networking

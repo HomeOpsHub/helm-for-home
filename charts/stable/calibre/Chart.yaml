@@ -1,0 +1,19 @@
+apiVersion: v2
+name: calibre
+description: A Helm chart for Calibre - e-book management
+type: application
+version: 0.1.0
+appVersion: "7.22.0"
+home: https://calibre-ebook.com
+sources:
+  - https://github.com/kovidgoyal/calibre
+keywords:
+  - calibre
+  - ebooks
+  - library
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

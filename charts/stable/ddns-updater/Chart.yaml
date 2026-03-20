@@ -1,0 +1,20 @@
+apiVersion: v2
+name: ddns-updater
+description: A Helm chart for DDNS Updater - dynamic DNS update client
+type: application
+version: 0.1.0
+appVersion: "2.8.1"
+home: https://github.com/qdm12/ddns-updater
+sources:
+  - https://github.com/qdm12/ddns-updater
+keywords:
+  - ddns
+  - dns
+  - updater
+  - networking
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Networking

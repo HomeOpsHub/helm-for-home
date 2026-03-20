@@ -1,0 +1,19 @@
+apiVersion: v2
+name: joomla
+description: A Helm chart for Joomla - content management system
+type: application
+version: 0.1.0
+appVersion: "5.2.3"
+home: https://www.joomla.org
+sources:
+  - https://github.com/joomla/joomla-cms
+keywords:
+  - joomla
+  - cms
+  - website
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: CMS

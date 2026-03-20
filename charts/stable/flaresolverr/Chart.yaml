@@ -1,0 +1,19 @@
+apiVersion: v2
+name: flaresolverr
+description: A Helm chart for FlareSolverr - proxy for Cloudflare
+type: application
+version: 0.1.0
+appVersion: "3.3.21"
+home: https://github.com/FlareSolverr/FlareSolverr
+sources:
+  - https://github.com/FlareSolverr/FlareSolverr
+keywords:
+  - flaresolverr
+  - proxy
+  - cloudflare
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Networking

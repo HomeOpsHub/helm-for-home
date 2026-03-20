@@ -1,0 +1,19 @@
+apiVersion: v2
+name: couchdb
+description: A Helm chart for CouchDB - NoSQL document database
+type: application
+version: 0.1.0
+appVersion: "3.4.2"
+home: https://couchdb.apache.org
+sources:
+  - https://github.com/apache/couchdb
+keywords:
+  - couchdb
+  - database
+  - nosql
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Database

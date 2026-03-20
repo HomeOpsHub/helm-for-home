@@ -1,0 +1,19 @@
+apiVersion: v2
+name: emby
+description: A Helm chart for Emby - personal media server
+type: application
+version: 0.1.0
+appVersion: "4.9.0.42"
+home: https://emby.media
+sources:
+  - https://github.com/MediaBrowser/Emby
+keywords:
+  - emby
+  - media
+  - streaming
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

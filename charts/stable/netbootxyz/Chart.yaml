@@ -1,0 +1,19 @@
+apiVersion: v2
+name: netbootxyz
+description: A Helm chart for netboot.xyz - network boot server
+type: application
+version: 0.1.0
+appVersion: "0.7.3"
+home: https://netboot.xyz
+sources:
+  - https://github.com/netbootxyz/netboot.xyz
+keywords:
+  - netboot
+  - pxe
+  - network-boot
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Networking

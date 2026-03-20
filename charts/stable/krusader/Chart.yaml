@@ -1,0 +1,19 @@
+apiVersion: v2
+name: krusader
+description: A Helm chart for Krusader - web file manager
+type: application
+version: 0.1.0
+appVersion: "2.8.1"
+home: https://krusader.org
+sources:
+  - https://github.com/KDE/krusader
+keywords:
+  - krusader
+  - files
+  - manager
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Utilities

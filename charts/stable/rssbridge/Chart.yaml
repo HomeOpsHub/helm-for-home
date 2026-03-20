@@ -1,0 +1,19 @@
+apiVersion: v2
+name: rssbridge
+description: A Helm chart for RSS-Bridge - RSS feed generator
+type: application
+version: 0.1.0
+appVersion: "latest"
+home: https://rss-bridge.org
+sources:
+  - https://github.com/RSS-Bridge/rss-bridge
+keywords:
+  - rss-bridge
+  - rss
+  - feeds
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity
