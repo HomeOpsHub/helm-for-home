@@ -1,0 +1,27 @@
+apiVersion: v2
+name: headlamp
+description: A Helm chart for Headlamp — a Kubernetes Web UI, with Traefik IngressRoute support
+type: application
+version: 0.1.0
+appVersion: "0.40.1"
+home: https://github.com/kubernetes-sigs/headlamp
+sources:
+  - https://github.com/kubernetes-sigs/headlamp
+icon: https://raw.githubusercontent.com/kubernetes-sigs/headlamp/main/frontend/public/headlamp-logo.svg
+keywords:
+  - kubernetes
+  - dashboard
+  - ui
+  - self-hosted
+  - homelab
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Utilities
+dependencies:
+  - name: headlamp
+    # Pin to a specific upstream chart version. Check latest at:
+    # https://github.com/kubernetes-sigs/headlamp/releases
+    version: "0.40.1"
+    repository: "https://kubernetes-sigs.github.io/headlamp/"
