@@ -1,0 +1,20 @@
+apiVersion: v2
+name: homeassistant
+description: A Helm chart for Home Assistant - open source home automation
+type: application
+version: 0.1.0
+appVersion: "2024.12.5"
+home: https://www.home-assistant.io
+sources:
+  - https://github.com/home-assistant/core
+keywords:
+  - homeassistant
+  - home-automation
+  - iot
+  - smart-home
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Automation
