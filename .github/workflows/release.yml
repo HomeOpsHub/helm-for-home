@@ -110,6 +110,10 @@ jobs:
           mkdir -p .cr-release-packages
           find charts -type f -name 'Chart.yaml' | xargs dirname | xargs -I {} helm package {} -d .cr-release-packages
 
+      - name: Generate release notes
+        id: release-notes
+        run: bash scripts/generate-release-notes.sh "${GITHUB_REF_NAME}" > release-notes.md
+
       - name: Publish stable charts
         uses: helm/chart-releaser-action@v1.7.0
         with:
@@ -127,3 +131,17 @@ jobs:
           mark_as_latest: false
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Create GitHub Release with notes
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          gh release create "$TAG" \
+            --title "Helm for Home $TAG" \
+            --notes-file release-notes.md \
+            --latest \
+            .cr-release-packages/*.tgz || \
+          gh release edit "$TAG" \
+            --notes-file release-notes.md
