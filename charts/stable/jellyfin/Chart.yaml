@@ -1,0 +1,23 @@
+apiVersion: v2
+name: jellyfin
+description: A Helm chart for Jellyfin — a free software media system
+type: application
+version: 0.1.0
+appVersion: "10.10.6"
+home: https://jellyfin.org
+sources:
+  - https://github.com/jellyfin/jellyfin
+  - https://github.com/linuxserver/docker-jellyfin
+keywords:
+  - jellyfin
+  - media
+  - streaming
+  - movies
+  - tv
+  - music
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

@@ -1,0 +1,58 @@
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+Headlamp is a user-friendly Kubernetes web UI for browsing cluster resources,
+viewing logs, exec-ing into pods, and managing workloads.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Web UI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.ingressRoute.enabled }}
+  Traefik IngressRoute is enabled.
+  Host is configured in: ingressRoute.spec.routes[0].match
+  Current match rule:    {{ (index .Values.ingressRoute.spec.routes 0).match }}
+
+{{- else if eq .Values.headlamp.service.type "NodePort" }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "headlamp.subchartServiceName" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "Web UI: http://$NODE_IP:$NODE_PORT"
+{{- else if eq .Values.headlamp.service.type "LoadBalancer" }}
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "headlamp.subchartServiceName" . }}
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "headlamp.subchartServiceName" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo "Web UI: http://$SERVICE_IP:{{ .Values.headlamp.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "headlamp.subchartServiceName" . }} {{ .Values.headlamp.service.port }}:{{ .Values.headlamp.service.port }}
+  Web UI: http://localhost:{{ .Values.headlamp.service.port }}
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Service Name (important for IngressRoute)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  The upstream subchart service for this release is:
+    {{ include "headlamp.subchartServiceName" . }}
+
+  Use this name in ingressRoute.spec.routes[].services[].name
+  if you are configuring a Traefik IngressRoute.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Tips
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  • Headlamp runs with cluster-admin privileges by default (ClusterRoleBinding).
+    Scope this down in production with a custom Role/RoleBinding and
+    headlamp.clusterRoleBinding.create=false.
+
+  • Enable OIDC SSO by setting:
+      headlamp.config.oidcClientID
+      headlamp.config.oidcClientSecret
+      headlamp.config.oidcIdpIssuerURL
+
+  • Install plugins (e.g. flux, backstage) by enabling:
+      headlamp.persistentVolumeClaim.enabled=true
+    and using an init container to copy plugins to /headlamp/plugins.
+
+  • Check installed plugins at: Settings → Plugins (inside the UI)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "headlamp.subchartServiceName" . }}-test-connection"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "headlamp.subchartServiceName" . }}:{{ .Values.headlamp.service.port }}']
+  restartPolicy: Never

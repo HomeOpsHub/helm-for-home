@@ -11,4 +11,3 @@
 ## Migration Progress
 
 - [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
-- [x] **Radarr** (movie management) — migrated to `charts/stable/radarr` (branch: `radarr`)

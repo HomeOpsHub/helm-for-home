@@ -1,0 +1,186 @@
+# Default values for jellyfin.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: linuxserver/jellyfin
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 1000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: false
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+env:
+  TZ: "UTC"
+  PUID: "1000"
+  PGID: "1000"
+  # Set to "true" to use NVIDIA GPU hardware acceleration
+  # DOCKER_MODS: "linuxserver/mods:jellyfin-opencl-intel"
+
+# Additional environment variables to set on the container
+extraEnv: []
+# - name: JELLYFIN_PublishedServerUrl
+#   value: "https://jellyfin.example.com"
+
+service:
+  type: ClusterIP
+  port: 8096
+  # Optional: expose additional ports for DLNA discovery
+  # dlna:
+  #   enabled: false
+  #   port: 1900
+  #   protocol: UDP
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: jellyfin.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: jellyfin-tls
+  #    hosts:
+  #      - jellyfin.local
+
+ingressRoute:
+  enabled: false
+  metadata:
+    name: ""
+    namespace: ""
+    annotations: {}
+  spec:
+    entrypoints: []
+    routes: []
+    #  - match: Host(`jellyfin.example.com`)
+    #    kind: Rule
+    #    services:
+    #      - name: jellyfin
+    #        port: 8096
+    #    middlewares: []
+    tls:
+      enabled: false
+      # secretName: ""
+      # certResolver: ""
+      # domains: []
+
+resources: {}
+  # limits:
+  #   cpu: "2"
+  #   memory: 2Gi
+  #   # For Intel GPU transcoding:
+  #   # gpu.intel.com/i915: 1
+  #   # For NVIDIA GPU transcoding:
+  #   # nvidia.com/gpu: 1
+  # requests:
+  #   cpu: 500m
+  #   memory: 512Mi
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+persistence:
+  config:
+    enabled: true
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+
+# Media library volumes — configure these to mount your media directories.
+# Each entry creates a volume + volumeMount in the deployment.
+mediaVolumes: []
+  # - name: movies
+  #   mountPath: /movies
+  #   hostPath: /mnt/media/movies          # Option A: hostPath
+  #   readOnly: false
+  # - name: tv
+  #   mountPath: /tv
+  #   existingClaim: media-tv-pvc          # Option B: existing PVC
+  #   readOnly: false
+  # - name: music
+  #   mountPath: /music
+  #   nfs:                                  # Option C: NFS
+  #     server: 192.168.1.100
+  #     path: /export/music
+  #   readOnly: true
+
+# GPU / hardware transcoding device pass-through
+deviceMounts: []
+  # Intel Quick Sync:
+  # - /dev/dri/renderD128
+  # NVIDIA (use nvidia runtime instead):
+  # - /dev/nvidia0
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+# - name: transcode
+#   emptyDir:
+#     medium: Memory
+#     sizeLimit: 4Gi
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: transcode
+#   mountPath: /config/transcodes
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
