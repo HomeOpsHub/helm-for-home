@@ -38,6 +38,9 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.8.0
 
+      - name: Add Helm repositories
+        run: bash scripts/add-helm-repos.sh
+
       - name: Build chart dependencies
         run: |
           for chart in charts/stable/* charts/beta/*; do
@@ -95,6 +98,10 @@ jobs:
           if [[ -n "$changed" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Add Helm repositories
+        if: steps.list-changed.outputs.changed == 'true'
+        run: bash scripts/add-helm-repos.sh
 
       - name: Build chart dependencies
         if: steps.list-changed.outputs.changed == 'true'

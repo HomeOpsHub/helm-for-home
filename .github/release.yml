@@ -1,0 +1,39 @@
+# GitHub Auto-Generated Release Notes Configuration
+# https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+
+changelog:
+  exclude:
+    labels:
+      - stale
+      - duplicate
+      - invalid
+      - wontfix
+    authors:
+      - dependabot
+      - github-actions
+  categories:
+    - title: "🚀 New Charts"
+      labels:
+        - new-chart
+    - title: "✨ Chart Updates"
+      labels:
+        - chart-update
+        - enhancement
+    - title: "🐛 Bug Fixes"
+      labels:
+        - bug
+        - fix
+    - title: "🔒 Security"
+      labels:
+        - security
+    - title: "📦 CI/CD & Infrastructure"
+      labels:
+        - ci
+        - github-actions
+        - dependencies
+    - title: "📝 Documentation"
+      labels:
+        - documentation
+    - title: "🏠 Other Changes"
+      labels:
+        - "*"
