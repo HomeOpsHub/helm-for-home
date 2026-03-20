@@ -12,3 +12,4 @@
 
 - [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
 - [x] **Prowlarr** (indexer manager) — migrated to `charts/stable/prowlarr` (branch: `prowlarr`)
+

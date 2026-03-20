@@ -1,0 +1,61 @@
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+Radarr is a movie collection manager that automatically searches for, downloads,
+and organizes your movie library.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Web UI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+    {{- range $path := $host.paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path }}
+    {{- end }}
+  {{- end }}
+{{- else if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "radarr.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "Radarr: http://$NODE_IP:$NODE_PORT"
+{{- else if contains "LoadBalancer" .Values.service.type }}
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "radarr.fullname" . }}
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "radarr.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo "Radarr: http://$SERVICE_IP:{{ .Values.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "radarr.fullname" . }} 7878:{{ .Values.service.port }}
+  Radarr: http://localhost:7878
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Adding Movies
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. Open the Radarr web UI in your browser.
+  2. Navigate to Settings → Media Management to configure root folders.
+  3. Go to Settings → Download Clients to add your download client.
+  4. Go to Settings → Indexers to add your indexers.
+  5. Use "Add Movies" to search and add movies to your library.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Persistence
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.persistence.config.enabled }}
+  Persistent storage is ENABLED (Radarr config and database are retained).
+{{- else }}
+  WARNING: Persistence is DISABLED. All configuration will be lost on pod restart.
+  Set persistence.config.enabled=true to retain your Radarr configuration.
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://wiki.servarr.com/radarr

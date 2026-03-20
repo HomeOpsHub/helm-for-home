@@ -1,0 +1,75 @@
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+Jellyfin is a free software media system that puts you in control of managing
+and streaming your digital media — movies, TV shows, music, photos, and more.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Accessing the Web UI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+    {{- range $path := $host.paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path.path }}
+    {{- end }}
+  {{- end }}
+{{- else if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "jellyfin.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "Web UI: http://$NODE_IP:$NODE_PORT"
+{{- else if contains "LoadBalancer" .Values.service.type }}
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "jellyfin.fullname" . }}
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "jellyfin.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo "Web UI: http://$SERVICE_IP:{{ .Values.service.port }}"
+{{- else }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "jellyfin.fullname" . }} 8096:{{ .Values.service.port }}
+  Web UI: http://localhost:8096
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Getting Started
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. Open the Jellyfin web UI in your browser.
+  2. Complete the initial setup wizard (language, admin user).
+  3. Add your media libraries — point to the mount paths configured
+     in values.yaml (e.g., /movies, /tv, /music).
+  4. Optionally enable hardware transcoding under Dashboard > Playback.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Media Libraries
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.mediaVolumes }}
+  Configured media volumes:
+  {{- range .Values.mediaVolumes }}
+    - {{ .name }}: {{ .mountPath }}
+  {{- end }}
+{{- else }}
+  WARNING: No media volumes configured. Add entries to mediaVolumes in
+  values.yaml to make your media available to Jellyfin.
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Persistence
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{{- if .Values.persistence.config.enabled }}
+  Persistent storage is ENABLED (config, metadata, and cache are retained).
+{{- else }}
+  WARNING: Persistence is DISABLED. All configuration and metadata will be
+  lost on pod restart. Set persistence.config.enabled=true to retain data.
+{{- end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Troubleshooting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://jellyfin.org/docs/
