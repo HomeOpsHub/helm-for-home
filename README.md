@@ -67,6 +67,7 @@ Production-ready charts that have been tested and validated.
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
 | [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
 | [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
+| [overseerr](charts/stable/overseerr) | Overseerr - media request management |
 | [plex](charts/stable/plex) | Plex Media Server |
 | [prowlarr](charts/stable/prowlarr) | Prowlarr - indexer manager for Sonarr/Radarr |
 | [radarr](charts/stable/radarr) | Radarr - movie collection manager |
