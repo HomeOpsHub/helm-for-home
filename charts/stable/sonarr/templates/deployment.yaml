@@ -64,6 +64,9 @@ spec:
             {{- range .Values.mediaVolumes }}
             - name: {{ .name }}
               mountPath: {{ .mountPath }}
+              {{- if .readOnly }}
+              readOnly: {{ .readOnly }}
+              {{- end }}
             {{- end }}
             {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
@@ -89,6 +92,8 @@ spec:
           nfs:
             server: {{ .nfs.server }}
             path: {{ .nfs.path }}
+          {{- else }}
+          emptyDir: {}
           {{- end }}
         {{- end }}
         {{- with .Values.volumes }}

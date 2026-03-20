@@ -80,6 +80,7 @@ Production-ready charts that have been tested and validated.
 | [radarr](charts/stable/radarr) | Radarr - movie collection manager |
 | [sabnzbd](charts/stable/sabnzbd) | SABnzbd - binary newsreader |
 | [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
+| [sonarr](charts/stable/sonarr) | Sonarr - TV show collection manager |
 | [syncthing](charts/stable/syncthing) | Syncthing - continuous file sync |
 | [tautulli](charts/stable/tautulli) | Tautulli - Plex media server monitoring |
 | [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |

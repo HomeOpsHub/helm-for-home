@@ -43,11 +43,13 @@ env:
   TZ: "UTC"
   PUID: "1000"
   PGID: "1000"
+  # Set to "true" to use NVIDIA GPU hardware acceleration
+  # DOCKER_MODS: "linuxserver/mods:sonarr-opencl-intel"
 
 # Additional environment variables to set on the container
 extraEnv: []
-# - name: SONARR__AUTH__REQUIRED
-#   value: "Enabled"
+# - name: sonarr_PublishedServerUrl
+#   value: "https://sonarr.example.com"
 
 service:
   type: ClusterIP
@@ -92,8 +94,8 @@ ingressRoute:
 
 resources: {}
   # limits:
-  #   cpu: 1000m
-  #   memory: 512Mi
+  #   cpu: "1"
+  #   memory: 1Gi
   # requests:
   #   cpu: 250m
   #   memory: 256Mi
@@ -101,8 +103,6 @@ resources: {}
 livenessProbe:
   httpGet:
     path: /ping
-    port: http
-  initialDelaySeconds: 30
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 3
@@ -110,8 +110,6 @@ livenessProbe:
 readinessProbe:
   httpGet:
     path: /ping
-    port: http
-  initialDelaySeconds: 15
   periodSeconds: 5
   timeoutSeconds: 3
   failureThreshold: 3
@@ -119,7 +117,7 @@ readinessProbe:
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 3
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
@@ -131,33 +129,29 @@ persistence:
       - ReadWriteOnce
     size: 1Gi
 
-# Media volumes for TV shows, downloads, etc.
-# Each entry creates a volume and volumeMount in the deployment.
-# Supports hostPath, existingClaim, and NFS backends.
+# Media library volumes — configure these to mount your media directories.
+# Each entry creates a volume + volumeMount in the deployment.
 mediaVolumes: []
-# - name: tv
-#   mountPath: /tv
-#   hostPath: /mnt/media/tv
-# - name: downloads
-#   mountPath: /downloads
-#   existingClaim: downloads-pvc
-# - name: media
-#   mountPath: /media
-#   nfs:
-#     server: 192.168.1.100
-#     path: /volume1/media
+  # - name: tv
+  #   mountPath: /tv
+  #   hostPath: /mnt/media/tv              # Option A: hostPath
+  #   readOnly: false
+  # - name: downloads
+  #   mountPath: /downloads
+  #   existingClaim: downloads-pvc          # Option B: existing PVC
+  #   readOnly: false
+  # - name: tv-nfs
+  #   mountPath: /tv
+  #   nfs:                                  # Option C: NFS
+  #     server: 192.168.1.100
+  #     path: /export/tv
+  #   readOnly: false
 
 # Additional volumes on the output Deployment definition.
 volumes: []
-# - name: extra-config
-#   configMap:
-#     name: my-extra-config
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts: []
-# - name: extra-config
-#   mountPath: /extra
-#   readOnly: true
 
 nodeSelector: {}
 
