@@ -1,0 +1,21 @@
+apiVersion: v2
+name: sonarr
+description: A Helm chart for Sonarr — a PVR for Usenet and BitTorrent users to manage TV shows
+type: application
+version: 0.1.0
+appVersion: "4.0.12.2823"
+home: https://sonarr.tv
+sources:
+  - https://github.com/Sonarr/Sonarr
+  - https://github.com/linuxserver/docker-sonarr
+keywords:
+  - sonarr
+  - tv
+  - pvr
+  - automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media/Automation
