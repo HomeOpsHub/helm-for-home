@@ -62,6 +62,7 @@ Production-ready charts that have been tested and validated.
 | [glances](charts/stable/glances) | Glances - system monitoring tool |
 | [gotify](charts/stable/gotify) | Gotify - server for sending and receiving messages |
 | [heimdall](charts/stable/heimdall) | Heimdall - application dashboard for your services |
+| [homeassistant](charts/stable/homeassistant) | Home Assistant - home automation |
 | [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
 | [jellyfin](charts/stable/jellyfin) | Jellyfin - free software media system |
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
