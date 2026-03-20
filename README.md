@@ -72,6 +72,7 @@ Production-ready charts that have been tested and validated.
 | [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
 | [overseerr](charts/stable/overseerr) | Overseerr - media request management |
 | [plex](charts/stable/plex) | Plex Media Server |
+| [portainer](charts/stable/portainer) | Portainer - container management UI |
 | [prowlarr](charts/stable/prowlarr) | Prowlarr - indexer manager for Sonarr/Radarr |
 | [sonarr](charts/stable/sonarr) | Sonarr - TV show management and automation PVR |
 | [radarr](charts/stable/radarr) | Radarr - movie collection manager |

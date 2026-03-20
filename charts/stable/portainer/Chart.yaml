@@ -1,0 +1,21 @@
+apiVersion: v2
+name: portainer
+description: A Helm chart for Portainer - lightweight container management UI
+type: application
+version: 0.1.0
+appVersion: "2.24.1"
+home: https://www.portainer.io
+sources:
+  - https://github.com/portainer/portainer
+keywords:
+  - portainer
+  - containers
+  - docker
+  - kubernetes
+  - management
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Management
