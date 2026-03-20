@@ -65,6 +65,7 @@ Production-ready charts that have been tested and validated.
 | [heimdall](charts/stable/heimdall) | Heimdall - application dashboard for your services |
 | [homeassistant](charts/stable/homeassistant) | Home Assistant - home automation |
 | [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
+| [mealie](charts/stable/mealie) | Mealie - recipe manager and meal planner |
 | [lidarr](charts/stable/lidarr) | Lidarr - music collection manager |
 | [jellyfin](charts/stable/jellyfin) | Jellyfin - free software media system |
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |

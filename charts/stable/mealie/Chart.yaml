@@ -1,0 +1,20 @@
+apiVersion: v2
+name: mealie
+description: A Helm chart for Mealie - a self-hosted recipe manager
+type: application
+version: 0.1.0
+appVersion: "2.5.0"
+home: https://mealie.io
+sources:
+  - https://github.com/mealie-recipes/mealie
+keywords:
+  - mealie
+  - recipes
+  - cooking
+  - meal-planning
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Utilities
