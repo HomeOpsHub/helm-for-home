@@ -1,0 +1,20 @@
+apiVersion: v2
+name: radarr
+description: A Helm chart for Radarr — a movie collection manager and PVR
+type: application
+version: 0.1.0
+appVersion: "5.16.3.9541"
+home: https://radarr.video
+sources:
+  - https://github.com/Radarr/Radarr
+keywords:
+  - radarr
+  - movies
+  - pvr
+  - automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media/Automation
