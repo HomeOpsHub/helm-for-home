@@ -65,6 +65,7 @@ Production-ready charts that have been tested and validated.
 | [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
 | [jellyfin](charts/stable/jellyfin) | Jellyfin - free software media system |
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
+| [navidrome](charts/stable/navidrome) | Navidrome - music server and streamer |
 | [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
 | [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
 | [plex](charts/stable/plex) | Plex Media Server |

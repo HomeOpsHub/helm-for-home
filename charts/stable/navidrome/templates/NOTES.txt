@@ -1,0 +1,15 @@
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+Navidrome has been deployed successfully.
+
+  Access the Web UI:
+    kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{- include "navidrome.fullname" . }} 4533:{{ .Values.service.port }}
+    Web UI: http://localhost:4533
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://www.navidrome.org
