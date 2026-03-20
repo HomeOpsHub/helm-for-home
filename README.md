@@ -68,6 +68,7 @@ Production-ready charts that have been tested and validated.
 | [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
 | [plex](charts/stable/plex) | Plex Media Server |
 | [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
+| [tautulli](charts/stable/tautulli) | Tautulli - Plex media server monitoring |
 | [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |
 | [uptime-kuma](charts/stable/uptime-kuma) | Uptime Kuma - self-hosted monitoring tool |
 | [whoogle](charts/stable/whoogle) | Whoogle - self-hosted Google search proxy |

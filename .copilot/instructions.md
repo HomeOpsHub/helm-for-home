@@ -11,3 +11,4 @@
 ## Migration Progress
 
 - [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
+- [x] **Tautulli** (Plex monitoring) — migrated to `charts/stable/tautulli` (branch: `tautulli`)
