@@ -1,0 +1,21 @@
+apiVersion: v2
+name: lidarr
+description: A Helm chart for Lidarr - a music collection manager and PVR
+type: application
+version: 0.1.0
+appVersion: "2.8.2.4493"
+home: https://lidarr.audio
+sources:
+  - https://github.com/Lidarr/Lidarr
+  - https://github.com/linuxserver/docker-lidarr
+keywords:
+  - lidarr
+  - music
+  - pvr
+  - automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

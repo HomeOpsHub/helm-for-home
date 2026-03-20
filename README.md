@@ -63,6 +63,7 @@ Production-ready charts that have been tested and validated.
 | [gotify](charts/stable/gotify) | Gotify - server for sending and receiving messages |
 | [heimdall](charts/stable/heimdall) | Heimdall - application dashboard for your services |
 | [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
+| [lidarr](charts/stable/lidarr) | Lidarr - music collection manager |
 | [jellyfin](charts/stable/jellyfin) | Jellyfin - free software media system |
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
 | [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
