@@ -56,23 +56,33 @@ Production-ready charts that have been tested and validated.
 | Chart | Description |
 |-------|-------------|
 | [adguard-home](charts/stable/adguard-home) | AdGuard Home - network-wide ad blocking |
+| [bazarr](charts/stable/bazarr) | Bazarr - automatic subtitle management |
 | [cloudbeaver](charts/stable/cloudbeaver) | CloudBeaver - web-based database manager |
 | [custom-error-pages](charts/stable/custom-error-pages) | Custom error pages (tarampampam/error-pages) |
 | [freshrss](charts/stable/freshrss) | FreshRSS - self-hosted RSS feed aggregator |
 | [glances](charts/stable/glances) | Glances - system monitoring tool |
 | [gotify](charts/stable/gotify) | Gotify - server for sending and receiving messages |
 | [heimdall](charts/stable/heimdall) | Heimdall - application dashboard for your services |
+| [homeassistant](charts/stable/homeassistant) | Home Assistant - home automation |
 | [it-tools](charts/stable/it-tools) | IT-Tools - collection of useful developer utilities |
+| [lidarr](charts/stable/lidarr) | Lidarr - music collection manager |
 | [jellyfin](charts/stable/jellyfin) | Jellyfin - free software media system |
 | [netdata](charts/stable/netdata) | Netdata - real-time performance monitoring |
 | [open-wearables](charts/stable/open-wearables) | Open Wearables - unified wearable health data platform |
 | [outline](charts/stable/outline) | Outline - team wiki and knowledge base |
+| [overseerr](charts/stable/overseerr) | Overseerr - media request management |
 | [plex](charts/stable/plex) | Plex Media Server |
 | [portainer](charts/stable/portainer) | Portainer - container management UI |
+| [prowlarr](charts/stable/prowlarr) | Prowlarr - indexer manager for Sonarr/Radarr |
+| [sonarr](charts/stable/sonarr) | Sonarr - TV show management and automation PVR |
 | [radarr](charts/stable/radarr) | Radarr - movie collection manager |
+| [sabnzbd](charts/stable/sabnzbd) | SABnzbd - binary newsreader |
 | [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
+| [syncthing](charts/stable/syncthing) | Syncthing - continuous file sync |
+| [tautulli](charts/stable/tautulli) | Tautulli - Plex media server monitoring |
 | [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |
 | [uptime-kuma](charts/stable/uptime-kuma) | Uptime Kuma - self-hosted monitoring tool |
+| [transmission](charts/stable/transmission) | Transmission - BitTorrent client |
 | [whoogle](charts/stable/whoogle) | Whoogle - self-hosted Google search proxy |
 
 ### Beta

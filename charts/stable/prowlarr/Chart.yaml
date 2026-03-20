@@ -1,0 +1,21 @@
+apiVersion: v2
+name: prowlarr
+description: A Helm chart for Prowlarr — an indexer manager for Sonarr, Radarr, and other apps
+type: application
+version: 0.1.0
+appVersion: "1.31.2.4975"
+home: https://prowlarr.com
+sources:
+  - https://github.com/Prowlarr/Prowlarr
+keywords:
+  - prowlarr
+  - indexer
+  - usenet
+  - torrent
+  - automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media/Automation
