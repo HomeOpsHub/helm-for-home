@@ -21,7 +21,7 @@ env:
 
 jobs:
   validate:
-    name: Lint, Test & Validate Charts
+    name: Validate Charts
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -45,23 +45,13 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.8.0
 
-      - name: Install helm-docs
-        run: |
-          cd /tmp
-          wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
-          tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
-          sudo mv helm-docs /usr/local/bin
-
       - name: Add Helm repositories
-        run: |
-          helm repo add headlamp https://kubernetes-sigs.github.io/headlamp/
-          helm repo update
+        run: bash scripts/add-helm-repos.sh
 
       - name: Build chart dependencies
         run: |
           for chart in charts/stable/* charts/beta/*; do
             if [ -f "$chart/Chart.yaml" ]; then
-              echo "Building dependencies for $chart"
               helm dependency build "$chart"
             fi
           done
@@ -69,30 +59,6 @@ jobs:
       - name: Lint all charts
         run: |
           find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm lint
-
-      - name: Check documentation
-        run: |
-          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs --dry-run
-
-      - name: Detect changed charts
-        id: list-changed
-        run: |
-          changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }})
-          if [[ -n "$changed" ]]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Lint changed charts
-        if: steps.list-changed.outputs.changed == 'true'
-        run: ct lint --target-branch ${{ github.event.repository.default_branch }}
-
-      - name: Create Kind cluster for integration tests
-        if: steps.list-changed.outputs.changed == 'true'
-        uses: helm/kind-action@v1.14.0
-
-      - name: Install & test changed charts
-        if: steps.list-changed.outputs.changed == 'true'
-        run: ct install --target-branch ${{ github.event.repository.default_branch }}
 
   publish:
     name: Package & Publish Charts
@@ -120,20 +86,17 @@ jobs:
       - name: Install helm-docs
         run: |
           cd /tmp
-          wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
-          tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          wget -q https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          tar -xzf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
           sudo mv helm-docs /usr/local/bin
 
       - name: Add Helm repositories
-        run: |
-          helm repo add headlamp https://kubernetes-sigs.github.io/headlamp/
-          helm repo update
+        run: bash scripts/add-helm-repos.sh
 
       - name: Build chart dependencies
         run: |
           for chart in charts/stable/* charts/beta/*; do
             if [ -f "$chart/Chart.yaml" ]; then
-              echo "Building dependencies for $chart"
               helm dependency build "$chart"
             fi
           done

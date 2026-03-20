@@ -37,9 +37,7 @@ jobs:
           version: v3.17.0
 
       - name: Add Helm repositories
-        run: |
-          helm repo add headlamp https://kubernetes-sigs.github.io/headlamp/
-          helm repo update
+        run: bash scripts/add-helm-repos.sh
 
       - name: Build chart dependencies
         run: |
