@@ -1,1 +1,4 @@
 **/*.Identifier
+
+# Copilot CLI session state
+.copilot/
