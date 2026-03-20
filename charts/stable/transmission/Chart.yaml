@@ -1,0 +1,21 @@
+apiVersion: v2
+name: transmission
+description: A Helm chart for Transmission - a fast, easy BitTorrent client
+type: application
+version: 0.1.0
+appVersion: "4.0.6"
+home: https://transmissionbt.com
+sources:
+  - https://github.com/transmission/transmission
+  - https://github.com/linuxserver/docker-transmission
+keywords:
+  - transmission
+  - torrent
+  - bittorrent
+  - downloader
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Downloads

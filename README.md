@@ -72,6 +72,7 @@ Production-ready charts that have been tested and validated.
 | [spotify](charts/stable/spotify) | Spotify - web-based Spotify client |
 | [teslamate](charts/stable/teslamate) | TeslaMate - Tesla vehicle data logger |
 | [uptime-kuma](charts/stable/uptime-kuma) | Uptime Kuma - self-hosted monitoring tool |
+| [transmission](charts/stable/transmission) | Transmission - BitTorrent client |
 | [whoogle](charts/stable/whoogle) | Whoogle - self-hosted Google search proxy |
 
 ### Beta
