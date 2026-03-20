@@ -1,0 +1,20 @@
+apiVersion: v2
+name: wireshark
+description: A Helm chart for Wireshark - network protocol analyzer
+type: application
+version: 0.1.0
+appVersion: "4.4.2"
+home: https://www.wireshark.org
+sources:
+  - https://github.com/wireshark/wireshark
+keywords:
+  - wireshark
+  - network
+  - analysis
+  - packets
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Networking

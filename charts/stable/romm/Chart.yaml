@@ -1,0 +1,20 @@
+apiVersion: v2
+name: romm
+description: A Helm chart for RomM - ROM manager
+type: application
+version: 0.1.0
+appVersion: "3.7.1"
+home: https://github.com/rommapp/romm
+sources:
+  - https://github.com/rommapp/romm
+keywords:
+  - romm
+  - roms
+  - emulation
+  - gaming
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Gaming

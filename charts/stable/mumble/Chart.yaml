@@ -1,0 +1,20 @@
+apiVersion: v2
+name: mumble
+description: A Helm chart for Mumble - voice chat server
+type: application
+version: 0.1.0
+appVersion: "latest"
+home: https://www.mumble.info
+sources:
+  - https://github.com/mumble-voip/mumble
+keywords:
+  - mumble
+  - voip
+  - voice
+  - chat
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Communication

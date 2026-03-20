@@ -1,0 +1,19 @@
+apiVersion: v2
+name: get-iplayer
+description: A Helm chart for get_iplayer - BBC iPlayer downloader
+type: application
+version: 0.1.0
+appVersion: "3.35"
+home: https://github.com/get-iplayer/get_iplayer
+sources:
+  - https://github.com/get-iplayer/get_iplayer
+keywords:
+  - get-iplayer
+  - bbc
+  - downloader
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

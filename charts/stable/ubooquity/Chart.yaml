@@ -1,0 +1,20 @@
+apiVersion: v2
+name: ubooquity
+description: A Helm chart for Ubooquity - comics and ebook server
+type: application
+version: 0.1.0
+appVersion: "2.1.2"
+home: https://vaemendis.net/ubooquity
+sources:
+  - https://github.com/vaemendis/ubooquity
+keywords:
+  - ubooquity
+  - comics
+  - ebooks
+  - reader
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

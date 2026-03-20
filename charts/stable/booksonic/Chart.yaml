@@ -1,0 +1,19 @@
+apiVersion: v2
+name: booksonic
+description: A Helm chart for Booksonic - audiobook streaming server
+type: application
+version: 0.1.0
+appVersion: "1.2"
+home: https://booksonic.org
+sources:
+  - https://github.com/popeen/Booksonic-App
+keywords:
+  - booksonic
+  - audiobooks
+  - streaming
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

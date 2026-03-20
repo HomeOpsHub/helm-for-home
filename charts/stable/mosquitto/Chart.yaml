@@ -1,0 +1,20 @@
+apiVersion: v2
+name: mosquitto
+description: A Helm chart for Eclipse Mosquitto - MQTT broker
+type: application
+version: 0.1.0
+appVersion: "2.0.20"
+home: https://mosquitto.org
+sources:
+  - https://github.com/eclipse/mosquitto
+keywords:
+  - mosquitto
+  - mqtt
+  - iot
+  - messaging
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Automation

@@ -1,0 +1,19 @@
+apiVersion: v2
+name: pyload
+description: A Helm chart for pyLoad - download manager
+type: application
+version: 0.1.0
+appVersion: "0.5.0"
+home: https://pyload.net
+sources:
+  - https://github.com/pyload/pyload
+keywords:
+  - pyload
+  - downloader
+  - manager
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Downloads

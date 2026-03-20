@@ -1,0 +1,20 @@
+apiVersion: v2
+name: ispyagentdvr
+description: A Helm chart for iSpy Agent DVR - video surveillance
+type: application
+version: 0.1.0
+appVersion: "5.8.5.0"
+home: https://www.ispyconnect.com
+sources:
+  - https://github.com/ispysoftware/agent-dvr
+keywords:
+  - ispy
+  - surveillance
+  - cameras
+  - nvr
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Security

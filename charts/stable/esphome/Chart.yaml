@@ -1,0 +1,20 @@
+apiVersion: v2
+name: esphome
+description: A Helm chart for ESPHome - ESP device management
+type: application
+version: 0.1.0
+appVersion: "2024.12.4"
+home: https://esphome.io
+sources:
+  - https://github.com/esphome/esphome
+keywords:
+  - esphome
+  - iot
+  - esp32
+  - home-automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Automation

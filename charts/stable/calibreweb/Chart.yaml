@@ -1,0 +1,19 @@
+apiVersion: v2
+name: calibreweb
+description: A Helm chart for Calibre-Web - web-based e-book reader
+type: application
+version: 0.1.0
+appVersion: "0.6.24"
+home: https://github.com/janeczku/calibre-web
+sources:
+  - https://github.com/janeczku/calibre-web
+keywords:
+  - calibre-web
+  - ebooks
+  - reader
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

@@ -1,0 +1,19 @@
+apiVersion: v2
+name: airsonic
+description: A Helm chart for Airsonic - personal music streaming server
+type: application
+version: 0.1.0
+appVersion: "11.1.4"
+home: https://airsonic.github.io
+sources:
+  - https://github.com/airsonic-advanced/airsonic-advanced
+keywords:
+  - airsonic
+  - music
+  - streaming
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

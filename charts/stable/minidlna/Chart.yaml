@@ -1,0 +1,20 @@
+apiVersion: v2
+name: minidlna
+description: A Helm chart for MiniDLNA - lightweight DLNA server
+type: application
+version: 0.1.0
+appVersion: "1.3.3"
+home: https://sourceforge.net/projects/minidlna
+sources:
+  - https://github.com/azatoth/minidlna
+keywords:
+  - minidlna
+  - dlna
+  - upnp
+  - media
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

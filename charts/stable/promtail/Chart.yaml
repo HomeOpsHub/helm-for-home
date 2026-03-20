@@ -1,0 +1,20 @@
+apiVersion: v2
+name: promtail
+description: A Helm chart for Promtail - log collector for Loki
+type: application
+version: 0.1.0
+appVersion: "3.3.2"
+home: https://grafana.com/docs/loki/latest/send-data/promtail
+sources:
+  - https://github.com/grafana/loki
+keywords:
+  - promtail
+  - logging
+  - loki
+  - grafana
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Monitoring

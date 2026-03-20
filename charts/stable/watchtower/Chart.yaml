@@ -1,0 +1,20 @@
+apiVersion: v2
+name: watchtower
+description: A Helm chart for Watchtower - container update automation
+type: application
+version: 0.1.0
+appVersion: "1.7.1"
+home: https://containrrr.dev/watchtower
+sources:
+  - https://github.com/containrrr/watchtower
+keywords:
+  - watchtower
+  - containers
+  - updates
+  - automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Management

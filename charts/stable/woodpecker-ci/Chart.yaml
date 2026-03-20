@@ -1,0 +1,20 @@
+apiVersion: v2
+name: woodpecker-ci
+description: A Helm chart for Woodpecker CI - continuous integration
+type: application
+version: 0.1.0
+appVersion: "2.8.3"
+home: https://woodpecker-ci.org
+sources:
+  - https://github.com/woodpecker-ci/woodpecker
+keywords:
+  - woodpecker
+  - ci
+  - cd
+  - automation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: CI-CD

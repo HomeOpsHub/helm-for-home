@@ -1,0 +1,20 @@
+apiVersion: v2
+name: nzbget
+description: A Helm chart for NZBGet - Usenet downloader
+type: application
+version: 0.1.0
+appVersion: "24.5"
+home: https://nzbget.com
+sources:
+  - https://github.com/nzbgetcom/nzbget
+keywords:
+  - nzbget
+  - usenet
+  - nzb
+  - downloader
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Downloads

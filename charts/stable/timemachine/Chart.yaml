@@ -1,0 +1,20 @@
+apiVersion: v2
+name: timemachine
+description: A Helm chart for Time Machine - macOS backup server
+type: application
+version: 0.1.0
+appVersion: "latest"
+home: https://github.com/mbentley/docker-timemachine
+sources:
+  - https://github.com/mbentley/docker-timemachine
+keywords:
+  - timemachine
+  - macos
+  - backup
+  - smb
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Backup

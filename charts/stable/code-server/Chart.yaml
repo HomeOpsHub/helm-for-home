@@ -1,0 +1,20 @@
+apiVersion: v2
+name: code-server
+description: A Helm chart for Code-Server - VS Code in the browser
+type: application
+version: 0.1.0
+appVersion: "4.96.4"
+home: https://coder.com
+sources:
+  - https://github.com/coder/code-server
+keywords:
+  - code-server
+  - vscode
+  - ide
+  - development
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Development

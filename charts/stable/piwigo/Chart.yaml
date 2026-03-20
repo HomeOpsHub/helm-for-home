@@ -1,0 +1,19 @@
+apiVersion: v2
+name: piwigo
+description: A Helm chart for Piwigo - photo gallery
+type: application
+version: 0.1.0
+appVersion: "15.2.0"
+home: https://piwigo.org
+sources:
+  - https://github.com/Piwigo/Piwigo
+keywords:
+  - piwigo
+  - photos
+  - gallery
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

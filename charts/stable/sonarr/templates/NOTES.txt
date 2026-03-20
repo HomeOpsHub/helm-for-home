@@ -1,107 +1,8 @@
 Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
 
-
-Sonarr is a PVR for Usenet and BitTorrent users. It monitors multiple RSS
-feeds for new episodes of your favorite TV shows and automatically grabs,
-sorts, and renames them.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Accessing the Web UI
-Sonarr is a PVR for Usenet and BitTorrent users that automatically
-monitors, downloads, and manages your TV show library.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Accessing Sonarr
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-{{- if .Values.ingress.enabled }}
-  {{- range $host := .Values.ingress.hosts }}
-    {{- range $path := $host.paths }}
-
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path.path }}
-
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path }}
-
-    {{- end }}
-  {{- end }}
-{{- else if contains "NodePort" .Values.service.type }}
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "sonarr.fullname" . }})
-  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-
-  echo "Web UI: http://$NODE_IP:$NODE_PORT"
-
-  echo "Sonarr: http://$NODE_IP:$NODE_PORT"
-
-{{- else if contains "LoadBalancer" .Values.service.type }}
-  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-        Watch status: kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "sonarr.fullname" . }}
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "sonarr.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-
-  echo "Web UI: http://$SERVICE_IP:{{ .Values.service.port }}"
-{{- else }}
-  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "sonarr.fullname" . }} 8989:{{ .Values.service.port }}
-  Web UI: http://localhost:8989
-
-  echo "Sonarr: http://$SERVICE_IP:{{ .Values.service.port }}"
-{{- else }}
-  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "sonarr.fullname" . }} 8989:{{ .Values.service.port }}
-  Sonarr: http://localhost:8989
-
-{{- end }}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Getting Started
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  1. Open the Sonarr web UI in your browser.
-
-  2. Go to Settings > Indexers to add your indexers (or connect Prowlarr).
-  3. Go to Settings > Download Clients to configure SABnzbd/Transmission.
-  4. Add your TV series via Series > Add New.
-  5. Configure root folders to point at your media volume mounts (e.g., /tv).
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Media Libraries
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-{{- if .Values.mediaVolumes }}
-  Configured media volumes:
-  {{- range .Values.mediaVolumes }}
-    - {{ .name }}: {{ .mountPath }}
-  {{- end }}
-{{- else }}
-  WARNING: No media volumes configured. Add entries to mediaVolumes in
-  values.yaml to make your TV library and downloads available to Sonarr.
-{{- end }}
-
-  2. Configure your download client (SABnzbd, NZBGet, qBittorrent, etc.).
-  3. Add an indexer (Newznab, Torznab, etc.).
-  4. Set your root folder for TV shows.
-  5. Start adding series to monitor and download automatically.
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Persistence
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-{{- if .Values.persistence.config.enabled }}
-
-  Persistent storage is ENABLED (config, metadata, and cache are retained).
-{{- else }}
-  WARNING: Persistence is DISABLED. All configuration and metadata will be
-  lost on pod restart. Set persistence.config.enabled=true to retain data.
-
-  Persistent storage is ENABLED (configuration and database are retained).
-{{- else }}
-  WARNING: Persistence is DISABLED. All configuration will be lost on pod restart.
-  Set persistence.config.enabled=true to retain your Sonarr configuration.
-
-{{- end }}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Troubleshooting
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Access the Web UI:
+    kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "sonarr.fullname" . }} 8989:{{ .Values.service.port }}
+    Web UI: http://localhost:8989
 
   Check pod status:
     kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
@@ -109,8 +10,5 @@ monitors, downloads, and manages your TV show library.
   View logs:
     kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
 
-
-  Docs: https://sonarr.org/docs/
-
-  Docs: https://wiki.servarr.com/sonarr
+  Docs: https://sonarr.tv
 

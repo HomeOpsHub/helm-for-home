@@ -1,0 +1,19 @@
+apiVersion: v2
+name: dashy
+description: A Helm chart for Dashy - feature-rich dashboard
+type: application
+version: 0.1.0
+appVersion: "3.1.0"
+home: https://dashy.to
+sources:
+  - https://github.com/Lissy93/dashy
+keywords:
+  - dashy
+  - dashboard
+  - homepage
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Dashboard

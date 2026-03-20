@@ -1,0 +1,20 @@
+apiVersion: v2
+name: threadfin
+description: A Helm chart for Threadfin - M3U proxy for Plex
+type: application
+version: 0.1.0
+appVersion: "1.1.20"
+home: https://github.com/Threadfin/Threadfin
+sources:
+  - https://github.com/Threadfin/Threadfin
+keywords:
+  - threadfin
+  - iptv
+  - m3u
+  - plex
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Media

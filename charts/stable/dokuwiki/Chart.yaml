@@ -1,0 +1,19 @@
+apiVersion: v2
+name: dokuwiki
+description: A Helm chart for DokuWiki - simple wiki engine
+type: application
+version: 0.1.0
+appVersion: "2024.02.06b"
+home: https://www.dokuwiki.org
+sources:
+  - https://github.com/dokuwiki/dokuwiki
+keywords:
+  - dokuwiki
+  - wiki
+  - documentation
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity

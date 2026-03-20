@@ -1,0 +1,19 @@
+apiVersion: v2
+name: homepage
+description: A Helm chart for Homepage - application dashboard
+type: application
+version: 0.1.0
+appVersion: "0.9.12"
+home: https://gethomepage.dev
+sources:
+  - https://github.com/gethomepage/homepage
+keywords:
+  - homepage
+  - dashboard
+  - startpage
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Dashboard

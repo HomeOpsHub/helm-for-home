@@ -1,0 +1,20 @@
+apiVersion: v2
+name: nextcloud
+description: A Helm chart for Nextcloud - self-hosted cloud platform
+type: application
+version: 0.1.0
+appVersion: "30.0.4"
+home: https://nextcloud.com
+sources:
+  - https://github.com/nextcloud/server
+keywords:
+  - nextcloud
+  - cloud
+  - files
+  - sync
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Productivity

@@ -1,0 +1,19 @@
+apiVersion: v2
+name: firefly
+description: A Helm chart for Firefly III - personal finance manager
+type: application
+version: 0.1.0
+appVersion: "6.1.24"
+home: https://www.firefly-iii.org
+sources:
+  - https://github.com/firefly-iii/firefly-iii
+keywords:
+  - firefly
+  - finance
+  - budgeting
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Finance

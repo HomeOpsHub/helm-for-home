@@ -1,0 +1,13 @@
+Thank you for installing {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
+
+  Access the Web UI:
+    kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "miniflux.fullname" . }} 8080:{{ .Values.service.port }}
+    Web UI: http://localhost:8080
+
+  Check pod status:
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  View logs:
+    kubectl logs --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  Docs: https://miniflux.app

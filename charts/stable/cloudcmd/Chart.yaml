@@ -1,0 +1,19 @@
+apiVersion: v2
+name: cloudcmd
+description: A Helm chart for Cloud Commander - web file manager
+type: application
+version: 0.1.0
+appVersion: "16.16.1"
+home: https://cloudcmd.io
+sources:
+  - https://github.com/coderaiser/cloudcmd
+keywords:
+  - cloudcmd
+  - files
+  - manager
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Utilities

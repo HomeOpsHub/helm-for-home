@@ -1,0 +1,19 @@
+apiVersion: v2
+name: speedtest-tracker
+description: A Helm chart for Speedtest Tracker - internet speed monitoring
+type: application
+version: 0.1.0
+appVersion: "1.1.0"
+home: https://github.com/alexjustesen/speedtest-tracker
+sources:
+  - https://github.com/alexjustesen/speedtest-tracker
+keywords:
+  - speedtest
+  - internet
+  - monitoring
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Monitoring

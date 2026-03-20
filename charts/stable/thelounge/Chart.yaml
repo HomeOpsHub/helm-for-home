@@ -1,0 +1,19 @@
+apiVersion: v2
+name: thelounge
+description: A Helm chart for The Lounge - web IRC client
+type: application
+version: 0.1.0
+appVersion: "4.4.3"
+home: https://thelounge.chat
+sources:
+  - https://github.com/thelounge/thelounge
+keywords:
+  - thelounge
+  - irc
+  - chat
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Communication
