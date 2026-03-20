@@ -1,0 +1,21 @@
+apiVersion: v2
+name: sabnzbd
+description: A Helm chart for SABnzbd - a free and easy binary newsreader
+type: application
+version: 0.1.0
+appVersion: "4.4.1"
+home: https://sabnzbd.org
+sources:
+  - https://github.com/sabnzbd/sabnzbd
+  - https://github.com/linuxserver/docker-sabnzbd
+keywords:
+  - sabnzbd
+  - usenet
+  - nzb
+  - downloader
+  - self-hosted
+maintainers:
+  - name: HomeOpsHub
+    url: https://github.com/HomeOpsHub
+annotations:
+  category: Downloads

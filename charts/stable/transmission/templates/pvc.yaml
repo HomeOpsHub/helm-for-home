@@ -1,0 +1,19 @@
+{{- if .Values.persistence.config.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "transmission.fullname" . }}-config
+  labels:
+    {{- include "transmission.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- range .Values.persistence.config.accessModes }}
+    - {{ . }}
+    {{- end }}
+  {{- if .Values.persistence.config.storageClass }}
+  storageClassName: {{ .Values.persistence.config.storageClass | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.config.size }}
+{{- end }}
