@@ -11,4 +11,3 @@
 ## Migration Progress
 
 - [x] **Heimdall** (dashboard) — migrated to `charts/stable/heimdall` (branch: `heimdall`)
-- [x] **Jellyfin** (media server) — migrated to `charts/stable/jellyfin` (branch: `jellyfin`)
