@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Generate release notes for Helm for Home.
 # Usage: ./scripts/generate-release-notes.sh [TAG]
-set -euo pipefail
+set -uo pipefail
 
 TAG="${1:-$(git describe --tags --abbrev=0 2>/dev/null || echo 'unreleased')}"
-PREV_TAG=$(git tag --sort=-v:refname | grep -v "^${TAG}$" | head -1 || echo "")
+PREV_TAG=$(git tag --sort=-v:refname 2>/dev/null | grep -v "^${TAG}$" | head -1 || true)
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 
 echo "## 🏠 Helm for Home — ${TAG}"
@@ -23,8 +23,8 @@ echo '```'
 echo ""
 
 # Chart inventory
-stable_count=$(find "${REPO_ROOT}/charts/stable" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l)
-beta_count=$(find "${REPO_ROOT}/charts/beta" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l)
+stable_count=$(find "${REPO_ROOT}/charts/stable" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+beta_count=$(find "${REPO_ROOT}/charts/beta" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 echo "### 📊 Chart Inventory"
 echo ""
 echo "| Category | Count |"
@@ -45,13 +45,13 @@ echo "|-------|---------|-------------|----------|"
 
 for chart in "${REPO_ROOT}"/charts/stable/*/Chart.yaml "${REPO_ROOT}"/charts/beta/*/Chart.yaml; do
   if [ -f "$chart" ]; then
-    name=$(grep '^name:' "$chart" | head -1 | awk '{print $2}')
-    version=$(grep '^version:' "$chart" | head -1 | awk '{print $2}')
-    appVersion=$(grep '^appVersion:' "$chart" | head -1 | awk '{print $2}' | tr -d '"')
-    category=$(grep 'category:' "$chart" | head -1 | awk '{print $2}')
+    name=$(grep '^name:' "$chart" | head -1 | awk '{print $2}' || true)
+    version=$(grep '^version:' "$chart" | head -1 | awk '{print $2}' || true)
+    appVersion=$(grep '^appVersion:' "$chart" | head -1 | awk '{print $2}' | tr -d '"' || true)
+    category=$(grep 'category:' "$chart" | head -1 | awk '{print $2}' || true)
     dir=$(dirname "$chart")
-    tier=$(echo "$dir" | grep -oE 'stable|beta')
-    echo "| ${name} | ${version} | ${appVersion} | ${category:-General} (${tier}) |"
+    tier=$(echo "$dir" | grep -oE 'stable|beta' || echo "stable")
+    echo "| ${name:-unknown} | ${version:-0.0.0} | ${appVersion:-latest} | ${category:-General} (${tier}) |"
   fi
 done
 
@@ -60,15 +60,15 @@ echo "</details>"
 echo ""
 
 # Changes since last tag
-if [ -n "$PREV_TAG" ] && [ "$TAG" != "unreleased" ]; then
+if [ -n "${PREV_TAG:-}" ] && [ "$TAG" != "unreleased" ]; then
   echo "### 🔄 Changes since \`${PREV_TAG}\`"
   echo ""
-  git log "${PREV_TAG}..${TAG}" --oneline --no-merges --format="- %s" 2>/dev/null | head -50
+  git log "${PREV_TAG}..${TAG}" --oneline --no-merges --format="- %s" 2>/dev/null | head -50 || true
   echo ""
-elif [ "$TAG" = "unreleased" ] && [ -n "$PREV_TAG" ]; then
+elif [ "$TAG" = "unreleased" ] && [ -n "${PREV_TAG:-}" ]; then
   echo "### 🔄 Changes since \`${PREV_TAG}\`"
   echo ""
-  git log "${PREV_TAG}..HEAD" --oneline --no-merges --format="- %s" | head -50
+  git log "${PREV_TAG}..HEAD" --oneline --no-merges --format="- %s" 2>/dev/null | head -50 || true
   echo ""
 fi
 
