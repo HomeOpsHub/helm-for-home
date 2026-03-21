@@ -125,6 +125,153 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/adguard-home-0.1.0/adguard-home-0.1.0.tgz
     version: 0.1.0
+  airsonic:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 11.1.4
+    created: "2026-03-21T00:49:03.505570557Z"
+    description: A Helm chart for Airsonic - personal music streaming server
+    digest: 86325b9509d166accb975d5915753d1ea88ac133755186e34be9f7d0fa36fd36
+    home: https://airsonic.github.io
+    keywords:
+    - airsonic
+    - music
+    - streaming
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: airsonic
+    sources:
+    - https://github.com/airsonic-advanced/airsonic-advanced
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/airsonic-0.1.0/airsonic-0.1.0.tgz
+    version: 0.1.0
+  bazarr:
+  - annotations:
+      category: Media/Automation
+    apiVersion: v2
+    appVersion: 1.5.1
+    created: "2026-03-21T00:49:03.615815288Z"
+    description: A Helm chart for Bazarr — automatic subtitle management for Sonarr
+      and Radarr
+    digest: 240afde06ce2bfa19c9dc3ebda17046339b7f59477068de3cf445c2c5d9ea2ec
+    home: https://www.bazarr.media
+    keywords:
+    - bazarr
+    - subtitles
+    - media
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: bazarr
+    sources:
+    - https://github.com/morpheus65535/bazarr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/bazarr-0.1.0/bazarr-0.1.0.tgz
+    version: 0.1.0
+  bitwarden:
+  - annotations:
+      category: Security
+    apiVersion: v2
+    appVersion: 1.32.7
+    created: "2026-03-21T00:49:03.741088629Z"
+    description: A Helm chart for Vaultwarden - lightweight Bitwarden server
+    digest: 82a2853e7fcf6fee81d7227d3b9ffbed4143580b0d2b634b3790104a6c181c6a
+    home: https://github.com/dani-garcia/vaultwarden
+    keywords:
+    - bitwarden
+    - vaultwarden
+    - passwords
+    - security
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: bitwarden
+    sources:
+    - https://github.com/dani-garcia/vaultwarden
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/bitwarden-0.1.0/bitwarden-0.1.0.tgz
+    version: 0.1.0
+  booksonic:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: "1.2"
+    created: "2026-03-21T00:49:03.862537534Z"
+    description: A Helm chart for Booksonic - audiobook streaming server
+    digest: 9d371a6424f995309c6637c10a550bc638f7f23ecda2a9cffc81497fde687788
+    home: https://booksonic.org
+    keywords:
+    - booksonic
+    - audiobooks
+    - streaming
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: booksonic
+    sources:
+    - https://github.com/popeen/Booksonic-App
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/booksonic-0.1.0/booksonic-0.1.0.tgz
+    version: 0.1.0
+  calibre:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 7.22.0
+    created: "2026-03-21T00:49:03.995630853Z"
+    description: A Helm chart for Calibre - e-book management
+    digest: 2073b6e0e4293ee71abd8cdc5407ff391d31f9d1f25ffb4775e3039daa0cd4dc
+    home: https://calibre-ebook.com
+    keywords:
+    - calibre
+    - ebooks
+    - library
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: calibre
+    sources:
+    - https://github.com/kovidgoyal/calibre
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/calibre-0.1.0/calibre-0.1.0.tgz
+    version: 0.1.0
+  calibreweb:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 0.6.24
+    created: "2026-03-21T00:49:04.15105671Z"
+    description: A Helm chart for Calibre-Web - web-based e-book reader
+    digest: c37fd43ddd7a308702a2adf7b9237b3cd368c1fb02bca74fd9313674fb0d075a
+    home: https://github.com/janeczku/calibre-web
+    keywords:
+    - calibre-web
+    - ebooks
+    - reader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: calibreweb
+    sources:
+    - https://github.com/janeczku/calibre-web
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/calibreweb-0.1.0/calibreweb-0.1.0.tgz
+    version: 0.1.0
   cloudbeaver:
   - annotations:
       category: Database
@@ -160,6 +307,127 @@ entries:
     type: application
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/cloudbeaver-0.1.0/cloudbeaver-0.1.0.tgz
+    version: 0.1.0
+  cloudcmd:
+  - annotations:
+      category: Utilities
+    apiVersion: v2
+    appVersion: 16.16.1
+    created: "2026-03-21T00:49:04.272996959Z"
+    description: A Helm chart for Cloud Commander - web file manager
+    digest: 0a2b05acb95591f943e5872cc7dd58a48330448f083ff1f59981d28306adfab1
+    home: https://cloudcmd.io
+    keywords:
+    - cloudcmd
+    - files
+    - manager
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: cloudcmd
+    sources:
+    - https://github.com/coderaiser/cloudcmd
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/cloudcmd-0.1.0/cloudcmd-0.1.0.tgz
+    version: 0.1.0
+  cloudflare-ddns:
+  - annotations:
+      category: Networking
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-03-21T00:49:04.387073026Z"
+    description: A Helm chart for Cloudflare DDNS - dynamic DNS updater
+    digest: c86d67b9d63bb57e166b5a51145c32a9501289db173d0ba6ca3eaf1663639cc4
+    home: https://github.com/oznu/docker-cloudflare-ddns
+    keywords:
+    - cloudflare
+    - ddns
+    - dns
+    - networking
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: cloudflare-ddns
+    sources:
+    - https://github.com/oznu/docker-cloudflare-ddns
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/cloudflare-ddns-0.1.0/cloudflare-ddns-0.1.0.tgz
+    version: 0.1.0
+  code-server:
+  - annotations:
+      category: Development
+    apiVersion: v2
+    appVersion: 4.96.4
+    created: "2026-03-21T00:49:04.484091618Z"
+    description: A Helm chart for Code-Server - VS Code in the browser
+    digest: 99869344988aeefa0594bbddf8652ca3d3b6c6c19781c24a9c7b6a2aecffd543
+    home: https://coder.com
+    keywords:
+    - code-server
+    - vscode
+    - ide
+    - development
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: code-server
+    sources:
+    - https://github.com/coder/code-server
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/code-server-0.1.0/code-server-0.1.0.tgz
+    version: 0.1.0
+  couchdb:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 3.4.2
+    created: "2026-03-21T00:49:04.629703618Z"
+    description: A Helm chart for CouchDB - NoSQL document database
+    digest: 86e60e7130777bcc053dfd466e3015349afa447a4d815522a5cdf689f61587bb
+    home: https://couchdb.apache.org
+    keywords:
+    - couchdb
+    - database
+    - nosql
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: couchdb
+    sources:
+    - https://github.com/apache/couchdb
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/couchdb-0.1.0/couchdb-0.1.0.tgz
+    version: 0.1.0
+  couchpotato:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 3.0.1
+    created: "2026-03-21T00:49:04.766706692Z"
+    description: A Helm chart for CouchPotato - movie download manager
+    digest: c1c4220d8386ae79e6a13682e7a14cb4be7201df5ef6a560d749062406afb1aa
+    home: https://couchpota.to
+    keywords:
+    - couchpotato
+    - movies
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: couchpotato
+    sources:
+    - https://github.com/CouchPotato/CouchPotatoServer
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/couchpotato-0.1.0/couchpotato-0.1.0.tgz
     version: 0.1.0
   custom-error-pages:
   - annotations:
@@ -217,6 +485,274 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/custom-error-pages-0.1.0/custom-error-pages-0.1.0.tgz
     version: 0.1.0
+  dashy:
+  - annotations:
+      category: Dashboard
+    apiVersion: v2
+    appVersion: 3.1.0
+    created: "2026-03-21T00:49:04.879959149Z"
+    description: A Helm chart for Dashy - feature-rich dashboard
+    digest: 85b6c57f610499afcc5acea5ec734bc3634915eb48d6cb4a9ea16ee16b5fc843
+    home: https://dashy.to
+    keywords:
+    - dashy
+    - dashboard
+    - homepage
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: dashy
+    sources:
+    - https://github.com/Lissy93/dashy
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/dashy-0.1.0/dashy-0.1.0.tgz
+    version: 0.1.0
+  ddns-updater:
+  - annotations:
+      category: Networking
+    apiVersion: v2
+    appVersion: 2.8.1
+    created: "2026-03-21T00:49:04.993391923Z"
+    description: A Helm chart for DDNS Updater - dynamic DNS update client
+    digest: 110207e25eb3a3cca69f8cfdd609afd345749930065b6f6c0c25832583bc02f1
+    home: https://github.com/qdm12/ddns-updater
+    keywords:
+    - ddns
+    - dns
+    - updater
+    - networking
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: ddns-updater
+    sources:
+    - https://github.com/qdm12/ddns-updater
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/ddns-updater-0.1.0/ddns-updater-0.1.0.tgz
+    version: 0.1.0
+  deluge:
+  - annotations:
+      category: Downloads
+    apiVersion: v2
+    appVersion: 2.1.1
+    created: "2026-03-21T00:49:05.120524391Z"
+    description: A Helm chart for Deluge - lightweight BitTorrent client
+    digest: 7ab02df907de64917e15f3c1270539f548b66b15d3c26e40bcee88680838bf16
+    home: https://deluge-torrent.org
+    keywords:
+    - deluge
+    - torrent
+    - bittorrent
+    - downloader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: deluge
+    sources:
+    - https://github.com/deluge-torrent/deluge
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/deluge-0.1.0/deluge-0.1.0.tgz
+    version: 0.1.0
+  dokuwiki:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: 2024.02.06b
+    created: "2026-03-21T00:49:05.243911227Z"
+    description: A Helm chart for DokuWiki - simple wiki engine
+    digest: 8cbde1e935da22588c20e8044c0fc2402512e6e851b763e775fe4180b0152bf0
+    home: https://www.dokuwiki.org
+    keywords:
+    - dokuwiki
+    - wiki
+    - documentation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: dokuwiki
+    sources:
+    - https://github.com/dokuwiki/dokuwiki
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/dokuwiki-0.1.0/dokuwiki-0.1.0.tgz
+    version: 0.1.0
+  drone-ci:
+  - annotations:
+      category: CI-CD
+    apiVersion: v2
+    appVersion: 2.24.0
+    created: "2026-03-21T00:49:05.371567108Z"
+    description: A Helm chart for Drone CI - continuous integration platform
+    digest: b853a881273b42ac02a84f66984674071e4e3cbac8a03ebafacecdce64d211bc
+    home: https://www.drone.io
+    keywords:
+    - drone
+    - ci
+    - cd
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: drone-ci
+    sources:
+    - https://github.com/harness/drone
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/drone-ci-0.1.0/drone-ci-0.1.0.tgz
+    version: 0.1.0
+  duplicacy:
+  - annotations:
+      category: Backup
+    apiVersion: v2
+    appVersion: 1.8.0
+    created: "2026-03-21T00:49:05.58210685Z"
+    description: A Helm chart for Duplicacy - cloud backup tool
+    digest: 58e82e861196aa79eb2c3ddca33d6bbfebebc01185fc096e421b219b6d6bed63
+    home: https://duplicacy.com
+    keywords:
+    - duplicacy
+    - backup
+    - cloud
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: duplicacy
+    sources:
+    - https://github.com/gilbertchen/duplicacy
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/duplicacy-0.1.0/duplicacy-0.1.0.tgz
+    version: 0.1.0
+  duplicati:
+  - annotations:
+      category: Backup
+    apiVersion: v2
+    appVersion: 2.1.0.2
+    created: "2026-03-21T00:49:05.710317819Z"
+    description: A Helm chart for Duplicati - free backup client
+    digest: 88976d09f75698dafa2edf49ad1f9d6ffa4b34573b32039a92cd3a523596f494
+    home: https://www.duplicati.com
+    keywords:
+    - duplicati
+    - backup
+    - encryption
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: duplicati
+    sources:
+    - https://github.com/duplicati/duplicati
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/duplicati-0.1.0/duplicati-0.1.0.tgz
+    version: 0.1.0
+  emby:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 4.9.0.42
+    created: "2026-03-21T00:49:05.830752719Z"
+    description: A Helm chart for Emby - personal media server
+    digest: c60718ecda2d81542a44b383caae9167a955c8ea684b4e729e8bb55ca7a1aa32
+    home: https://emby.media
+    keywords:
+    - emby
+    - media
+    - streaming
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: emby
+    sources:
+    - https://github.com/MediaBrowser/Emby
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/emby-0.1.0/emby-0.1.0.tgz
+    version: 0.1.0
+  esphome:
+  - annotations:
+      category: Automation
+    apiVersion: v2
+    appVersion: 2024.12.4
+    created: "2026-03-21T00:49:05.967884319Z"
+    description: A Helm chart for ESPHome - ESP device management
+    digest: c917afcb94d9d040d422f9958847bc8c3903196c3a90bae30c2f64d0252264dd
+    home: https://esphome.io
+    keywords:
+    - esphome
+    - iot
+    - esp32
+    - home-automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: esphome
+    sources:
+    - https://github.com/esphome/esphome
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/esphome-0.1.0/esphome-0.1.0.tgz
+    version: 0.1.0
+  firefly:
+  - annotations:
+      category: Finance
+    apiVersion: v2
+    appVersion: 6.1.24
+    created: "2026-03-21T00:49:06.093014913Z"
+    description: A Helm chart for Firefly III - personal finance manager
+    digest: 2f6a112e5648b53da624c29c06d21bb1402d423220bfd2a2eb2bb6625d3ac84e
+    home: https://www.firefly-iii.org
+    keywords:
+    - firefly
+    - finance
+    - budgeting
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: firefly
+    sources:
+    - https://github.com/firefly-iii/firefly-iii
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/firefly-0.1.0/firefly-0.1.0.tgz
+    version: 0.1.0
+  flaresolverr:
+  - annotations:
+      category: Networking
+    apiVersion: v2
+    appVersion: 3.3.21
+    created: "2026-03-21T00:49:06.215559885Z"
+    description: A Helm chart for FlareSolverr - proxy for Cloudflare
+    digest: c1c625b35629410dc9ab4580b2ffae4c47c39ac2bafa5b955c4a12eea7785514
+    home: https://github.com/FlareSolverr/FlareSolverr
+    keywords:
+    - flaresolverr
+    - proxy
+    - cloudflare
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: flaresolverr
+    sources:
+    - https://github.com/FlareSolverr/FlareSolverr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/flaresolverr-0.1.0/flaresolverr-0.1.0.tgz
+    version: 0.1.0
   freshrss:
   - annotations:
       category: Media
@@ -261,6 +797,80 @@ entries:
     type: application
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/freshrss-0.1.0/freshrss-0.1.0.tgz
+    version: 0.1.0
+  get-iplayer:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: "3.35"
+    created: "2026-03-21T00:49:06.347247403Z"
+    description: A Helm chart for get_iplayer - BBC iPlayer downloader
+    digest: 53d3ffd70d72b46a0e9236e6fb96b13555db150c5ace4f8ae7ea0e9701cf6bf5
+    home: https://github.com/get-iplayer/get_iplayer
+    keywords:
+    - get-iplayer
+    - bbc
+    - downloader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: get-iplayer
+    sources:
+    - https://github.com/get-iplayer/get_iplayer
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/get-iplayer-0.1.0/get-iplayer-0.1.0.tgz
+    version: 0.1.0
+  gitea:
+  - annotations:
+      category: Development
+    apiVersion: v2
+    appVersion: 1.22.6
+    created: "2026-03-21T00:49:06.470129842Z"
+    description: A Helm chart for Gitea - lightweight Git hosting
+    digest: 720b80261f521fedfcf88ade247aca58cb676aecaf9d4fbc17876bbbb41c19f3
+    home: https://gitea.io
+    keywords:
+    - gitea
+    - git
+    - hosting
+    - development
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: gitea
+    sources:
+    - https://github.com/go-gitea/gitea
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/gitea-0.1.0/gitea-0.1.0.tgz
+    version: 0.1.0
+  gitlab:
+  - annotations:
+      category: Development
+    apiVersion: v2
+    appVersion: 17.7.0
+    created: "2026-03-21T00:49:06.608263812Z"
+    description: A Helm chart for GitLab CE - DevOps platform
+    digest: 48df247a12d1c982771aad9b19c6664de944f3243691afe37358491a2e2b09c3
+    home: https://about.gitlab.com
+    keywords:
+    - gitlab
+    - git
+    - devops
+    - ci
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: gitlab
+    sources:
+    - https://gitlab.com/gitlab-org/gitlab
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/gitlab-0.1.0/gitlab-0.1.0.tgz
     version: 0.1.0
   glances:
   - annotations:
@@ -347,6 +957,209 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/gotify-0.1.0/gotify-0.1.0.tgz
     version: 0.1.0
+  guacamole:
+  - annotations:
+      category: Networking
+    apiVersion: v2
+    appVersion: 1.5.5
+    created: "2026-03-21T00:49:06.723528023Z"
+    description: A Helm chart for Apache Guacamole - remote desktop gateway
+    digest: a1dd7c0e9ea7f25bdc5d27dfcef4fc72770680089d7ad6a0bf617c88596b62ec
+    home: https://guacamole.apache.org
+    keywords:
+    - guacamole
+    - remote-desktop
+    - vnc
+    - rdp
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: guacamole
+    sources:
+    - https://github.com/apache/guacamole-server
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/guacamole-0.1.0/guacamole-0.1.0.tgz
+    version: 0.1.0
+  headlamp:
+  - annotations:
+      category: Utilities
+    apiVersion: v2
+    appVersion: 0.40.1
+    created: "2026-03-21T00:49:06.851246026Z"
+    dependencies:
+    - name: headlamp
+      repository: https://kubernetes-sigs.github.io/headlamp/
+      version: 0.40.1
+    description: A Helm chart for Headlamp — a Kubernetes Web UI, with Traefik IngressRoute
+      support
+    digest: 3f1cd5c7ecbb2a658f0d62b172049c81d77a805209070389fe7abb6e022b17fa
+    home: https://github.com/kubernetes-sigs/headlamp
+    icon: https://raw.githubusercontent.com/kubernetes-sigs/headlamp/main/frontend/public/headlamp-logo.svg
+    keywords:
+    - kubernetes
+    - dashboard
+    - ui
+    - self-hosted
+    - homelab
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: headlamp
+    sources:
+    - https://github.com/kubernetes-sigs/headlamp
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/headlamp-0.1.0/headlamp-0.1.0.tgz
+    version: 0.1.0
+  healthchecks:
+  - annotations:
+      category: Monitoring
+    apiVersion: v2
+    appVersion: "3.7"
+    created: "2026-03-21T00:49:06.983155536Z"
+    description: A Helm chart for Healthchecks - cron job monitoring
+    digest: 9bd55387c0ece9a011aae97be5be8cb0f6dd781cf38ccfa7cb809b06b80304b5
+    home: https://healthchecks.io
+    keywords:
+    - healthchecks
+    - monitoring
+    - cron
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: healthchecks
+    sources:
+    - https://github.com/healthchecks/healthchecks
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/healthchecks-0.1.0/healthchecks-0.1.0.tgz
+    version: 0.1.0
+  heimdall:
+  - annotations:
+      category: Dashboard
+    apiVersion: v2
+    appVersion: 2.6.1
+    created: "2026-03-21T00:49:07.107210547Z"
+    description: A Helm chart for Heimdall — a self-hosted application dashboard
+    digest: c2d976edeb40c05900544965a3799564e06d689a3eac82dafd54f18637262991
+    home: https://heimdall.site
+    keywords:
+    - heimdall
+    - dashboard
+    - homepage
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: heimdall
+    sources:
+    - https://github.com/linuxserver/Heimdall
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/heimdall-0.1.0/heimdall-0.1.0.tgz
+    version: 0.1.0
+  homeassistant:
+  - annotations:
+      category: Automation
+    apiVersion: v2
+    appVersion: 2024.12.5
+    created: "2026-03-21T00:49:07.210586926Z"
+    description: A Helm chart for Home Assistant - open source home automation
+    digest: 86860263467427d3f12851c2683a1e7a1b3af0e5573e65ad41eaa8683333e39d
+    home: https://www.home-assistant.io
+    keywords:
+    - homeassistant
+    - home-automation
+    - iot
+    - smart-home
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: homeassistant
+    sources:
+    - https://github.com/home-assistant/core
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/homeassistant-0.1.0/homeassistant-0.1.0.tgz
+    version: 0.1.0
+  homebridge:
+  - annotations:
+      category: Automation
+    apiVersion: v2
+    appVersion: 1.8.4
+    created: "2026-03-21T00:49:07.343955245Z"
+    description: A Helm chart for Homebridge - HomeKit bridge
+    digest: 6070ff9dec1db6b9835346fb3acd5a9bb34a13b9d967301024410d460a9ad9ea
+    home: https://homebridge.io
+    keywords:
+    - homebridge
+    - homekit
+    - apple
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: homebridge
+    sources:
+    - https://github.com/homebridge/homebridge
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/homebridge-0.1.0/homebridge-0.1.0.tgz
+    version: 0.1.0
+  homepage:
+  - annotations:
+      category: Dashboard
+    apiVersion: v2
+    appVersion: 0.9.12
+    created: "2026-03-21T00:49:07.484671419Z"
+    description: A Helm chart for Homepage - application dashboard
+    digest: f5b655b224ef6f1b2378013cbd993699dbca9d46d0021aa239ef8c70099226d5
+    home: https://gethomepage.dev
+    keywords:
+    - homepage
+    - dashboard
+    - startpage
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: homepage
+    sources:
+    - https://github.com/gethomepage/homepage
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/homepage-0.1.0/homepage-0.1.0.tgz
+    version: 0.1.0
+  ispyagentdvr:
+  - annotations:
+      category: Security
+    apiVersion: v2
+    appVersion: 5.8.5.0
+    created: "2026-03-21T00:49:07.615915126Z"
+    description: A Helm chart for iSpy Agent DVR - video surveillance
+    digest: c9347cd641597d381d4b6d3c571b4528fcbaa571842bfe3cafa9e009e7133755
+    home: https://www.ispyconnect.com
+    keywords:
+    - ispy
+    - surveillance
+    - cameras
+    - nvr
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: ispyagentdvr
+    sources:
+    - https://github.com/ispysoftware/agent-dvr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/ispyagentdvr-0.1.0/ispyagentdvr-0.1.0.tgz
+    version: 0.1.0
   it-tools:
   - annotations:
       category: Utilities
@@ -406,6 +1219,477 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/it-tools-0.1.0/it-tools-0.1.0.tgz
     version: 0.1.0
+  jackett:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 0.22.1122
+    created: "2026-03-21T00:49:07.718053528Z"
+    description: A Helm chart for Jackett - torrent indexer proxy
+    digest: 9dd432580167d5d4cfbacacf44a2f27e04f2e11603a166a57b79660fe2d623a0
+    home: https://github.com/Jackett/Jackett
+    keywords:
+    - jackett
+    - indexer
+    - torrent
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: jackett
+    sources:
+    - https://github.com/Jackett/Jackett
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/jackett-0.1.0/jackett-0.1.0.tgz
+    version: 0.1.0
+  jellyfin:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 10.10.6
+    created: "2026-03-21T00:49:07.829927058Z"
+    description: A Helm chart for Jellyfin — a free software media system
+    digest: 887043fabb58ba341a2e14df564c4bad97a7ae0c4dfb66745c3ed2aa23221fda
+    home: https://jellyfin.org
+    keywords:
+    - jellyfin
+    - media
+    - streaming
+    - movies
+    - tv
+    - music
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: jellyfin
+    sources:
+    - https://github.com/jellyfin/jellyfin
+    - https://github.com/linuxserver/docker-jellyfin
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/jellyfin-0.1.0/jellyfin-0.1.0.tgz
+    version: 0.1.0
+  joomla:
+  - annotations:
+      category: CMS
+    apiVersion: v2
+    appVersion: 5.2.3
+    created: "2026-03-21T00:49:07.971603176Z"
+    description: A Helm chart for Joomla - content management system
+    digest: c9b2c94046ba3a927518840ad211ee3d0171095edaa0ade3b7741e5a8df568fc
+    home: https://www.joomla.org
+    keywords:
+    - joomla
+    - cms
+    - website
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: joomla
+    sources:
+    - https://github.com/joomla/joomla-cms
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/joomla-0.1.0/joomla-0.1.0.tgz
+    version: 0.1.0
+  komga:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 1.14.1
+    created: "2026-03-21T00:49:08.119111956Z"
+    description: A Helm chart for Komga - comics and manga server
+    digest: 0487b5778a04436aaabbe7a965b0bfff71b277e97feb18411de8687808c830ef
+    home: https://komga.org
+    keywords:
+    - komga
+    - comics
+    - manga
+    - reader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: komga
+    sources:
+    - https://github.com/gotson/komga
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/komga-0.1.0/komga-0.1.0.tgz
+    version: 0.1.0
+  krusader:
+  - annotations:
+      category: Utilities
+    apiVersion: v2
+    appVersion: 2.8.1
+    created: "2026-03-21T00:49:08.238244297Z"
+    description: A Helm chart for Krusader - web file manager
+    digest: 3615516c1cdf37eabdf1cf633694dd563405321641edb7a37957fa87dc804c27
+    home: https://krusader.org
+    keywords:
+    - krusader
+    - files
+    - manager
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: krusader
+    sources:
+    - https://github.com/KDE/krusader
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/krusader-0.1.0/krusader-0.1.0.tgz
+    version: 0.1.0
+  lidarr:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 2.8.2.4493
+    created: "2026-03-21T00:49:08.349131581Z"
+    description: A Helm chart for Lidarr - a music collection manager and PVR
+    digest: 42b7ff13b30e6d33ece936f83add7c798597606ef8b435d4b26bfb70b5f40654
+    home: https://lidarr.audio
+    keywords:
+    - lidarr
+    - music
+    - pvr
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: lidarr
+    sources:
+    - https://github.com/Lidarr/Lidarr
+    - https://github.com/linuxserver/docker-lidarr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/lidarr-0.1.0/lidarr-0.1.0.tgz
+    version: 0.1.0
+  loki:
+  - annotations:
+      category: Monitoring
+    apiVersion: v2
+    appVersion: 3.3.2
+    created: "2026-03-21T00:49:08.472924644Z"
+    description: A Helm chart for Grafana Loki - log aggregation
+    digest: 1a2d2705f261412f0476d54a16160766c6e9003c745adca00c01dac1d73ad8c6
+    home: https://grafana.com/oss/loki
+    keywords:
+    - loki
+    - logging
+    - grafana
+    - monitoring
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: loki
+    sources:
+    - https://github.com/grafana/loki
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/loki-0.1.0/loki-0.1.0.tgz
+    version: 0.1.0
+  mealie:
+  - annotations:
+      category: Utilities
+    apiVersion: v2
+    appVersion: 2.5.0
+    created: "2026-03-21T00:49:08.600774936Z"
+    description: A Helm chart for Mealie - a self-hosted recipe manager
+    digest: 77bf27a32ad498debac7b306a213a3b8364d0f5cb8ff8732055292aa903bc8e2
+    home: https://mealie.io
+    keywords:
+    - mealie
+    - recipes
+    - cooking
+    - meal-planning
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: mealie
+    sources:
+    - https://github.com/mealie-recipes/mealie
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
+    version: 0.1.0
+  minecraft-bedrock:
+  - annotations:
+      category: Gaming
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-03-21T00:49:08.700809671Z"
+    description: A Helm chart for Minecraft Bedrock Server
+    digest: 93c063efd6f8913b20dafda286d772a363cd01b433365871db67abc1eede744a
+    home: https://www.minecraft.net
+    keywords:
+    - minecraft
+    - bedrock
+    - gaming
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: minecraft-bedrock
+    sources:
+    - https://github.com/itzg/docker-minecraft-bedrock-server
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/minecraft-bedrock-0.1.0/minecraft-bedrock-0.1.0.tgz
+    version: 0.1.0
+  minecraft-server:
+  - annotations:
+      category: Gaming
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-03-21T00:49:08.817995729Z"
+    description: A Helm chart for Minecraft Java Server
+    digest: 5abc8517b271ab48a1c75bac3ccfb1a45107c57f11b35e2d2272c061f183bbdf
+    home: https://www.minecraft.net
+    keywords:
+    - minecraft
+    - java
+    - gaming
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: minecraft-server
+    sources:
+    - https://github.com/itzg/docker-minecraft-server
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/minecraft-server-0.1.0/minecraft-server-0.1.0.tgz
+    version: 0.1.0
+  minidlna:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 1.3.3
+    created: "2026-03-21T00:49:08.92661315Z"
+    description: A Helm chart for MiniDLNA - lightweight DLNA server
+    digest: 31fe46ca8901a24dc1b8254405f575ef108f60c470eea709e4b25ea0d1bfb15b
+    home: https://sourceforge.net/projects/minidlna
+    keywords:
+    - minidlna
+    - dlna
+    - upnp
+    - media
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: minidlna
+    sources:
+    - https://github.com/azatoth/minidlna
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/minidlna-0.1.0/minidlna-0.1.0.tgz
+    version: 0.1.0
+  miniflux:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: 2.2.4
+    created: "2026-03-21T00:49:09.026862411Z"
+    description: A Helm chart for Miniflux - minimalist RSS reader
+    digest: b26e71f30fc0e9ffee0f20404057ca290d7a56967a5b79e76fcde702bb56d639
+    home: https://miniflux.app
+    keywords:
+    - miniflux
+    - rss
+    - reader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: miniflux
+    sources:
+    - https://github.com/miniflux/v2
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/miniflux-0.1.0/miniflux-0.1.0.tgz
+    version: 0.1.0
+  minio:
+  - annotations:
+      category: Storage
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-03-21T00:49:09.11798758Z"
+    description: A Helm chart for MinIO - S3-compatible object storage
+    digest: b1f98925d8caf21b4a5606d25b88b148d44148ec3d50a36b8d31142a0bc23029
+    home: https://min.io
+    keywords:
+    - minio
+    - s3
+    - storage
+    - object-storage
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: minio
+    sources:
+    - https://github.com/minio/minio
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/minio-0.1.0/minio-0.1.0.tgz
+    version: 0.1.0
+  mosquitto:
+  - annotations:
+      category: Automation
+    apiVersion: v2
+    appVersion: 2.0.20
+    created: "2026-03-21T00:49:09.236095384Z"
+    description: A Helm chart for Eclipse Mosquitto - MQTT broker
+    digest: a6922f4e28e959a027c82e9ec675431d715bf98c664a07cfb860195f82cde60c
+    home: https://mosquitto.org
+    keywords:
+    - mosquitto
+    - mqtt
+    - iot
+    - messaging
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: mosquitto
+    sources:
+    - https://github.com/eclipse/mosquitto
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/mosquitto-0.1.0/mosquitto-0.1.0.tgz
+    version: 0.1.0
+  mumble:
+  - annotations:
+      category: Communication
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-03-21T00:49:09.34322503Z"
+    description: A Helm chart for Mumble - voice chat server
+    digest: e6470e76f849b382a091ff46592503d1479a66e15272c65a0ab1de08ea0bc5cf
+    home: https://www.mumble.info
+    keywords:
+    - mumble
+    - voip
+    - voice
+    - chat
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: mumble
+    sources:
+    - https://github.com/mumble-voip/mumble
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/mumble-0.1.0/mumble-0.1.0.tgz
+    version: 0.1.0
+  mylar:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 0.7.6
+    created: "2026-03-21T00:49:09.475772918Z"
+    description: A Helm chart for Mylar3 - comic book downloader
+    digest: 23a17845c9b6bde4fcdead06223698f03216d8d59a5441f060c28fa7f5cf8a85
+    home: https://github.com/mylar3/mylar3
+    keywords:
+    - mylar
+    - comics
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: mylar
+    sources:
+    - https://github.com/mylar3/mylar3
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/mylar-0.1.0/mylar-0.1.0.tgz
+    version: 0.1.0
+  n8n:
+  - annotations:
+      category: Automation
+    apiVersion: v2
+    appVersion: 1.73.1
+    created: "2026-03-21T00:49:09.615023163Z"
+    description: A Helm chart for n8n - workflow automation
+    digest: fad935f55c04d1f76145233570baba275d11438d12ee4b6c2ad664391b675ea2
+    home: https://n8n.io
+    keywords:
+    - n8n
+    - workflow
+    - automation
+    - integration
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: n8n
+    sources:
+    - https://github.com/n8n-io/n8n
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/n8n-0.1.0/n8n-0.1.0.tgz
+    version: 0.1.0
+  navidrome:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 0.53.3
+    created: "2026-03-21T00:49:09.717918641Z"
+    description: A Helm chart for Navidrome - a modern music server and streamer
+    digest: e0375afd113b95de9d70d012408cefb960725be46da0924a8e74234f34719d5e
+    home: https://www.navidrome.org
+    keywords:
+    - navidrome
+    - music
+    - streaming
+    - subsonic
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: navidrome
+    sources:
+    - https://github.com/navidrome/navidrome
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/navidrome-0.1.0/navidrome-0.1.0.tgz
+    version: 0.1.0
+  netbootxyz:
+  - annotations:
+      category: Networking
+    apiVersion: v2
+    appVersion: 0.7.3
+    created: "2026-03-21T00:49:09.833253566Z"
+    description: A Helm chart for netboot.xyz - network boot server
+    digest: 20f40ce45366f974ab1228d57d6f5e7b0ac4b92749559585cc34a9cb9d863f30
+    home: https://netboot.xyz
+    keywords:
+    - netboot
+    - pxe
+    - network-boot
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: netbootxyz
+    sources:
+    - https://github.com/netbootxyz/netboot.xyz
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/netbootxyz-0.1.0/netbootxyz-0.1.0.tgz
+    version: 0.1.0
   netdata:
   - annotations:
       category: Monitoring
@@ -440,6 +1724,129 @@ entries:
     type: application
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/netdata-0.1.0/netdata-0.1.0.tgz
+    version: 0.1.0
+  nextcloud:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: 30.0.4
+    created: "2026-03-21T00:49:09.952898298Z"
+    description: A Helm chart for Nextcloud - self-hosted cloud platform
+    digest: 27b28398f3962c374ba283095fa436447dcf930886439c0262a6d0f4fe6cae98
+    home: https://nextcloud.com
+    keywords:
+    - nextcloud
+    - cloud
+    - files
+    - sync
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: nextcloud
+    sources:
+    - https://github.com/nextcloud/server
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/nextcloud-0.1.0/nextcloud-0.1.0.tgz
+    version: 0.1.0
+  nomad:
+  - annotations:
+      category: Management
+    apiVersion: v2
+    appVersion: 1.9.4
+    created: "2026-03-21T00:49:10.063294251Z"
+    description: A Helm chart for HashiCorp Nomad - workload orchestrator
+    digest: c92a1c7ecc6b2340b8adf0d4ff1f2a82d2a8ded7853a24dc29d2c92e456c6e48
+    home: https://www.nomadproject.io
+    keywords:
+    - nomad
+    - orchestration
+    - hashicorp
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: nomad
+    sources:
+    - https://github.com/hashicorp/nomad
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/nomad-0.1.0/nomad-0.1.0.tgz
+    version: 0.1.0
+  nzbget:
+  - annotations:
+      category: Downloads
+    apiVersion: v2
+    appVersion: "24.5"
+    created: "2026-03-21T00:49:10.194162605Z"
+    description: A Helm chart for NZBGet - Usenet downloader
+    digest: f889d64afe1cd093f8aa11eaa34e7feb6b3c0f16918b29744146ad29763f204e
+    home: https://nzbget.com
+    keywords:
+    - nzbget
+    - usenet
+    - nzb
+    - downloader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: nzbget
+    sources:
+    - https://github.com/nzbgetcom/nzbget
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/nzbget-0.1.0/nzbget-0.1.0.tgz
+    version: 0.1.0
+  octoprint:
+  - annotations:
+      category: Utilities
+    apiVersion: v2
+    appVersion: 1.10.3
+    created: "2026-03-21T00:49:10.311509325Z"
+    description: A Helm chart for OctoPrint - 3D printer management
+    digest: 0ecfba059622ce63eb8bf03b7326169dd2d1c2b99ba383cd057745ba50a3f74d
+    home: https://octoprint.org
+    keywords:
+    - octoprint
+    - 3dprinter
+    - printing
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: octoprint
+    sources:
+    - https://github.com/OctoPrint/OctoPrint
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/octoprint-0.1.0/octoprint-0.1.0.tgz
+    version: 0.1.0
+  ombi:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 4.44.1
+    created: "2026-03-21T00:49:10.418906379Z"
+    description: A Helm chart for Ombi - media request manager
+    digest: 26d92b27b69672dd815cbf751e327afc00528f02583dc7ac8003f86b4d8b009b
+    home: https://ombi.io
+    keywords:
+    - ombi
+    - requests
+    - plex
+    - media
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: ombi
+    sources:
+    - https://github.com/Ombi-app/Ombi
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/ombi-0.1.0/ombi-0.1.0.tgz
     version: 0.1.0
   open-wearables:
   - annotations:
@@ -620,6 +2027,54 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/open-wearables-0.2.0/open-wearables-0.2.0.tgz
     version: 0.2.0
+  openhab:
+  - annotations:
+      category: Automation
+    apiVersion: v2
+    appVersion: 4.3.0
+    created: "2026-03-21T00:49:10.524160709Z"
+    description: A Helm chart for openHAB - home automation bus
+    digest: 33f5c5063696dcb1b0b2ba77c68bd0a266afd3c3f633d0a9f14ee542d72d4819
+    home: https://www.openhab.org
+    keywords:
+    - openhab
+    - home-automation
+    - iot
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: openhab
+    sources:
+    - https://github.com/openhab/openhab-core
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/openhab-0.1.0/openhab-0.1.0.tgz
+    version: 0.1.0
+  organizr:
+  - annotations:
+      category: Dashboard
+    apiVersion: v2
+    appVersion: 2.1.2850
+    created: "2026-03-21T00:49:10.633756019Z"
+    description: A Helm chart for Organizr - HTPC dashboard
+    digest: 0e35d020dbb543befc7bc099c29dd81ab99280da04813c40e46a048de5798f17
+    home: https://organizr.app
+    keywords:
+    - organizr
+    - dashboard
+    - htpc
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: organizr
+    sources:
+    - https://github.com/causefx/Organizr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/organizr-0.1.0/organizr-0.1.0.tgz
+    version: 0.1.0
   outline:
   - annotations:
       category: Productivity
@@ -835,6 +2290,81 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/outline-0.1.0/outline-0.1.0.tgz
     version: 0.1.0
+  overseerr:
+  - annotations:
+      category: Media/Requests
+    apiVersion: v2
+    appVersion: 1.33.2
+    created: "2026-03-21T00:49:10.741215435Z"
+    description: A Helm chart for Overseerr — a media request management tool for
+      Plex
+    digest: 1fe7fc46164bb1e7dcbf23e9e5d89708f07ba42b288b4c2339feeb1e47888202
+    home: https://overseerr.dev
+    keywords:
+    - overseerr
+    - requests
+    - plex
+    - media
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: overseerr
+    sources:
+    - https://github.com/sct/overseerr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/overseerr-0.1.0/overseerr-0.1.0.tgz
+    version: 0.1.0
+  paperless-ng:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: 2.14.7
+    created: "2026-03-21T00:49:10.873360148Z"
+    description: A Helm chart for Paperless-ngx - document management
+    digest: 8c2659f83248e95d3d443a59bd190e1fa25def77eb48f9be85b80d16167da491
+    home: https://docs.paperless-ngx.com
+    keywords:
+    - paperless
+    - documents
+    - ocr
+    - management
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: paperless-ng
+    sources:
+    - https://github.com/paperless-ngx/paperless-ngx
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/paperless-ng-0.1.0/paperless-ng-0.1.0.tgz
+    version: 0.1.0
+  piwigo:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 15.2.0
+    created: "2026-03-21T00:49:11.027574354Z"
+    description: A Helm chart for Piwigo - photo gallery
+    digest: de54b0bec00512f92e29b93d7cef298397ae39f0a701ab78a43c6ba62ed4847e
+    home: https://piwigo.org
+    keywords:
+    - piwigo
+    - photos
+    - gallery
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: piwigo
+    sources:
+    - https://github.com/Piwigo/Piwigo
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/piwigo-0.1.0/piwigo-0.1.0.tgz
+    version: 0.1.0
   plex:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -899,6 +2429,307 @@ entries:
     type: application
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/plex-0.1.0/plex-0.1.0.tgz
+    version: 0.1.0
+  portainer:
+  - annotations:
+      category: Management
+    apiVersion: v2
+    appVersion: 2.24.1
+    created: "2026-03-21T00:49:11.140028013Z"
+    description: A Helm chart for Portainer - lightweight container management UI
+    digest: 39395c0f08990523135b81b52212440ebcf108fe98808c55c36226fee9364eb4
+    home: https://www.portainer.io
+    keywords:
+    - portainer
+    - containers
+    - docker
+    - kubernetes
+    - management
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: portainer
+    sources:
+    - https://github.com/portainer/portainer
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/portainer-0.1.0/portainer-0.1.0.tgz
+    version: 0.1.0
+  promtail:
+  - annotations:
+      category: Monitoring
+    apiVersion: v2
+    appVersion: 3.3.2
+    created: "2026-03-21T00:49:11.251192161Z"
+    description: A Helm chart for Promtail - log collector for Loki
+    digest: 99b2963c4bb5795f75aaa54c89d9a5ca553cbd5fda1b4996f33617b21535dfee
+    home: https://grafana.com/docs/loki/latest/send-data/promtail
+    keywords:
+    - promtail
+    - logging
+    - loki
+    - grafana
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: promtail
+    sources:
+    - https://github.com/grafana/loki
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/promtail-0.1.0/promtail-0.1.0.tgz
+    version: 0.1.0
+  prowlarr:
+  - annotations:
+      category: Media/Automation
+    apiVersion: v2
+    appVersion: 1.31.2.4975
+    created: "2026-03-21T00:49:11.354513654Z"
+    description: A Helm chart for Prowlarr — an indexer manager for Sonarr, Radarr,
+      and other apps
+    digest: 1996a99e203f85d632a4210b51d20532ff1d4759b5bc4e7338a8d78c05ce6f3d
+    home: https://prowlarr.com
+    keywords:
+    - prowlarr
+    - indexer
+    - usenet
+    - torrent
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: prowlarr
+    sources:
+    - https://github.com/Prowlarr/Prowlarr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/prowlarr-0.1.0/prowlarr-0.1.0.tgz
+    version: 0.1.0
+  pyload:
+  - annotations:
+      category: Downloads
+    apiVersion: v2
+    appVersion: 0.5.0
+    created: "2026-03-21T00:49:11.472781478Z"
+    description: A Helm chart for pyLoad - download manager
+    digest: a18ea8d7fd9330fe033fa73c2a3181c9e64b0d09eaae7739525f7a61c8bec81a
+    home: https://pyload.net
+    keywords:
+    - pyload
+    - downloader
+    - manager
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: pyload
+    sources:
+    - https://github.com/pyload/pyload
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/pyload-0.1.0/pyload-0.1.0.tgz
+    version: 0.1.0
+  radarr:
+  - annotations:
+      category: Media/Automation
+    apiVersion: v2
+    appVersion: 5.16.3.9541
+    created: "2026-03-21T00:49:11.600717605Z"
+    description: A Helm chart for Radarr — a movie collection manager and PVR
+    digest: 587010dc46476c9722b57501b9182e9eeffaba5ef7d73442a6c823d243d7c057
+    home: https://radarr.video
+    keywords:
+    - radarr
+    - movies
+    - pvr
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: radarr
+    sources:
+    - https://github.com/Radarr/Radarr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/radarr-0.1.0/radarr-0.1.0.tgz
+    version: 0.1.0
+  romm:
+  - annotations:
+      category: Gaming
+    apiVersion: v2
+    appVersion: 3.7.1
+    created: "2026-03-21T00:49:11.736821334Z"
+    description: A Helm chart for RomM - ROM manager
+    digest: 2fa4de1dc313136eb3b5c874449163219ae04cc9ac69cfce9475ec07a7c32f2a
+    home: https://github.com/rommapp/romm
+    keywords:
+    - romm
+    - roms
+    - emulation
+    - gaming
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: romm
+    sources:
+    - https://github.com/rommapp/romm
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/romm-0.1.0/romm-0.1.0.tgz
+    version: 0.1.0
+  rssbridge:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-03-21T00:49:11.837423893Z"
+    description: A Helm chart for RSS-Bridge - RSS feed generator
+    digest: c55ce7d6e293d25a207a47c5fb7cec15751da3fce25a926ebcd5b26f7efad961
+    home: https://rss-bridge.org
+    keywords:
+    - rss-bridge
+    - rss
+    - feeds
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: rssbridge
+    sources:
+    - https://github.com/RSS-Bridge/rss-bridge
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/rssbridge-0.1.0/rssbridge-0.1.0.tgz
+    version: 0.1.0
+  sabnzbd:
+  - annotations:
+      category: Downloads
+    apiVersion: v2
+    appVersion: 4.4.1
+    created: "2026-03-21T00:49:11.962954426Z"
+    description: A Helm chart for SABnzbd - a free and easy binary newsreader
+    digest: 3a726303fce0375741c09a7b490ed02d2bbbf9b98a71fe43262df010238a2de7
+    home: https://sabnzbd.org
+    keywords:
+    - sabnzbd
+    - usenet
+    - nzb
+    - downloader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: sabnzbd
+    sources:
+    - https://github.com/sabnzbd/sabnzbd
+    - https://github.com/linuxserver/docker-sabnzbd
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/sabnzbd-0.1.0/sabnzbd-0.1.0.tgz
+    version: 0.1.0
+  sickchill:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 2024.3.1
+    created: "2026-03-21T00:49:12.057136073Z"
+    description: A Helm chart for SickChill - TV show automation
+    digest: bcf2fe3d31e24210f06d80bf94f41a80401563b3fdc128fab38101c446df89b9
+    home: https://sickchill.github.io
+    keywords:
+    - sickchill
+    - tv
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: sickchill
+    sources:
+    - https://github.com/SickChill/SickChill
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/sickchill-0.1.0/sickchill-0.1.0.tgz
+    version: 0.1.0
+  silverbullet:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: 0.9.5
+    created: "2026-03-21T00:49:12.177289486Z"
+    description: A Helm chart for SilverBullet - note-taking and wiki
+    digest: 25923b4e165deb4006d3df32e57bcd337d3269fb65e17f02d049e508065ceccd
+    home: https://silverbullet.md
+    keywords:
+    - silverbullet
+    - notes
+    - wiki
+    - markdown
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: silverbullet
+    sources:
+    - https://github.com/silverbulletmd/silverbullet
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/silverbullet-0.1.0/silverbullet-0.1.0.tgz
+    version: 0.1.0
+  sonarr:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 4.0.12.2823
+    created: "2026-03-21T00:49:12.283232906Z"
+    description: A Helm chart for Sonarr — a TV show collection manager and PVR
+    digest: 96020370a1ce492548fef7bd80f99e553eb870bfd38666fc534eb15522a16cfd
+    home: https://sonarr.tv
+    keywords:
+    - sonarr
+    - tv
+    - pvr
+    - automation
+    - media
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: sonarr
+    sources:
+    - https://github.com/Sonarr/Sonarr
+    - https://github.com/linuxserver/docker-sonarr
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
+    version: 0.1.0
+  speedtest-tracker:
+  - annotations:
+      category: Monitoring
+    apiVersion: v2
+    appVersion: 1.1.0
+    created: "2026-03-21T00:49:12.395793373Z"
+    description: A Helm chart for Speedtest Tracker - internet speed monitoring
+    digest: 427534d3251b196d6e4a7232c9e85b7ac7c850cf907b170b7e400a9e6df8c6bc
+    home: https://github.com/alexjustesen/speedtest-tracker
+    keywords:
+    - speedtest
+    - internet
+    - monitoring
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: speedtest-tracker
+    sources:
+    - https://github.com/alexjustesen/speedtest-tracker
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/speedtest-tracker-0.1.0/speedtest-tracker-0.1.0.tgz
     version: 0.1.0
   spotify:
   - annotations:
@@ -1205,6 +3036,57 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/spotify-0.1.0/spotify-0.1.0.tgz
     version: 0.1.0
+  syncthing:
+  - annotations:
+      category: Utilities
+    apiVersion: v2
+    appVersion: 1.28.1
+    created: "2026-03-21T00:49:12.521563816Z"
+    description: A Helm chart for Syncthing - continuous file synchronization
+    digest: 9cb3e8d038747df737e265393ae7380c2429e8464097a2baae09a97e94c61603
+    home: https://syncthing.net
+    keywords:
+    - syncthing
+    - sync
+    - files
+    - backup
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: syncthing
+    sources:
+    - https://github.com/syncthing/syncthing
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/syncthing-0.1.0/syncthing-0.1.0.tgz
+    version: 0.1.0
+  tautulli:
+  - annotations:
+      category: Media/Monitoring
+    apiVersion: v2
+    appVersion: 2.15.0
+    created: "2026-03-21T00:49:12.653311783Z"
+    description: A Helm chart for Tautulli — a Plex media server monitoring and statistics
+      tool
+    digest: d6da39ad3f332c38d8e826c96b205f8533cd41b77db42016f8c5445375fa8f27
+    home: https://tautulli.com
+    keywords:
+    - tautulli
+    - plex
+    - monitoring
+    - statistics
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: tautulli
+    sources:
+    - https://github.com/Tautulli/Tautulli
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/tautulli-0.1.0/tautulli-0.1.0.tgz
+    version: 0.1.0
   teslamate:
   - annotations:
       category: IoT
@@ -1341,6 +3223,180 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/teslamate-0.1.0/teslamate-0.1.0.tgz
     version: 0.1.0
+  thelounge:
+  - annotations:
+      category: Communication
+    apiVersion: v2
+    appVersion: 4.4.3
+    created: "2026-03-21T00:49:12.764817626Z"
+    description: A Helm chart for The Lounge - web IRC client
+    digest: 37430f273d2e86114e83be5a887494182686d246ddb8569ad69af6a98f26d2fd
+    home: https://thelounge.chat
+    keywords:
+    - thelounge
+    - irc
+    - chat
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: thelounge
+    sources:
+    - https://github.com/thelounge/thelounge
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/thelounge-0.1.0/thelounge-0.1.0.tgz
+    version: 0.1.0
+  threadfin:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 1.1.20
+    created: "2026-03-21T00:49:12.890206349Z"
+    description: A Helm chart for Threadfin - M3U proxy for Plex
+    digest: 0753ba5d3aa1171de55fc98038af2b01f85428353af7f8e686620a10f59a9191
+    home: https://github.com/Threadfin/Threadfin
+    keywords:
+    - threadfin
+    - iptv
+    - m3u
+    - plex
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: threadfin
+    sources:
+    - https://github.com/Threadfin/Threadfin
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/threadfin-0.1.0/threadfin-0.1.0.tgz
+    version: 0.1.0
+  tiddlywiki:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: 5.3.6
+    created: "2026-03-21T00:49:12.997054929Z"
+    description: A Helm chart for TiddlyWiki - non-linear personal notebook
+    digest: 7d8712b6a31743d8bab56e86ec4044127321478a4ab1980c022fe26fea8e7591
+    home: https://tiddlywiki.com
+    keywords:
+    - tiddlywiki
+    - wiki
+    - notes
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: tiddlywiki
+    sources:
+    - https://github.com/TiddlyWiki/TiddlyWiki5
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/tiddlywiki-0.1.0/tiddlywiki-0.1.0.tgz
+    version: 0.1.0
+  timemachine:
+  - annotations:
+      category: Backup
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-03-21T00:49:13.125230381Z"
+    description: A Helm chart for Time Machine - macOS backup server
+    digest: 7e39e4b8d67b222f2cd40d0a22432798950edd404b9034f0bf8d66ede80700be
+    home: https://github.com/mbentley/docker-timemachine
+    keywords:
+    - timemachine
+    - macos
+    - backup
+    - smb
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: timemachine
+    sources:
+    - https://github.com/mbentley/docker-timemachine
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/timemachine-0.1.0/timemachine-0.1.0.tgz
+    version: 0.1.0
+  traefik:
+  - annotations:
+      category: Networking
+    apiVersion: v2
+    appVersion: 3.2.3
+    created: "2026-03-21T00:49:13.255220867Z"
+    description: A Helm chart for Traefik - cloud-native reverse proxy
+    digest: 3a51a48df38de98af5bbe34461e3ac018c5f5ff82173bda405a825d798a9cbf1
+    home: https://traefik.io
+    keywords:
+    - traefik
+    - proxy
+    - ingress
+    - loadbalancer
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: traefik
+    sources:
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/traefik-0.1.0/traefik-0.1.0.tgz
+    version: 0.1.0
+  transmission:
+  - annotations:
+      category: Downloads
+    apiVersion: v2
+    appVersion: 4.0.6
+    created: "2026-03-21T00:49:13.354167133Z"
+    description: A Helm chart for Transmission - a fast, easy BitTorrent client
+    digest: de3df5a41a9fa14eddc61ee07e5b2945b73009e4fb559ace7947abe0c398e1bb
+    home: https://transmissionbt.com
+    keywords:
+    - transmission
+    - torrent
+    - bittorrent
+    - downloader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: transmission
+    sources:
+    - https://github.com/transmission/transmission
+    - https://github.com/linuxserver/docker-transmission
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/transmission-0.1.0/transmission-0.1.0.tgz
+    version: 0.1.0
+  ubooquity:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: 2.1.2
+    created: "2026-03-21T00:49:13.484384922Z"
+    description: A Helm chart for Ubooquity - comics and ebook server
+    digest: 91cb86490477f2ffc312f50371a6ba9aa23fad2f717d9cb470c12768366c32e3
+    home: https://vaemendis.net/ubooquity
+    keywords:
+    - ubooquity
+    - comics
+    - ebooks
+    - reader
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: ubooquity
+    sources:
+    - https://github.com/vaemendis/ubooquity
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/ubooquity-0.1.0/ubooquity-0.1.0.tgz
+    version: 0.1.0
   uptime-kuma:
   - annotations:
       category: Monitoring
@@ -1442,7 +3498,65 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/uptime-kuma-0.1.0/uptime-kuma-0.1.0.tgz
     version: 0.1.0
+  valheim:
+  - annotations:
+      category: Gaming
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-03-21T00:49:13.586322468Z"
+    description: A Helm chart for Valheim - dedicated game server
+    digest: e4bfeac4b91bcbe08411f8317806e97d947bab14585a46d3fa03e8e7d700265b
+    home: https://www.valheimgame.com
+    keywords:
+    - valheim
+    - gaming
+    - server
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: valheim
+    sources:
+    - https://github.com/lloesche/valheim-server-docker
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/valheim-0.1.0/valheim-0.1.0.tgz
+    version: 0.1.0
   vitasync:
+  - annotations:
+      category: Health
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-03-21T00:49:13.712299234Z"
+    description: A Helm chart for deploying VitaSync — a self-hosted wearable health
+      data aggregation platform with a Fastify API, BullMQ worker, and Next.js dashboard.
+    digest: dc0fb2952ebce0c18baa9b1a66d6b603071f1bd4f2afebfd3ffae58a372eb36e
+    home: https://github.com/biosync-io/vitasync
+    keywords:
+    - health
+    - wearables
+    - fitness
+    - self-hosted
+    - fitbit
+    - garmin
+    - strava
+    - whoop
+    - withings
+    - polar
+    - quantified-self
+    - fastify
+    - nextjs
+    - bullmq
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: vitasync
+    sources:
+    - https://github.com/biosync-io/vitasync
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/vitasync-0.3.0/vitasync-0.3.0.tgz
+    version: 0.3.0
   - annotations:
       category: Health
     apiVersion: v2
@@ -1783,6 +3897,55 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/vitasync-0.1.0/vitasync-0.1.0.tgz
     version: 0.1.0
+  wallabag:
+  - annotations:
+      category: Productivity
+    apiVersion: v2
+    appVersion: 2.6.10
+    created: "2026-03-21T00:49:13.850890613Z"
+    description: A Helm chart for Wallabag - read-it-later app
+    digest: be11261288ea2c7974f24d4962477d20a5e5c3661f7f3cdc113230ae8eab02d0
+    home: https://wallabag.org
+    keywords:
+    - wallabag
+    - bookmarks
+    - reading
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: wallabag
+    sources:
+    - https://github.com/wallabag/wallabag
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/wallabag-0.1.0/wallabag-0.1.0.tgz
+    version: 0.1.0
+  watchtower:
+  - annotations:
+      category: Management
+    apiVersion: v2
+    appVersion: 1.7.1
+    created: "2026-03-21T00:49:13.951220929Z"
+    description: A Helm chart for Watchtower - container update automation
+    digest: bafafb3a0ba0084c9d30c859f2538c8451fb5154cd4c925289d57ae85d334d37
+    home: https://containrrr.dev/watchtower
+    keywords:
+    - watchtower
+    - containers
+    - updates
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: watchtower
+    sources:
+    - https://github.com/containrrr/watchtower
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/watchtower-0.1.0/watchtower-0.1.0.tgz
+    version: 0.1.0
   whoogle:
   - annotations:
       category: Privacy
@@ -1819,4 +3982,103 @@ entries:
     urls:
     - https://github.com/HomeOpsHub/helm-for-home/releases/download/whoogle-0.1.0/whoogle-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-17T05:43:06.04565123Z"
+  wireshark:
+  - annotations:
+      category: Networking
+    apiVersion: v2
+    appVersion: 4.4.2
+    created: "2026-03-21T00:49:14.070090481Z"
+    description: A Helm chart for Wireshark - network protocol analyzer
+    digest: 77dab68353f21e123c5bac2cf5bdf40025dc8e39f507c3962e1347b575451fb2
+    home: https://www.wireshark.org
+    keywords:
+    - wireshark
+    - network
+    - analysis
+    - packets
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: wireshark
+    sources:
+    - https://github.com/wireshark/wireshark
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/wireshark-0.1.0/wireshark-0.1.0.tgz
+    version: 0.1.0
+  woodpecker-ci:
+  - annotations:
+      category: CI-CD
+    apiVersion: v2
+    appVersion: 2.8.3
+    created: "2026-03-21T00:49:14.186771839Z"
+    description: A Helm chart for Woodpecker CI - continuous integration
+    digest: fa76623d2a718bcb90a8bcb68e0d30d7755986a2ee7e2696a11b40bf2b34091b
+    home: https://woodpecker-ci.org
+    keywords:
+    - woodpecker
+    - ci
+    - cd
+    - automation
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: woodpecker-ci
+    sources:
+    - https://github.com/woodpecker-ci/woodpecker
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/woodpecker-ci-0.1.0/woodpecker-ci-0.1.0.tgz
+    version: 0.1.0
+  youtubedl-material:
+  - annotations:
+      category: Media
+    apiVersion: v2
+    appVersion: "4.3"
+    created: "2026-03-21T00:49:14.305677129Z"
+    description: A Helm chart for YoutubeDL-Material - YouTube downloader
+    digest: f8754a8e0fef18d3962ee2523de40b254323c0fd0cadcd2a00bfe2502ffd5985
+    home: https://github.com/Tzahi12345/YoutubeDL-Material
+    keywords:
+    - youtube
+    - downloader
+    - media
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: youtubedl-material
+    sources:
+    - https://github.com/Tzahi12345/YoutubeDL-Material
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/youtubedl-material-0.1.0/youtubedl-material-0.1.0.tgz
+    version: 0.1.0
+  znc:
+  - annotations:
+      category: Communication
+    apiVersion: v2
+    appVersion: 1.9.1
+    created: "2026-03-21T00:49:14.462204694Z"
+    description: A Helm chart for ZNC - IRC bouncer
+    digest: d30147000795d17f34eaf376d203daff45317a5dc142552a36d6fb12ca792d87
+    home: https://wiki.znc.in
+    keywords:
+    - znc
+    - irc
+    - bouncer
+    - chat
+    - self-hosted
+    maintainers:
+    - name: HomeOpsHub
+      url: https://github.com/HomeOpsHub
+    name: znc
+    sources:
+    - https://github.com/znc/znc
+    type: application
+    urls:
+    - https://github.com/HomeOpsHub/helm-for-home/releases/download/znc-0.1.0/znc-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-03-21T00:49:14.462437817Z"
