@@ -181,3 +181,31 @@ jobs:
               gh release edit "$tag" --notes-file /tmp/release-body.md 2>/dev/null || true
             fi
           done < /tmp/changed-charts.txt
+
+  docs:
+    name: Deploy Docs
+    runs-on: ubuntu-latest
+    needs: release
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install and build
+        run: |
+          cd docs
+          npm install
+          npm run docs:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/.vitepress/dist
+          keep_files: true

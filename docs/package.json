@@ -1,0 +1,14 @@
+{
+  "name": "helm-for-home-docs",
+  "version": "1.0.0",
+  "description": "Helm for Home documentation — VitePress-powered guides and chart catalog",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

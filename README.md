@@ -1,7 +1,7 @@
 # Helm for Home
 
 [![Release Charts](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/release.yml/badge.svg)](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/release.yml)
-[![Validate Charts](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/lint.yml/badge.svg)](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/lint.yml)
+[![CI](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/ci.yml/badge.svg)](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/ci.yml)
 [![Security Scan](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/security.yml/badge.svg)](https://github.com/HomeOpsHub/helm-for-home/actions/workflows/security.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -34,6 +34,15 @@ A curated collection of Helm charts for deploying self-hosted applications on ho
 - [Helm](https://helm.sh/docs/intro/install/) v3.12+
 
 ### Installation
+
+#### From GHCR (OCI)
+
+```bash
+# No repo setup needed — install directly from GHCR
+helm install uptime-kuma oci://ghcr.io/homeopshub/charts/uptime-kuma --version 0.7.0
+```
+
+#### From Helm Repository
 
 ```bash
 # Add the repository
