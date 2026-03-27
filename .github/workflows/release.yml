@@ -2,15 +2,12 @@ name: Release Charts
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - '*'
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -20,57 +17,12 @@ env:
   HELM_DOCS_VERSION: "1.14.2"
 
 jobs:
-  validate:
-    name: Validate Charts
+  release:
+    name: Release
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    permissions:
-      contents: read
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Set up Helm
-        uses: azure/setup-helm@v4
-        with:
-          version: v3.17.0
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.x'
-
-      - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.8.0
-
-      - name: Add Helm repositories
-        run: bash scripts/add-helm-repos.sh
-
-      - name: Build chart dependencies
-        run: |
-          for chart in charts/stable/* charts/beta/*; do
-            if [ -f "$chart/Chart.yaml" ]; then
-              helm dependency build "$chart"
-            fi
-          done
-
-      - name: Lint all charts
-        run: |
-          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm lint
-
-  publish:
-    name: Package & Publish Charts
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    needs: validate
-    permissions:
-      contents: write
-      packages: write
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -82,12 +34,14 @@ jobs:
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
+        with:
+          version: v3.17.0
 
       - name: Install helm-docs
         run: |
           cd /tmp
-          wget -q https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
-          tar -xzf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          wget -q https://github.com/norwoodj/helm-docs/releases/download/v${{ env.HELM_DOCS_VERSION }}/helm-docs_${{ env.HELM_DOCS_VERSION }}_Linux_x86_64.tar.gz
+          tar -xzf helm-docs_${{ env.HELM_DOCS_VERSION }}_Linux_x86_64.tar.gz
           sudo mv helm-docs /usr/local/bin
 
       - name: Add Helm repositories
@@ -97,24 +51,73 @@ jobs:
         run: |
           for chart in charts/stable/* charts/beta/*; do
             if [ -f "$chart/Chart.yaml" ]; then
-              helm dependency build "$chart"
+              helm dependency build "$chart" 2>/dev/null || true
             fi
           done
 
-      - name: Generate documentation
+      - name: Generate chart documentation
+        run: find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs
+
+      - name: Detect changed charts
+        id: changed
         run: |
-          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs helm-docs
+          BEFORE="${{ github.event.before }}"
+          if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+            BEFORE=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+          fi
 
-      - name: Package charts
+          changed=""
+          if [[ -n "$BEFORE" ]]; then
+            changed=$(git diff --name-only "$BEFORE" "${{ github.sha }}" -- 'charts/**/Chart.yaml' \
+              | xargs -I {} dirname {} | sort -u) || true
+          fi
+
+          if [[ -n "$changed" ]]; then
+            echo "detected=true" >> "$GITHUB_OUTPUT"
+            echo "$changed" > /tmp/changed-charts.txt
+            echo "### 📋 Charts to Release" >> "$GITHUB_STEP_SUMMARY"
+            while IFS= read -r chart; do
+              name=$(basename "$chart")
+              version=$(grep '^version:' "$chart/Chart.yaml" | head -1 | awk '{print $2}')
+              echo "- **${name}** \`${version}\`" >> "$GITHUB_STEP_SUMMARY"
+            done <<< "$changed"
+          else
+            echo "detected=false" >> "$GITHUB_OUTPUT"
+            echo "No chart changes detected." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Lint changed charts
+        if: steps.changed.outputs.detected == 'true'
         run: |
-          mkdir -p .cr-release-packages
-          find charts -type f -name 'Chart.yaml' | xargs dirname | xargs -I {} helm package {} -d .cr-release-packages
+          while IFS= read -r chart; do
+            helm lint "$chart"
+          done < /tmp/changed-charts.txt
 
-      - name: Generate release notes
-        id: release-notes
-        run: bash scripts/generate-release-notes.sh "${GITHUB_REF_NAME}" > release-notes.md
+      - name: Login to GHCR
+        if: steps.changed.outputs.detected == 'true'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Publish stable charts
+      - name: Package & publish to GHCR
+        if: steps.changed.outputs.detected == 'true'
+        run: |
+          mkdir -p /tmp/packages
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "### 📦 Published to GHCR" >> "$GITHUB_STEP_SUMMARY"
+
+          while IFS= read -r chart; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              name=$(basename "$chart")
+              version=$(grep '^version:' "$chart/Chart.yaml" | head -1 | awk '{print $2}')
+
+              helm package "$chart" -d /tmp/packages
+              helm push "/tmp/packages/${name}-${version}.tgz" \
+                oci://ghcr.io/${{ github.repository_owner }}/charts
+
+              echo "- \`oci://ghcr.io/${{ github.repository_owner }}/charts/${name}:${version}\`" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done < /tmp/changed-charts.txt
+
+      - name: Publish stable charts to GitHub Pages
         uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts/stable/
@@ -123,7 +126,7 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Publish beta charts
+      - name: Publish beta charts to GitHub Pages
         uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts/beta/
@@ -132,16 +135,49 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Create GitHub Release with notes
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Enhance release notes
+        if: steps.changed.outputs.detected == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG="${GITHUB_REF_NAME}"
-          gh release create "$TAG" \
-            --title "Helm for Home $TAG" \
-            --notes-file release-notes.md \
-            --latest \
-            .cr-release-packages/*.tgz || \
-          gh release edit "$TAG" \
-            --notes-file release-notes.md
+          while IFS= read -r chart; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              name=$(basename "$chart")
+              version=$(grep '^version:' "$chart/Chart.yaml" | head -1 | awk '{print $2}')
+              app_version=$(grep '^appVersion:' "$chart/Chart.yaml" | head -1 | awk '{print $2}' | tr -d '"')
+              description=$(grep '^description:' "$chart/Chart.yaml" | head -1 | sed 's/^description: *//')
+              tag="${name}-${version}"
+
+              cat > /tmp/release-body.md << EOF
+          ## ${name}
+
+          ${description}
+
+          | | |
+          |---|---|
+          | **Chart Version** | \`${version}\` |
+          | **App Version** | \`${app_version}\` |
+
+          ### Install from GHCR (OCI)
+
+          \`\`\`bash
+          helm install ${name} oci://ghcr.io/${{ github.repository_owner }}/charts/${name} --version ${version}
+          \`\`\`
+
+          ### Install from Helm Repository
+
+          \`\`\`bash
+          helm repo add helm-for-home https://${{ github.repository_owner }}.github.io/helm-for-home/
+          helm install ${name} helm-for-home/${name} --version ${version}
+          \`\`\`
+
+          ### Customize
+
+          \`\`\`bash
+          helm show values oci://ghcr.io/${{ github.repository_owner }}/charts/${name} --version ${version}
+          \`\`\`
+          EOF
+
+              gh release edit "$tag" --notes-file /tmp/release-body.md 2>/dev/null || true
+            fi
+          done < /tmp/changed-charts.txt

@@ -15,6 +15,15 @@ echo ""
 # Installation
 echo "### 📦 Installation"
 echo ""
+echo "#### From GHCR (OCI)"
+echo ""
+echo '```bash'
+echo "# Pull any chart directly from GHCR"
+echo "helm install <release-name> oci://ghcr.io/homeopshub/charts/<chart-name> --version <version>"
+echo '```'
+echo ""
+echo "#### From Helm Repository"
+echo ""
 echo '```bash'
 echo "helm repo add helm-for-home https://homeopshub.github.io/helm-for-home/"
 echo "helm repo update"
@@ -90,14 +99,17 @@ cat << 'FEATURES'
 ### 🔧 Quick Start
 
 ```bash
-# Install any chart
+# Install from GHCR (OCI) — no repo setup needed
+helm install <release-name> oci://ghcr.io/homeopshub/charts/<chart-name> --version <version>
+
+# Or install from Helm repository
 helm install <release-name> helm-for-home/<chart-name>
 
 # Install with custom values
 helm install <release-name> helm-for-home/<chart-name> -f my-values.yaml
 
 # See all configurable values
-helm show values helm-for-home/<chart-name>
+helm show values oci://ghcr.io/homeopshub/charts/<chart-name> --version <version>
 ```
 
 ---
