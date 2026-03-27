@@ -100,6 +100,7 @@ jobs:
       - name: Package & publish to GHCR
         if: steps.changed.outputs.detected == 'true'
         run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           mkdir -p /tmp/packages
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "### 📦 Published to GHCR" >> "$GITHUB_STEP_SUMMARY"
@@ -111,9 +112,9 @@ jobs:
 
               helm package "$chart" -d /tmp/packages
               helm push "/tmp/packages/${name}-${version}.tgz" \
-                oci://ghcr.io/${{ github.repository_owner }}/charts
+                oci://ghcr.io/${OWNER}/charts
 
-              echo "- \`oci://ghcr.io/${{ github.repository_owner }}/charts/${name}:${version}\`" >> "$GITHUB_STEP_SUMMARY"
+              echo "- \`oci://ghcr.io/${OWNER}/charts/${name}:${version}\`" >> "$GITHUB_STEP_SUMMARY"
             fi
           done < /tmp/changed-charts.txt
 
@@ -140,6 +141,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           while IFS= read -r chart; do
             if [ -f "$chart/Chart.yaml" ]; then
               name=$(basename "$chart")
@@ -161,20 +163,20 @@ jobs:
           ### Install from GHCR (OCI)
 
           \`\`\`bash
-          helm install ${name} oci://ghcr.io/${{ github.repository_owner }}/charts/${name} --version ${version}
+          helm install ${name} oci://ghcr.io/${OWNER}/charts/${name} --version ${version}
           \`\`\`
 
           ### Install from Helm Repository
 
           \`\`\`bash
-          helm repo add helm-for-home https://${{ github.repository_owner }}.github.io/helm-for-home/
+          helm repo add helm-for-home https://${OWNER}.github.io/helm-for-home/
           helm install ${name} helm-for-home/${name} --version ${version}
           \`\`\`
 
           ### Customize
 
           \`\`\`bash
-          helm show values oci://ghcr.io/${{ github.repository_owner }}/charts/${name} --version ${version}
+          helm show values oci://ghcr.io/${OWNER}/charts/${name} --version ${version}
           \`\`\`
           EOF
 
