@@ -2,7 +2,7 @@ apiVersion: v2
 name: valheim
 description: A Helm chart for Valheim - dedicated game server
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "latest"
 home: https://www.valheimgame.com
 sources:

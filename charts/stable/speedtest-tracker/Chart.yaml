@@ -2,7 +2,7 @@ apiVersion: v2
 name: speedtest-tracker
 description: A Helm chart for Speedtest Tracker - internet speed monitoring
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.1.0"
 home: https://github.com/alexjustesen/speedtest-tracker
 sources:

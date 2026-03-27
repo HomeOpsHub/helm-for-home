@@ -2,7 +2,7 @@ apiVersion: v2
 name: couchdb
 description: A Helm chart for CouchDB - NoSQL document database
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "3.4.2"
 home: https://couchdb.apache.org
 sources:

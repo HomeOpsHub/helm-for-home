@@ -2,7 +2,7 @@ apiVersion: v2
 name: bitwarden
 description: A Helm chart for Vaultwarden - lightweight Bitwarden server
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.32.7"
 home: https://github.com/dani-garcia/vaultwarden
 sources:

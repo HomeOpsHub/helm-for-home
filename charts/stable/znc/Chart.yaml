@@ -2,7 +2,7 @@ apiVersion: v2
 name: znc
 description: A Helm chart for ZNC - IRC bouncer
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.9.1"
 home: https://wiki.znc.in
 sources:

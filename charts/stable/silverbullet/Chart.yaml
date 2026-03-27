@@ -2,7 +2,7 @@ apiVersion: v2
 name: silverbullet
 description: A Helm chart for SilverBullet - note-taking and wiki
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "0.9.5"
 home: https://silverbullet.md
 sources:

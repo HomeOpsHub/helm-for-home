@@ -2,7 +2,7 @@ apiVersion: v2
 name: jellyfin
 description: A Helm chart for Jellyfin — a free software media system
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "10.10.6"
 home: https://jellyfin.org
 sources:

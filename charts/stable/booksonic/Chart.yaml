@@ -2,7 +2,7 @@ apiVersion: v2
 name: booksonic
 description: A Helm chart for Booksonic - audiobook streaming server
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.2"
 home: https://booksonic.org
 sources:

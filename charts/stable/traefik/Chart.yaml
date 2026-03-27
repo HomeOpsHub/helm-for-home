@@ -2,7 +2,7 @@ apiVersion: v2
 name: traefik
 description: A Helm chart for Traefik - cloud-native reverse proxy
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "3.2.3"
 home: https://traefik.io
 sources:

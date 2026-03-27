@@ -2,7 +2,7 @@ apiVersion: v2
 name: bazarr
 description: A Helm chart for Bazarr — automatic subtitle management for Sonarr and Radarr
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.5.1"
 home: https://www.bazarr.media
 sources:

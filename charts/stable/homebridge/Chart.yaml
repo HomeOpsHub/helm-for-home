@@ -2,7 +2,7 @@ apiVersion: v2
 name: homebridge
 description: A Helm chart for Homebridge - HomeKit bridge
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.8.4"
 home: https://homebridge.io
 sources:

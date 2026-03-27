@@ -2,7 +2,7 @@ apiVersion: v2
 name: ddns-updater
 description: A Helm chart for DDNS Updater - dynamic DNS update client
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2.8.1"
 home: https://github.com/qdm12/ddns-updater
 sources:

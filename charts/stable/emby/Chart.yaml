@@ -2,7 +2,7 @@ apiVersion: v2
 name: emby
 description: A Helm chart for Emby - personal media server
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "4.9.0.42"
 home: https://emby.media
 sources:

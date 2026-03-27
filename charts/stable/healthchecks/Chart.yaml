@@ -2,7 +2,7 @@ apiVersion: v2
 name: healthchecks
 description: A Helm chart for Healthchecks - cron job monitoring
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "3.7"
 home: https://healthchecks.io
 sources:

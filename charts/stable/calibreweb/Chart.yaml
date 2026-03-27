@@ -2,7 +2,7 @@ apiVersion: v2
 name: calibreweb
 description: A Helm chart for Calibre-Web - web-based e-book reader
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "0.6.24"
 home: https://github.com/janeczku/calibre-web
 sources:

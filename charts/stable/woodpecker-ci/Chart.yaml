@@ -2,7 +2,7 @@ apiVersion: v2
 name: woodpecker-ci
 description: A Helm chart for Woodpecker CI - continuous integration
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2.8.3"
 home: https://woodpecker-ci.org
 sources:

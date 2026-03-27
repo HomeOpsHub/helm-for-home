@@ -2,7 +2,7 @@ apiVersion: v2
 name: get-iplayer
 description: A Helm chart for get_iplayer - BBC iPlayer downloader
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "3.35"
 home: https://github.com/get-iplayer/get_iplayer
 sources:

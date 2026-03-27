@@ -2,7 +2,7 @@ apiVersion: v2
 name: guacamole
 description: A Helm chart for Apache Guacamole - remote desktop gateway
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.5.5"
 home: https://guacamole.apache.org
 sources:

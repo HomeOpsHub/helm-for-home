@@ -2,7 +2,7 @@ apiVersion: v2
 name: navidrome
 description: A Helm chart for Navidrome - a modern music server and streamer
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "0.53.3"
 home: https://www.navidrome.org
 sources:

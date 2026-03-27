@@ -2,7 +2,7 @@ apiVersion: v2
 name: portainer
 description: A Helm chart for Portainer - lightweight container management UI
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2.24.1"
 home: https://www.portainer.io
 sources:

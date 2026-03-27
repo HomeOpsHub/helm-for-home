@@ -2,7 +2,7 @@ apiVersion: v2
 name: minio
 description: A Helm chart for MinIO - S3-compatible object storage
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "latest"
 home: https://min.io
 sources:

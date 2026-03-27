@@ -2,7 +2,7 @@ apiVersion: v2
 name: duplicacy
 description: A Helm chart for Duplicacy - cloud backup tool
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.8.0"
 home: https://duplicacy.com
 sources:

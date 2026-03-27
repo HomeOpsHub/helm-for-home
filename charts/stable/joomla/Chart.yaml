@@ -2,7 +2,7 @@ apiVersion: v2
 name: joomla
 description: A Helm chart for Joomla - content management system
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "5.2.3"
 home: https://www.joomla.org
 sources:

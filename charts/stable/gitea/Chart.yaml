@@ -2,7 +2,7 @@ apiVersion: v2
 name: gitea
 description: A Helm chart for Gitea - lightweight Git hosting
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.22.6"
 home: https://gitea.io
 sources:

@@ -2,7 +2,7 @@ apiVersion: v2
 name: ispyagentdvr
 description: A Helm chart for iSpy Agent DVR - video surveillance
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "5.8.5.0"
 home: https://www.ispyconnect.com
 sources:

@@ -2,7 +2,7 @@ apiVersion: v2
 name: sickchill
 description: A Helm chart for SickChill - TV show automation
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2024.3.1"
 home: https://sickchill.github.io
 sources:

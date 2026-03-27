@@ -2,7 +2,7 @@ apiVersion: v2
 name: sabnzbd
 description: A Helm chart for SABnzbd - a free and easy binary newsreader
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "4.4.1"
 home: https://sabnzbd.org
 sources:

@@ -2,7 +2,7 @@ apiVersion: v2
 name: ubooquity
 description: A Helm chart for Ubooquity - comics and ebook server
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2.1.2"
 home: https://vaemendis.net/ubooquity
 sources:

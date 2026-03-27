@@ -2,7 +2,7 @@ apiVersion: v2
 name: radarr
 description: A Helm chart for Radarr — a movie collection manager and PVR
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "5.16.3.9541"
 home: https://radarr.video
 sources:

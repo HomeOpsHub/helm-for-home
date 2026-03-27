@@ -2,7 +2,7 @@ apiVersion: v2
 name: homeassistant
 description: A Helm chart for Home Assistant - open source home automation
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2024.12.5"
 home: https://www.home-assistant.io
 sources:

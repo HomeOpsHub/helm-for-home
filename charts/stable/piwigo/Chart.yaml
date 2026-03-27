@@ -2,7 +2,7 @@ apiVersion: v2
 name: piwigo
 description: A Helm chart for Piwigo - photo gallery
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "15.2.0"
 home: https://piwigo.org
 sources:

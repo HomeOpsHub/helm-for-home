@@ -2,7 +2,7 @@ apiVersion: v2
 name: cloudcmd
 description: A Helm chart for Cloud Commander - web file manager
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "16.16.1"
 home: https://cloudcmd.io
 sources:

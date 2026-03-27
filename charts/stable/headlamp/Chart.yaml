@@ -2,7 +2,7 @@ apiVersion: v2
 name: headlamp
 description: A Helm chart for Headlamp — a Kubernetes Web UI, with Traefik IngressRoute support
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "0.40.1"
 home: https://github.com/kubernetes-sigs/headlamp
 sources:

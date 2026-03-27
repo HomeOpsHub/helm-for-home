@@ -2,7 +2,7 @@ apiVersion: v2
 name: dokuwiki
 description: A Helm chart for DokuWiki - simple wiki engine
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2024.02.06b"
 home: https://www.dokuwiki.org
 sources:

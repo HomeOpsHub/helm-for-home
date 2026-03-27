@@ -2,7 +2,7 @@ apiVersion: v2
 name: couchpotato
 description: A Helm chart for CouchPotato - movie download manager
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "3.0.1"
 home: https://couchpota.to
 sources:

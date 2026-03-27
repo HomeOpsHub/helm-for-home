@@ -2,7 +2,7 @@ apiVersion: v2
 name: tiddlywiki
 description: A Helm chart for TiddlyWiki - non-linear personal notebook
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "5.3.6"
 home: https://tiddlywiki.com
 sources:

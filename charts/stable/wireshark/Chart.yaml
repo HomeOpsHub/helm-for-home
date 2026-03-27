@@ -2,7 +2,7 @@ apiVersion: v2
 name: wireshark
 description: A Helm chart for Wireshark - network protocol analyzer
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "4.4.2"
 home: https://www.wireshark.org
 sources:

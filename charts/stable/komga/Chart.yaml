@@ -2,7 +2,7 @@ apiVersion: v2
 name: komga
 description: A Helm chart for Komga - comics and manga server
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.14.1"
 home: https://komga.org
 sources:

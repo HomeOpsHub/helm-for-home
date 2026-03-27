@@ -2,7 +2,7 @@ apiVersion: v2
 name: miniflux
 description: A Helm chart for Miniflux - minimalist RSS reader
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "2.2.4"
 home: https://miniflux.app
 sources:
