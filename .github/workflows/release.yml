@@ -119,7 +119,7 @@ jobs:
           done < /tmp/changed-charts.txt
 
       - name: Publish stable charts to GitHub Pages
-        uses: helm/chart-releaser-action@v1.7.0
+        uses: helm/chart-releaser-action@v1.9.0
         with:
           charts_dir: charts/stable/
           skip_existing: true
@@ -128,7 +128,7 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Publish beta charts to GitHub Pages
-        uses: helm/chart-releaser-action@v1.7.0
+        uses: helm/chart-releaser-action@v1.9.0
         with:
           charts_dir: charts/beta/
           skip_existing: true
